@@ -1,0 +1,13 @@
+C:\Users\Wilder\Documents\GitHub\pruebacarga\desafio2019\desafio2019.Logic\bin\Debug\desafio2019.Logic.dll
+C:\Users\Wilder\Documents\GitHub\pruebacarga\desafio2019\desafio2019.Logic\bin\Debug\desafio2019.Logic.pdb
+C:\Users\Wilder\Documents\GitHub\pruebacarga\desafio2019\desafio2019.Logic\bin\Debug\Dapper.dll
+C:\Users\Wilder\Documents\GitHub\pruebacarga\desafio2019\desafio2019.Logic\bin\Debug\desafio2019.Data.dll
+C:\Users\Wilder\Documents\GitHub\pruebacarga\desafio2019\desafio2019.Logic\bin\Debug\desafio2019.Entity.dll
+C:\Users\Wilder\Documents\GitHub\pruebacarga\desafio2019\desafio2019.Logic\bin\Debug\desafio2019.Data.pdb
+C:\Users\Wilder\Documents\GitHub\pruebacarga\desafio2019\desafio2019.Logic\bin\Debug\desafio2019.Entity.pdb
+C:\Users\Wilder\Documents\GitHub\pruebacarga\desafio2019\desafio2019.Logic\bin\Debug\Dapper.xml
+C:\Users\Wilder\Documents\GitHub\pruebacarga\desafio2019\desafio2019.Logic\obj\Debug\desafio2019.Logic.csprojAssemblyReference.cache
+C:\Users\Wilder\Documents\GitHub\pruebacarga\desafio2019\desafio2019.Logic\obj\Debug\desafio2019.Logic.csproj.CoreCompileInputs.cache
+C:\Users\Wilder\Documents\GitHub\pruebacarga\desafio2019\desafio2019.Logic\obj\Debug\desafio2019.Logic.csproj.CopyComplete
+C:\Users\Wilder\Documents\GitHub\pruebacarga\desafio2019\desafio2019.Logic\obj\Debug\desafio2019.Logic.dll
+C:\Users\Wilder\Documents\GitHub\pruebacarga\desafio2019\desafio2019.Logic\obj\Debug\desafio2019.Logic.pdb
