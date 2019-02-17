@@ -41,6 +41,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="MySql\EnConnection.cs" />
+    <Compile Include="MySql\EnDevice.cs" />
+    <Compile Include="MySql\EnOperativeSystem.cs" />
+    <Compile Include="MySql\EnSensor.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -14,7 +14,8 @@ namespace desafio2019.Data
         public String CnxMySQL()
         {
 
-            strConexion = "Server = 40.79.22.145; Port = 3306; Database = gestion_test; Uid = testuser; Pwd = Exigo.2019123; SslMode = Preferred; ";
+            //strConexion = "Server = 104.248.211.185; Port = 3306; Database = desafio2019; Uid = desafioext; Pwd = aPdfKiFXyZSJS0ds; SslMode = Preferred; ";
+            strConexion = "Server = 104.248.211.185; Database = desafio2019; Uid = desafioext; Pwd = aPdfKiFXyZSJS0ds;";
             return strConexion;
 
         }
