@@ -42,7 +42,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="MySql\EnConnection.cs" />
-    <Compile Include="MySql\EnDevice.cs" />
+    <Compile Include="MySql\EnDevices.cs" />
+    <Compile Include="MySql\EnDevice_Type.cs" />
     <Compile Include="MySql\EnOperativeSystem.cs" />
     <Compile Include="MySql\EnSensor.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -133,6 +133,8 @@ C:\Users\Wilder\Documents\GitHub\Desafio\desafio2019.WEB\bin\AspNet.ScriptManage
 C:\Users\Wilder\Documents\GitHub\Desafio\desafio2019.WEB\bin\AspNet.ScriptManager.jQuery.dll
 C:\Users\Wilder\Documents\GitHub\Desafio\desafio2019.WEB\bin\desafio2019.Entity.dll
 C:\Users\Wilder\Documents\GitHub\Desafio\desafio2019.WEB\bin\desafio2019.Logic.dll
+C:\Users\Wilder\Documents\GitHub\Desafio\desafio2019.WEB\bin\EPPlus.dll
+C:\Users\Wilder\Documents\GitHub\Desafio\desafio2019.WEB\bin\IPAddressControlLib.dll
 C:\Users\Wilder\Documents\GitHub\Desafio\desafio2019.WEB\bin\Microsoft.AspNet.FriendlyUrls.dll
 C:\Users\Wilder\Documents\GitHub\Desafio\desafio2019.WEB\bin\Microsoft.AspNet.TelemetryCorrelation.dll
 C:\Users\Wilder\Documents\GitHub\Desafio\desafio2019.WEB\bin\Microsoft.AspNet.Web.Optimization.WebForms.dll
@@ -150,6 +152,7 @@ C:\Users\Wilder\Documents\GitHub\Desafio\desafio2019.WEB\bin\Dapper.dll
 C:\Users\Wilder\Documents\GitHub\Desafio\desafio2019.WEB\bin\Google.Protobuf.dll
 C:\Users\Wilder\Documents\GitHub\Desafio\desafio2019.WEB\bin\desafio2019.Entity.pdb
 C:\Users\Wilder\Documents\GitHub\Desafio\desafio2019.WEB\bin\desafio2019.Logic.pdb
+C:\Users\Wilder\Documents\GitHub\Desafio\desafio2019.WEB\bin\EPPlus.xml
 C:\Users\Wilder\Documents\GitHub\Desafio\desafio2019.WEB\bin\System.Web.Optimization.xml
 C:\Users\Wilder\Documents\GitHub\Desafio\desafio2019.WEB\bin\Newtonsoft.Json.xml
 C:\Users\Wilder\Documents\GitHub\Desafio\desafio2019.WEB\bin\Antlr3.Runtime.pdb
@@ -168,4 +171,3 @@ C:\Users\Wilder\Documents\GitHub\Desafio\desafio2019.WEB\obj\Debug\desafio2019.W
 C:\Users\Wilder\Documents\GitHub\Desafio\desafio2019.WEB\obj\Debug\desafio2019.WEB.csproj.CopyComplete
 C:\Users\Wilder\Documents\GitHub\Desafio\desafio2019.WEB\obj\Debug\desafio2019.WEB.dll
 C:\Users\Wilder\Documents\GitHub\Desafio\desafio2019.WEB\obj\Debug\desafio2019.WEB.pdb
-C:\Users\Wilder\Documents\GitHub\Desafio\desafio2019.WEB\bin\IPAddressControlLib.dll

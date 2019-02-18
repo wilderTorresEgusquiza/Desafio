@@ -60,7 +60,8 @@
   <ItemGroup>
     <Compile Include="ConexionDAO.cs" />
     <Compile Include="MySql\DaConnection.cs" />
-    <Compile Include="MySql\DaDevice.cs" />
+    <Compile Include="MySql\DaDevice_Type.cs" />
+    <Compile Include="MySql\DaDevices.cs" />
     <Compile Include="MySql\DaOperativeSystem.cs" />
     <Compile Include="MySql\DaSensor.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

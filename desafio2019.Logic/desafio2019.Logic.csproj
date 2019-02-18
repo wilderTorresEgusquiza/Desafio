@@ -60,7 +60,8 @@
   <ItemGroup>
     <Compile Include="Class1.cs" />
     <Compile Include="MySql\LoConnection.cs" />
-    <Compile Include="MySql\LoDevice.cs" />
+    <Compile Include="MySql\LoDevice_Type.cs" />
+    <Compile Include="MySql\LoDevices.cs" />
     <Compile Include="MySql\LoOperativeSystem.cs" />
     <Compile Include="MySql\LoSensor.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

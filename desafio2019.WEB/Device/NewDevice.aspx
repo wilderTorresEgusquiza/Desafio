@@ -63,7 +63,7 @@
                 </div>
                 <div class="col-lg-2 col-md-2">
                     <div class="form-group">
-                        <div class="pull-left" style="padding-top: 25px">
+                        <div class="pull-left" style="padding-top: 35px">
                             <asp:CheckBox ID="chkValidarIp" runat="server" Text="Validar" OnCheckedChanged="chkValidarIp_CheckedChanged" AutoPostBack="true" />
                         </div>
                     </div>
@@ -194,6 +194,8 @@
                     return bolValida;
 
                 }
+
+
 
 
             </script>

@@ -1,4 +1,5 @@
-﻿using desafio2019.Logic.MySql;
+﻿using desafio2019.Entity.MySql;
+using desafio2019.Logic.MySql;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -49,10 +50,10 @@ namespace desafio2019.WEB.Device
         {
             try
             {
-                LoDevice objLo = new LoDevice();
+                LoDevice_Type objLo = new LoDevice_Type();
                 object objDevice = new object();
 
-                objDevice = objLo.CargaDevice();
+                objDevice = objLo.CargaDevice_Type();
 
                 ddlTypeDevice.DataValueField = "rowid";
                 ddlTypeDevice.DataTextField = "description";
@@ -153,12 +154,41 @@ namespace desafio2019.WEB.Device
 
         protected void btnSalvar_Click(object sender, EventArgs e)
         {
+            string msg = string.Empty;
             lblMensaje.Text = string.Empty;
-            if (!IsValidIp(txtIp.Text))
+
+            try
             {
-                lblMensaje.Text = "Ip Incorrecta";
-                return;
+
+                if (!IsValidIp(txtIp.Text))
+                {
+                    lblMensaje.Text = "Ip Incorrecta";
+                    return;
+                }
+
+                LoDevices objLo = new LoDevices();
+                EnDevices objEn = new EnDevices();
+
+                objEn.ConnectionID = Convert.ToInt32(ddlTypeConnection.SelectedValue);
+                objEn.NameDevice = txtNameDevice.Text.Trim();
+                objEn.DeviceID = Convert.ToInt32(ddlTypeDevice.SelectedValue);
+                objEn.SensorID = Convert.ToInt32(ddlTypeSensor.SelectedValue);
+                objEn.OperSysID = Convert.ToInt32(ddlTypeConnection.SelectedValue);
+
+                msg = objLo.Devices_Insertar(objEn);
+                if (msg.ToUpper() == "EXITO")
+                {
+                    Response.Redirect("/Device/MyDevice.aspx");
+                }
+
             }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
+
+
 
 
         }
