@@ -44,6 +44,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="IPAddressControlLib, Version=1.2.4446.28646, Culture=neutral, PublicKeyToken=64ca5a4287aa7107, processorArchitecture=MSIL">
+      <HintPath>..\packages\IPAddressControl.1.2.4446.28646\lib\IPAddressControlLib.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System" />
@@ -120,6 +123,7 @@
     <Content Include="Content\Site.css" />
     <Content Include="Default.aspx" />
     <Content Include="Device\ConfigNewDevice.aspx" />
+    <Content Include="Device\MyDevice.aspx" />
     <Content Include="Device\NewDevice.aspx" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
@@ -139,6 +143,7 @@
     <Content Include="Scripts\jquery-3.3.1.min.js" />
     <Content Include="Scripts\jquery-3.3.1.slim.js" />
     <Content Include="Scripts\jquery-3.3.1.slim.min.js" />
+    <Content Include="Scripts\jValidacionGeneral.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
     <Content Include="Scripts\WebForms\DetailsView.js" />
     <Content Include="Scripts\WebForms\Focus.js" />
@@ -197,6 +202,13 @@
     </Compile>
     <Compile Include="Device\ConfigNewDevice.aspx.designer.cs">
       <DependentUpon>ConfigNewDevice.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Device\MyDevice.aspx.cs">
+      <DependentUpon>MyDevice.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Device\MyDevice.aspx.designer.cs">
+      <DependentUpon>MyDevice.aspx</DependentUpon>
     </Compile>
     <Compile Include="Device\NewDevice.aspx.cs">
       <DependentUpon>NewDevice.aspx</DependentUpon>

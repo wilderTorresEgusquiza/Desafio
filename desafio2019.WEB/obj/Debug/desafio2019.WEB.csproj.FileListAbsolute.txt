@@ -168,3 +168,4 @@ C:\Users\Wilder\Documents\GitHub\Desafio\desafio2019.WEB\obj\Debug\desafio2019.W
 C:\Users\Wilder\Documents\GitHub\Desafio\desafio2019.WEB\obj\Debug\desafio2019.WEB.csproj.CopyComplete
 C:\Users\Wilder\Documents\GitHub\Desafio\desafio2019.WEB\obj\Debug\desafio2019.WEB.dll
 C:\Users\Wilder\Documents\GitHub\Desafio\desafio2019.WEB\obj\Debug\desafio2019.WEB.pdb
+C:\Users\Wilder\Documents\GitHub\Desafio\desafio2019.WEB\bin\IPAddressControlLib.dll

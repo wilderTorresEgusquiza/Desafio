@@ -33,6 +33,18 @@ namespace desafio2019.WEB
             // para la producción, use la herramienta de compilación disponible en https://modernizr.com para seleccionar solo las pruebas que necesite
             bundles.Add(new ScriptBundle("~/bundles/modernizr").Include(
                             "~/Scripts/modernizr-*"));
+
+
+            //---------------------
+
+            bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
+          "~/Scripts/bootstrap.min.js"));
+
+            bundles.Add(new StyleBundle("~/Content/css").Include(
+                      "~/Content/bootstrap.min.css"));
+
+
+
         }
     }
 }
