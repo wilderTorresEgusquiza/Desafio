@@ -120,7 +120,7 @@ namespace desafio2019.Data.MySql
                 cadena += "     SensorID = " + objEn.SensorID + ",    ";
                 cadena += "     OperSysID = " + objEn.OperSysID + "    ";
                 cadena += " WHERE   ";
-                cadena += "     rowid = " + objEn.rowid + ",    ";
+                cadena += "     rowid = " + objEn.rowid + "   ";
 
                 using (MySqlCommand cmd = new MySqlCommand(cadena, tran.Connection))
                 {

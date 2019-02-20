@@ -19,7 +19,7 @@
             <div class="row">
                 <div class="col-lg-12 col-md-12">
                     <div class="form-group">
-                        <asp:TextBox ID="txtIp" runat="server" CssClass="form-control" placeholder="Filter by field"></asp:TextBox>
+                        <asp:TextBox ID="txtBuscar" runat="server" CssClass="form-control" placeholder="Filter by field"></asp:TextBox>
                     </div>
                 </div>
             </div>
@@ -123,8 +123,9 @@
                             <button id="btnCerrar" type="button" class="close refresh-me" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                             <h4 class="modal-title" id="myModalLabel">Edit Device</h4>
                         </div>
-
+                        <asp:HiddenField ID="hd_ID" runat="server" />
                         <div class="modal-body">
+
                             <div class="row">
                                 <div class="col-lg-12 col-md-12">
                                     <div class="form-group">
@@ -169,7 +170,7 @@
                                 <div class="col-lg-8 col-md-8">
                                     <div class="form-group">
                                         <label for="lblIp">Ip Publica</label>
-                                        <asp:TextBox ID="TextBox1" runat="server" CssClass="form-control" placeholder="xxx.xxx.xxx.xxx" onkeyUp="return IpMascara(this,event);"></asp:TextBox>
+                                        <asp:TextBox ID="txtIp2" runat="server" CssClass="form-control" placeholder="xxx.xxx.xxx.xxx" onkeyUp="return IpMascara(this,event);"></asp:TextBox>
                                     </div>
                                 </div>
                                 <div class="col-lg-4 col-md-4">
@@ -190,7 +191,7 @@
 
                             <div class="row">
                                 <div class="col-lg-12" style="text-align: right">
-                                   <asp:Button ID="btnSalvar" runat="server" Text="Salvar" CssClass="btn btn-primary" OnClientClick="return Grabar();" OnClick="btnSalvar_Click" />
+                                   <asp:Button ID="btnSalvar2" runat="server" Text="Salvar" CssClass="btn btn-primary" OnClientClick="return Grabar();" OnClick="btnSalvar2_Click" />
                                 </div>
                             </div>
                         </div>
@@ -314,7 +315,7 @@
                 function Validar() {
 
                     var bolValida = true;
-                    if (txtcontrolError(document.getElementById("<%=txtIp.ClientID %>")) == false) bolValida = false;
+                    if (txtcontrolError(document.getElementById("<%=txtIp2.ClientID %>")) == false) bolValida = false;
 
                     return bolValida;
 
@@ -328,7 +329,7 @@
                     if (ddlcontrolError(document.getElementById("<%=ddlTypeDevice.ClientID %>")) == false) bolValida = false;
                     if (ddlcontrolError(document.getElementById("<%=ddlTypeSensor.ClientID %>")) == false) bolValida = false;
                     if (ddlcontrolError(document.getElementById("<%=ddlOperativeSystem.ClientID %>")) == false) bolValida = false;
-                    if (txtcontrolError(document.getElementById("<%=txtIp.ClientID %>")) == false) bolValida = false;
+                    if (txtcontrolError(document.getElementById("<%=txtIp2.ClientID %>")) == false) bolValida = false;
                     if (txtcontrolError(document.getElementById("<%=txtNameDevice.ClientID %>")) == false) bolValida = false;
 
 

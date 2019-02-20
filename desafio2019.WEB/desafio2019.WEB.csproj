@@ -135,6 +135,9 @@
     <Content Include="Device\MyDevice.aspx" />
     <Content Include="Device\NewDevice.aspx" />
     <Content Include="favicon.ico" />
+    <Content Include="files\Raspbian.txt" />
+    <Content Include="files\Windows 10 IoT Core%2817744%29 All Model.txt" />
+    <Content Include="files\Windows 10 IoT Core%2817744%29 Raspbian.txt" />
     <Content Include="font-awesome\css\font-awesome.css" />
     <Content Include="font-awesome\css\font-awesome.min.css" />
     <Content Include="font-awesome\fonts\fontawesome-webfont.svg" />

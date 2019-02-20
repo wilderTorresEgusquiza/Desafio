@@ -13,13 +13,13 @@ namespace desafio2019.WEB.Device {
     public partial class MyDevice {
         
         /// <summary>
-        /// Control txtIp.
+        /// Control txtBuscar.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtIp;
+        protected global::System.Web.UI.WebControls.TextBox txtBuscar;
         
         /// <summary>
         /// Control grvListado.
@@ -38,6 +38,15 @@ namespace desafio2019.WEB.Device {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Panel pnlPagina;
+        
+        /// <summary>
+        /// Control hd_ID.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hd_ID;
         
         /// <summary>
         /// Control ddlTypeConnection.
@@ -85,13 +94,13 @@ namespace desafio2019.WEB.Device {
         protected global::System.Web.UI.WebControls.TextBox txtNameDevice;
         
         /// <summary>
-        /// Control TextBox1.
+        /// Control txtIp2.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TextBox1;
+        protected global::System.Web.UI.WebControls.TextBox txtIp2;
         
         /// <summary>
         /// Control chkValidarIp.
@@ -112,13 +121,13 @@ namespace desafio2019.WEB.Device {
         protected global::System.Web.UI.WebControls.Label lblMensaje;
         
         /// <summary>
-        /// Control btnSalvar.
+        /// Control btnSalvar2.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnSalvar;
+        protected global::System.Web.UI.WebControls.Button btnSalvar2;
         
         /// <summary>
         /// Control HiddenField1.

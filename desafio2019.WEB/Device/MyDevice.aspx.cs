@@ -7,6 +7,7 @@ using System.Data;
 using System.IO;
 using System.Linq;
 using System.Net;
+using System.Web;
 using System.Web.Script.Serialization;
 using System.Web.Script.Services;
 using System.Web.Services;
@@ -52,7 +53,7 @@ namespace desafio2019.WEB.Device
             try
             {
                 ScriptManager.RegisterStartupScript(this, typeof(Page), "jsKeys", "javascript:BuscarItem();", true);
-           
+
 
                 CargaConnection();
                 CargaDevice();
@@ -67,10 +68,9 @@ namespace desafio2019.WEB.Device
                 int index = Convert.ToInt32(e.CommandArgument);
                 Label rowid = (Label)grvListado.Rows[index].FindControl("lblrowid");
 
-              
-
                 dt = objLo.Devices_Selecionar(Convert.ToInt32(rowid.Text));
 
+                hd_ID.Value = rowid.Text;
                 ddlTypeConnection.SelectedValue = dt.Rows[0]["ConnectionID"].ToString();
                 ddlTypeDevice.SelectedValue = dt.Rows[0]["DeviceID"].ToString();
                 ddlTypeSensor.SelectedValue = dt.Rows[0]["SensorID"].ToString();
@@ -101,51 +101,20 @@ namespace desafio2019.WEB.Device
 
 
                 int index = Convert.ToInt32(e.CommandArgument);
-                Label rowid = (Label)grvListado.Rows[index].FindControl("lblrowid");
+                Label OperSystem = (Label)grvListado.Rows[index].FindControl("lblOperSystem");
 
 
-
-                dt = objLo.Devices_Selecionar(Convert.ToInt32(rowid.Text));
-
-
-
-                ExcelPackage excel = new ExcelPackage();
-                var workSheet = excel.Workbook.Worksheets.Add("Reporte");
-                workSheet.TabColor = System.Drawing.Color.Black;
-
-
-                if (dt.Rows.Count > 0)
-                {
-                    workSheet.Cells["A1"].LoadFromDataTable(dt, true, OfficeOpenXml.Table.TableStyles.Light8);
-
-                }
-
-                workSheet.HeaderFooter.OddFooter.RightAlignedText = string.Format("Page {0} of {1}", ExcelHeaderFooter.PageNumber, ExcelHeaderFooter.NumberOfPages);
-                workSheet.HeaderFooter.OddFooter.LeftAlignedText = ExcelHeaderFooter.FilePath + ExcelHeaderFooter.FileName;
-                // workSheet.PrinterSettings.RepeatRows = workSheet.Cells["1:" + numColumnas];
-                workSheet.PrinterSettings.Orientation = eOrientation.Landscape;
-                excel.Workbook.Properties.Title = "Reporte";
-                excel.Workbook.Properties.Author = "Sistemas ";
-                excel.Workbook.Properties.Comments = "Maestro ";
-
-                excel.Workbook.Properties.Company = "Device S.A";
-
-
-
-                DateTime fechaHora = new DateTime();
-                fechaHora = DateTime.Now;
-
-                string nombre = "descarga-A" + fechaHora.ToString("yyyyMMddHHmmss") + ".xlsx";
-                using (var memoryStream = new MemoryStream())
-                {
-                    Response.ContentType = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
-                    Response.AddHeader("content-disposition", "attachment;  filename=" + nombre);
-                    excel.SaveAs(memoryStream);
-                    memoryStream.WriteTo(Response.OutputStream);
-                    Response.Flush();
-                    Response.End();
-                }
-
+                string ruta = "/files/" + OperSystem.Text + ".txt";
+               
+                FileInfo Archivo = new FileInfo(HttpContext.Current.Server.MapPath(ruta));
+                File.WriteAllText(HttpContext.Current.Server.MapPath(ruta), OperSystem.Text);
+                HttpContext.Current.Response.Clear();
+                HttpContext.Current.Response.AddHeader("Content-Disposition", "attachment; filename=" + Archivo.Name);
+                HttpContext.Current.Response.AddHeader("Content-Length", Archivo.Length.ToString());
+                HttpContext.Current.Response.ContentType = "application/octet-stream";
+                HttpContext.Current.Response.WriteFile(ruta);
+               
+               HttpContext.Current.Response.End();          
 
             }
             catch (Exception ex)
@@ -165,7 +134,7 @@ namespace desafio2019.WEB.Device
                 return;
             }
 
-            if (IsValidIp(txtIp.Text.Trim()))
+            if (IsValidIp(txtIp2.Text.Trim()))
             {
                 lblMensaje.Text = "Ip Validada";
             }
@@ -273,7 +242,7 @@ namespace desafio2019.WEB.Device
             }
         }
 
-        protected void btnSalvar_Click(object sender, EventArgs e)
+        protected void btnSalvar2_Click(object sender, EventArgs e)
         {
             string msg = string.Empty;
             lblMensaje.Text = string.Empty;
@@ -281,7 +250,7 @@ namespace desafio2019.WEB.Device
             try
             {
 
-                if (!IsValidIp(txtIp.Text))
+                if (!IsValidIp(txtIp2.Text))
                 {
                     lblMensaje.Text = "Ip Incorrecta";
                     return;
@@ -290,11 +259,12 @@ namespace desafio2019.WEB.Device
                 LoDevices objLo = new LoDevices();
                 EnDevices objEn = new EnDevices();
 
+                objEn.rowid = Convert.ToInt32(hd_ID.Value);
                 objEn.ConnectionID = Convert.ToInt32(ddlTypeConnection.SelectedValue);
                 objEn.NameDevice = txtNameDevice.Text.Trim();
                 objEn.DeviceID = Convert.ToInt32(ddlTypeDevice.SelectedValue);
                 objEn.SensorID = Convert.ToInt32(ddlTypeSensor.SelectedValue);
-                objEn.OperSysID = Convert.ToInt32(ddlTypeConnection.SelectedValue);
+                objEn.OperSysID = Convert.ToInt32(ddlOperativeSystem.SelectedValue);
 
                 msg = objLo.Devices_Editar(objEn);
                 if (msg.ToUpper() == "EXITO")
