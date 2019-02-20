@@ -83,9 +83,10 @@
                                                 </a>--%>
                                                 <asp:LinkButton ID="btntxt" Text="" runat="server" CommandArgument="<%# ((GridViewRow)Container).RowIndex %>" OnCommand="btntxt_Command"><span class="fa fa-cloud-download" aria-hidden="true"></span></asp:LinkButton>
                                                 <asp:LinkButton ID="btnEditar" Text="" runat="server" CommandArgument="<%# ((GridViewRow)Container).RowIndex %>" OnCommand="btnEditar_Command"><span class="fa fa-edit" aria-hidden="true"></span></asp:LinkButton>
-                                                <a href="#" data-toggle="modal" data-target="#ItemID" onclick='GetItem(<%# "\"" + Eval("rowid").ToString()  + "\"" %>)'>
+                                                <a href="#" data-toggle="modal" data-target="#ItemID" onclick='GetItem(<%# "\"" + Eval("rowid").ToString() + "\",\"" + Eval("temmax").ToString() + "\",\"" + Eval("temmin").ToString() + "\",\"" + Eval("hummax").ToString()  + "\",\"" + Eval("hummin").ToString()   + "\"" %>)'>
                                                     <span class="fa fa-circle" aria-hidden="true"></span>
                                                 </a>
+                                                <asp:LinkButton ID="btnUpload" Text="" runat="server"  ><span class="fa fa-cloud-upload" aria-hidden="true"></span></asp:LinkButton>
                                             </ItemTemplate>
                                             <HeaderStyle Width="5%" />
                                             <ItemStyle HorizontalAlign="Center" Width="5%" />
@@ -114,7 +115,7 @@
                     </div>
                 </div>
             </div>
-
+            <asp:HiddenField ID="hd_ID" runat="server" />
             <button id="IdPopupBuscaItem" type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModalBuscaItem" style="display: none"></button>
             <div class="modal fade" id="myModalBuscaItem" role="dialog">
                 <div class="modal-dialog modal-sm">
@@ -123,7 +124,7 @@
                             <button id="btnCerrar" type="button" class="close refresh-me" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                             <h4 class="modal-title" id="myModalLabel">Edit Device</h4>
                         </div>
-                        <asp:HiddenField ID="hd_ID" runat="server" />
+
                         <div class="modal-body">
 
                             <div class="row">
@@ -191,7 +192,7 @@
 
                             <div class="row">
                                 <div class="col-lg-12" style="text-align: right">
-                                   <asp:Button ID="btnSalvar2" runat="server" Text="Salvar" CssClass="btn btn-primary" OnClientClick="return Grabar();" OnClick="btnSalvar2_Click" />
+                                    <asp:Button ID="btnSalvar2" runat="server" Text="Salvar" CssClass="btn btn-primary" OnClientClick="return Grabar();" OnClick="btnSalvar2_Click" />
                                 </div>
                             </div>
                         </div>
@@ -204,7 +205,7 @@
 
 
             <div class="modal fade  bd-example-modal-lg" id="ItemID" tabindex="-1" role="dialog" aria-labelledby="ItemIDModal" aria-hidden="true">
-                <div class="modal-dialog  modal-lg" role="document">
+                <div class="modal-dialog  modal-md" role="document">
                     <div class="modal-content">
                         <div class="modal-header" style="background-color: #e7eaec">
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -213,34 +214,39 @@
                             <h5 class="modal-title" id="AnularModal">configuración del Dispositivo</h5>
                         </div>
                         <div class="modal-body">
-                            <asp:HiddenField ID="HiddenField1" runat="server" />
+
                             <div class="row">
                                 <div class="col-lg-12 col-md-12">
-                                    <asp:GridView ID="grvItem" runat="server" Width="100%" CssClass="table table-hover table-striped table-bordered" BorderWidth="0px" GridLines="None" AutoGenerateColumns="true">
-                                        <Columns>
-                                        </Columns>
-                                        <EmptyDataTemplate>
-                                            <table id="tbSinDatos" style="width: 100%">
-                                                <tbody>
-                                                    <tr>
-                                                        <td style="text-align: left">
-                                                            <asp:Label ID="lblSinDatos" runat="server" Text="No se encontraron Datos..."></asp:Label>
-                                                        </td>
-                                                    </tr>
-                                                </tbody>
-                                            </table>
-                                        </EmptyDataTemplate>
-                                        <PagerTemplate>
-                                        </PagerTemplate>
-                                    </asp:GridView>
 
+                                    <table style="align-content: center;">
+                                        <tr>
+                                            <td style="width: 110px;"></td>
+                                            <td>Maxima</td>
+                                            <td>Minima</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Temperatura</td>
+                                            <td>
+                                                <asp:TextBox ID="txtTempMaxima" runat="server" CssClass="form-control"></asp:TextBox></td>
+                                            <td>
+                                                <asp:TextBox ID="txtTempMin" runat="server" CssClass="form-control"></asp:TextBox></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Humedad</td>
+                                            <td>
+                                                <asp:TextBox ID="txtHumMax" runat="server" CssClass="form-control"></asp:TextBox></td>
+                                            <td>
+                                                <asp:TextBox ID="txtHumMin" runat="server" CssClass="form-control"></asp:TextBox></td>
+                                        </tr>
+                                    </table>
 
                                 </div>
                             </div>
 
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                            <asp:Button ID="btnGenerar" runat="server" Text="Generar" OnClientClick="return configuracion();" />
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">cancelar</button>
                         </div>
                     </div>
                 </div>
@@ -256,23 +262,51 @@
 
                 }
 
-                function GetItem(rowid) { }
 
-                function GetItem2(rowid) {
-                    var url = 'MyDevice/Temperatura_txt';
-                    var prm = {};
 
-                    prm.rowid = rowid;
+                function GetItem(rowid, tempmax, tempmin, humimax, humimin) {
 
-                    var prmJson = {};
-                    prmJson.device = JSON.stringify(prm);
+                    document.getElementById("<%=hd_ID.ClientID %>").value = rowid;
+                    document.getElementById("<%=txtTempMaxima.ClientID %>").value = tempmax;
+                    document.getElementById("<%=txtTempMin.ClientID %>").value = tempmin;
+                    document.getElementById("<%=txtHumMax.ClientID %>").value = humimax;
+                    document.getElementById("<%=txtHumMin.ClientID %>").value = humimin;
 
-                    var rsptaJson = {};
+                }
+
+                function configuracion() {
+                    var url = 'MyDevice.aspx/Configuracion';
+
+                    var prmJson = {
+                         "Id": document.getElementById("<%=hd_ID.ClientID %>").value,
+                        "simulatedData": false,
+                        "interval": 2000,
+                        "deviceId": "Raspberry Pi Node",
+                        "LEDPin": 5,
+                        "messageMax": 256,
+                        "credentialPath": "~/.iot-hub",
+                        "temperatureAlertMAX":  document.getElementById("<%=txtTempMaxima.ClientID %>").value,
+                        "temperatureAlertMIN": document.getElementById("<%=txtTempMin.ClientID %>").value,
+                        "HumidityAlertMAX": document.getElementById("<%=txtHumMax.ClientID %>").value,
+                        "HumidityAlertMin": document.getElementById("<%=txtHumMin.ClientID %>").value,
+                        "i2cOption": {
+                            "pin": 9,
+                            "i2cBusNo": 1,
+                            "i2cAddress": 119
+
+                        }
+
+                    }
+
+                    //var prmJson = {};
+                    //prmJson.configuracion = JSON.stringify(prm);
+
+                    //var rsptaJson = {};
                     rsptaJson = execute(url, prmJson);
 
                     if (rsptaJson.ErrorJson == 0) {
-                        //var Estado = $.parseJSON(rsptaJson.response.d);
-                        bindGrid(rsptaJson.response.d);
+                        var Estado = $.parseJSON(rsptaJson.response.d);
+                       // bindGrid(rsptaJson.response.d);
                     }
                     else {
                         var Estado = rsptaJson.response;

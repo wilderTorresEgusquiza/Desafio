@@ -39,7 +39,11 @@ namespace desafio2019.Data.MySql
                 cadena += "     d.SensorID,  ";
                 cadena += "     s.description as Sensor,  ";
                 cadena += "     d.OperSysID,  ";
-                cadena += "     o.description as OperSystem  ";
+                cadena += "     o.description as OperSystem , ";
+                cadena += "     d.temmax , ";
+                cadena += "     d.temmin , ";
+                cadena += "     d.hummax , ";
+                cadena += "     d.hummin  ";
                 cadena += " FROM   ";
                 cadena += "     Device  d    ";
                 cadena += "     inner join Conecction_Type c   on      ";
@@ -127,7 +131,6 @@ namespace desafio2019.Data.MySql
                     cmd.CommandType = CommandType.Text;
                     cmd.Transaction = tran;
 
-
                     cmd.ExecuteNonQuery();
 
                 }
@@ -138,6 +141,7 @@ namespace desafio2019.Data.MySql
                 throw ex;
             }
         }
+
 
         public DataTable Devices_Selecionar(int rowid)
         {
@@ -192,6 +196,35 @@ namespace desafio2019.Data.MySql
 
         }
 
+        public void Devices_configuracion(EnDevices objEn, MySqlTransaction tran)
+        {
+            string cadena = string.Empty;
+            try
+            {
+
+                cadena = " UPDATE    Device   SET ";
+                cadena += "     temmax = '" + objEn.temmax + "',    ";
+                cadena += "     temmin = '" + objEn.temmin + "',    ";
+                cadena += "     hummax = '" + objEn.hummax + "',    ";
+                cadena += "     hummin = '" + objEn.hummin + "'   ";
+                cadena += " WHERE   ";
+                cadena += "     rowid = " + objEn.rowid + "   ";
+
+                using (MySqlCommand cmd = new MySqlCommand(cadena, tran.Connection))
+                {
+                    cmd.CommandType = CommandType.Text;
+                    cmd.Transaction = tran;
+
+                    cmd.ExecuteNonQuery();
+
+                }
+
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
 
     }
 }

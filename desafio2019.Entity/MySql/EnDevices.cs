@@ -14,6 +14,10 @@ namespace desafio2019.Entity.MySql
         public int DeviceID { get; set; }
         public int SensorID { get; set; }
         public int OperSysID { get; set; }
+        public string temmax { get; set; }
+        public string temmin { get; set; }
+        public string hummax { get; set; }
+        public string hummin { get; set; }
 
         public class EnDevicesTabla
         {
@@ -27,6 +31,10 @@ namespace desafio2019.Entity.MySql
             public string Sensor { get; set; }
             public int OperSysID { get; set; }
             public string OperSystem { get; set; }
+            public string temmax { get; set; }
+            public string temmin { get; set; }
+            public string hummax { get; set; }
+            public string hummin { get; set; }
 
         }
 

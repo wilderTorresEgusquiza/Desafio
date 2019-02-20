@@ -27,7 +27,7 @@ namespace desafio2019.WEB.Device
             }
         }
 
-        private void Devices_Lista()
+        public void Devices_Lista()
         {
             try
             {
@@ -105,7 +105,7 @@ namespace desafio2019.WEB.Device
 
 
                 string ruta = "/files/" + OperSystem.Text + ".txt";
-               
+
                 FileInfo Archivo = new FileInfo(HttpContext.Current.Server.MapPath(ruta));
                 File.WriteAllText(HttpContext.Current.Server.MapPath(ruta), OperSystem.Text);
                 HttpContext.Current.Response.Clear();
@@ -113,8 +113,8 @@ namespace desafio2019.WEB.Device
                 HttpContext.Current.Response.AddHeader("Content-Length", Archivo.Length.ToString());
                 HttpContext.Current.Response.ContentType = "application/octet-stream";
                 HttpContext.Current.Response.WriteFile(ruta);
-               
-               HttpContext.Current.Response.End();          
+
+                HttpContext.Current.Response.End();
 
             }
             catch (Exception ex)
@@ -269,7 +269,7 @@ namespace desafio2019.WEB.Device
                 msg = objLo.Devices_Editar(objEn);
                 if (msg.ToUpper() == "EXITO")
                 {
-
+                    Devices_Lista();
                 }
 
             }
@@ -278,12 +278,67 @@ namespace desafio2019.WEB.Device
                 throw ex;
             }
 
-
-
-
-
         }
 
+
+        //protected void btnGenerar_Click(object sender, EventArgs e)
+        //{
+        //    try
+        //    {
+        //        string msg = string.Empty;
+        //        LoDevices objLo = new LoDevices();
+        //        EnDevices objEn = new EnDevices();
+
+        //        objEn.rowid = Convert.ToInt32(hd_ID.Value);
+        //        objEn.temmax = txtTempMaxima.Text;
+        //        objEn.temmin = txtTempMin.Text;
+        //        objEn.hummax = txtHumMax.Text;
+        //        objEn.hummin = txtHumMin.Text;
+
+        //        msg = objLo.Devices_configuracion(objEn);
+        //        if (msg.ToUpper() == "EXITO")
+        //        {
+        //            Devices_Lista();
+        //        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        throw ex;
+        //    }
+        //}
+
+        [WebMethod]
+        [ScriptMethod(UseHttpGet = false, ResponseFormat = ResponseFormat.Json)]
+        public static object Empresarios_Listar(string configuracion)
+        {
+            DataTable dt = new DataTable();
+
+            #region INGRESO_DE_DATOS
+
+            JavaScriptSerializer serializer = new JavaScriptSerializer();
+            var objJson = serializer.Deserialize<dynamic>(configuracion);
+
+            string msg = string.Empty;
+            LoDevices objLo = new LoDevices();
+            EnDevices objEn = new EnDevices();
+
+            objEn.rowid = Convert.ToInt32(objJson["Id"]);
+            objEn.temmax = objJson["temperatureAlertMAX"];
+            objEn.temmin = objJson["temperatureAlertMIN"];
+            objEn.hummax = objJson["HumidityAlertMAX"];
+            objEn.hummin = objJson["HumidityAlertMin"];
+
+            msg = objLo.Devices_configuracion(objEn);
+            if (msg.ToUpper() == "EXITO")
+            {
+                //Devices_Lista();
+            }
+
+
+            #endregion INGRESO_DE_DATOS
+            object objProducto = new object();
+            return objProducto;
+        }
 
     }
 }
