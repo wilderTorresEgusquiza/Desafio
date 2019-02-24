@@ -78,6 +78,20 @@ namespace desafio2019.Logic.MySql
 
         }
 
+        public DataTable DevicesJson_Selecionar(int rowid)
+        {
+            try
+            {
+                DaDevices OjbDAO = new DaDevices();
+                return OjbDAO.DevicesJson_Selecionar(rowid);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
+        }
+
         public string Devices_Editar(EnDevices objEn)
         {
             string msg = string.Empty;
@@ -116,7 +130,7 @@ namespace desafio2019.Logic.MySql
             }
         }
 
-        public string Devices_configuracion(EnDevices objEn)
+        public string Devices_configuracion(int ID, string cadena)
         {
             string msg = string.Empty;
             ConexionDAO cadenaDao = new ConexionDAO();
@@ -129,7 +143,7 @@ namespace desafio2019.Logic.MySql
                     try
                     {
                         DaDevices OjbDAO = new DaDevices();
-                        OjbDAO.Devices_configuracion(objEn, tran);
+                        OjbDAO.Devices_configuracion(ID,cadena, tran);
                         tran.Commit();
                         msg = "EXITO";
 

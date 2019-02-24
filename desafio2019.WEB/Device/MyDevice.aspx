@@ -83,13 +83,13 @@
                                                 </a>--%>
                                                 <asp:LinkButton ID="btntxt" Text="" runat="server" CommandArgument="<%# ((GridViewRow)Container).RowIndex %>" OnCommand="btntxt_Command"><span class="fa fa-cloud-download" aria-hidden="true"></span></asp:LinkButton>
                                                 <asp:LinkButton ID="btnEditar" Text="" runat="server" CommandArgument="<%# ((GridViewRow)Container).RowIndex %>" OnCommand="btnEditar_Command"><span class="fa fa-edit" aria-hidden="true"></span></asp:LinkButton>
-                                                <a href="#" data-toggle="modal" data-target="#ItemID" onclick='GetItem(<%# "\"" + Eval("rowid").ToString() + "\",\"" + Eval("temmax").ToString() + "\",\"" + Eval("temmin").ToString() + "\",\"" + Eval("hummax").ToString()  + "\",\"" + Eval("hummin").ToString()   + "\"" %>)'>
+                                                <a href="#" data-toggle="modal" data-target="#ItemID" onclick='GetItem(<%# "\"" + Eval("rowid").ToString()   + "\"" %>)'>
                                                     <span class="fa fa-circle" aria-hidden="true"></span>
                                                 </a>
-                                                <asp:LinkButton ID="btnUpload" Text="" runat="server"  ><span class="fa fa-cloud-upload" aria-hidden="true"></span></asp:LinkButton>
+                                                <asp:LinkButton ID="btnEnviar" Text="" runat="server" CommandArgument="<%# ((GridViewRow)Container).RowIndex %>" OnCommand="btnEnviar_Command"><span class="fa fa-edit" aria-hidden="true"></span></asp:LinkButton>
                                             </ItemTemplate>
-                                            <HeaderStyle Width="5%" />
-                                            <ItemStyle HorizontalAlign="Center" Width="5%" />
+                                            <HeaderStyle Width="10%" />
+                                            <ItemStyle HorizontalAlign="Center" Width="10%" />
                                         </asp:TemplateField>
                                     </Columns>
                                     <EmptyDataTemplate>
@@ -245,7 +245,7 @@
 
                         </div>
                         <div class="modal-footer">
-                            <asp:Button ID="btnGenerar" runat="server" Text="Generar" OnClientClick="return configuracion();" />
+                            <asp:Button ID="btnTemperatura" runat="server" Text="Generar" CssClass="btn btn-primary" OnClick="btnTemperatura_Click" OnClientClick="return validarconfig();" />
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">cancelar</button>
                         </div>
                     </div>
@@ -262,51 +262,65 @@
 
                 }
 
+                function validarconfig() {
+
+                    var bolValida = true;
+                    var temp = false;
+                    var hum = false;
+
+<%--                    if (txtcontrolError(document.getElementById("<%=txtTempMaxima.ClientID %>")) == false) bolValida = false;
+                    if (txtcontrolError(document.getElementById("<%=txtTempMin.ClientID %>")) == false) bolValida = false;
+                    if (txtcontrolError(document.getElementById("<%=txtHumMax.ClientID %>")) == false) bolValida = false;
+                    if (txtcontrolError(document.getElementById("<%=txtHumMin.ClientID %>")) == false) bolValida = false;--%>
 
 
-                function GetItem(rowid, tempmax, tempmin, humimax, humimin) {
-
-                    document.getElementById("<%=hd_ID.ClientID %>").value = rowid;
-                    document.getElementById("<%=txtTempMaxima.ClientID %>").value = tempmax;
-                    document.getElementById("<%=txtTempMin.ClientID %>").value = tempmin;
-                    document.getElementById("<%=txtHumMax.ClientID %>").value = humimax;
-                    document.getElementById("<%=txtHumMin.ClientID %>").value = humimin;
-
-                }
-
-                function configuracion() {
-                    var url = 'MyDevice.aspx/Configuracion';
-
-                    var prmJson = {
-                         "Id": document.getElementById("<%=hd_ID.ClientID %>").value,
-                        "simulatedData": false,
-                        "interval": 2000,
-                        "deviceId": "Raspberry Pi Node",
-                        "LEDPin": 5,
-                        "messageMax": 256,
-                        "credentialPath": "~/.iot-hub",
-                        "temperatureAlertMAX":  document.getElementById("<%=txtTempMaxima.ClientID %>").value,
-                        "temperatureAlertMIN": document.getElementById("<%=txtTempMin.ClientID %>").value,
-                        "HumidityAlertMAX": document.getElementById("<%=txtHumMax.ClientID %>").value,
-                        "HumidityAlertMin": document.getElementById("<%=txtHumMin.ClientID %>").value,
-                        "i2cOption": {
-                            "pin": 9,
-                            "i2cBusNo": 1,
-                            "i2cAddress": 119
-
-                        }
-
+                    if (txtcontrolError(document.getElementById("<%=txtTempMaxima.ClientID %>"))) {
+                        temp = true;
+                    }
+                    if (txtcontrolError(document.getElementById("<%=txtTempMin.ClientID %>"))) {
+                        temp = true;
                     }
 
-                    //var prmJson = {};
-                    //prmJson.configuracion = JSON.stringify(prm);
+                    if (txtcontrolError(document.getElementById("<%=txtHumMax.ClientID %>")) {
+                        hum = true;
+                    }
+                    if (txtcontrolError(document.getElementById("<%=txtHumMin.ClientID %>")) {
+                        hum = true;
+                    }
 
-                    //var rsptaJson = {};
+                    if (!temp && !hum) {
+                        window.alert("debe ingresar una temperatura y humedad");
+                        bolValida = false;
+                    }
+                    //bolValida = false;
+
+                    return bolValida;
+                };
+
+
+                function GetItem(id) {
+                    document.getElementById("<%=hd_ID.ClientID %>").value = id;
+                }
+
+                function configuracion2() {
+
+                    var url = 'MyDevice.aspx/temperatura';
+                    var prm = {};
+                    prm.rowid = document.getElementById("<%=hd_ID.ClientID %>").value;
+                    prm.temmax = document.getElementById("<%=txtTempMaxima.ClientID %>").value;
+                    prm.temmin = document.getElementById("<%=txtTempMin.ClientID %>").value;
+                    prm.hummax = document.getElementById("<%=txtHumMax.ClientID %>").value;
+                    prm.humimin = document.getElementById("<%=txtHumMin.ClientID %>").value;
+
+                    var prmJson = {};
+                    prmJson.configuracion = JSON.stringify(prm);
+
+                    var rsptaJson = {};
                     rsptaJson = execute(url, prmJson);
 
                     if (rsptaJson.ErrorJson == 0) {
                         var Estado = $.parseJSON(rsptaJson.response.d);
-                       // bindGrid(rsptaJson.response.d);
+                        //bindGrid(rsptaJson.response.d);
                     }
                     else {
                         var Estado = rsptaJson.response;
@@ -314,7 +328,9 @@
                     }
 
                     return true;
+
                 }
+
 
                 function execute(urlmetodo, parametros) {
                     var rsp = {};

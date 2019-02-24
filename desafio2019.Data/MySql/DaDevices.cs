@@ -196,21 +196,58 @@ namespace desafio2019.Data.MySql
 
         }
 
-        public void Devices_configuracion(EnDevices objEn, MySqlTransaction tran)
+
+
+        public DataTable DevicesJson_Selecionar(int rowid)
         {
-            string cadena = string.Empty;
+            string cadena = String.Empty;
+            DataSet ds = new DataSet();
+            DataTable dt = new DataTable();
+
             try
             {
 
-                cadena = " UPDATE    Device   SET ";
-                cadena += "     temmax = '" + objEn.temmax + "',    ";
-                cadena += "     temmin = '" + objEn.temmin + "',    ";
-                cadena += "     hummax = '" + objEn.hummax + "',    ";
-                cadena += "     hummin = '" + objEn.hummin + "'   ";
+                cadena = " SELECT   ";
+                cadena += "     rowid,  ";
+                cadena += "     DJson  ";
+                cadena += " FROM   ";
+                cadena += "     Device     ";
                 cadena += " WHERE   ";
-                cadena += "     rowid = " + objEn.rowid + "   ";
+                cadena += "      rowid = " + rowid + "  ";
 
-                using (MySqlCommand cmd = new MySqlCommand(cadena, tran.Connection))
+                using (MySqlConnection cn = new MySqlConnection(connectionStringMysql()))
+                {
+                    using (MySqlDataAdapter da = new MySqlDataAdapter(cadena, cn))
+                    {
+
+                        da.Fill(ds, "Data");
+                        dt = ds.Tables["Data"];
+
+                        return dt;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
+
+        }
+
+
+
+        public void Devices_configuracion(int ID,string cadena, MySqlTransaction tran)
+        {
+            try
+            {
+                string query = string.Empty;
+                query = " UPDATE    Device   SET ";
+                query += "     DJson = '" + cadena + "'    ";
+                query += " WHERE   ";
+                query += "     rowid = " + ID + "   ";
+
+                using (MySqlCommand cmd = new MySqlCommand(query, tran.Connection))
                 {
                     cmd.CommandType = CommandType.Text;
                     cmd.Transaction = tran;

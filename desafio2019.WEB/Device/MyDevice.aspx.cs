@@ -1,6 +1,7 @@
 ﻿using desafio2019.Entity.MySql;
 using desafio2019.Logic.MySql;
 using OfficeOpenXml;
+using Renci.SshNet;
 using System;
 using System.Collections;
 using System.Data;
@@ -123,6 +124,62 @@ namespace desafio2019.WEB.Device
             }
         }
 
+        protected void btnEnviar_Command(object sender, CommandEventArgs e)
+        {
+
+            try
+            {
+
+                LoDevices objLo = new LoDevices();
+                EnDevices objEn = new EnDevices();
+
+                DataTable dt = new DataTable();
+
+                int index = Convert.ToInt32(e.CommandArgument);
+                Label rowid = (Label)grvListado.Rows[index].FindControl("lblrowid");
+
+                dt = objLo.DevicesJson_Selecionar(Convert.ToInt32(rowid.Text));
+
+
+
+
+                string ruta = "/files/configuracion.json";
+
+              
+
+                FileInfo Archivo = new FileInfo(HttpContext.Current.Server.MapPath(ruta));
+                File.WriteAllText(HttpContext.Current.Server.MapPath(ruta), dt.Rows[0]["DJson"].ToString());
+
+
+
+
+                string host = "";
+                string user = "";
+                string pass = "";
+                string cadenaJson = dt.Rows[0]["DJson"].ToString();
+                string resultado = string.Empty;
+
+                //using (SshClient ssh = new SshClient(host, user, pass))
+                //{
+                //    ssh.Connect();
+                //    var result = ssh.RunCommand("df -h");
+                //    ssh.Disconnect();
+                //}
+
+                // sftp://104.248.211.185
+
+                using (WebClient client = new WebClient())
+                {
+                    client.Credentials = new NetworkCredential(user, pass);
+                    client.UploadFile("sftp://104.248.211.185:22/opt/prueba/config.json", WebRequestMethods.Ftp.UploadFile, localFilePath);
+                }
+
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
 
         protected void chkValidarIp_CheckedChanged(object sender, EventArgs e)
         {
@@ -281,35 +338,44 @@ namespace desafio2019.WEB.Device
         }
 
 
-        //protected void btnGenerar_Click(object sender, EventArgs e)
-        //{
-        //    try
-        //    {
-        //        string msg = string.Empty;
-        //        LoDevices objLo = new LoDevices();
-        //        EnDevices objEn = new EnDevices();
 
-        //        objEn.rowid = Convert.ToInt32(hd_ID.Value);
-        //        objEn.temmax = txtTempMaxima.Text;
-        //        objEn.temmin = txtTempMin.Text;
-        //        objEn.hummax = txtHumMax.Text;
-        //        objEn.hummin = txtHumMin.Text;
-
-        //        msg = objLo.Devices_configuracion(objEn);
-        //        if (msg.ToUpper() == "EXITO")
-        //        {
-        //            Devices_Lista();
-        //        }
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        throw ex;
-        //    }
-        //}
 
         [WebMethod]
         [ScriptMethod(UseHttpGet = false, ResponseFormat = ResponseFormat.Json)]
-        public static object Empresarios_Listar(string configuracion)
+        public static object Configuracion_Insertar(string temperatura)
+        {
+            DataTable dt = new DataTable();
+
+            #region INGRESO_DE_DATOS
+
+            JavaScriptSerializer serializer = new JavaScriptSerializer();
+            var objJson = serializer.Deserialize<dynamic>(temperatura);
+
+            string msg = string.Empty;
+            LoDevices objLo = new LoDevices();
+            EnDevices objEn = new EnDevices();
+
+            objEn.rowid = Convert.ToInt32(objJson["Id"]);
+            objEn.temmax = objJson["temperatureAlertMAX"];
+            objEn.temmin = objJson["temperatureAlertMIN"];
+            objEn.hummax = objJson["HumidityAlertMAX"];
+            objEn.hummin = objJson["HumidityAlertMin"];
+
+            // msg = objLo.Devices_configuracion(objEn);
+            if (msg.ToUpper() == "EXITO")
+            {
+                //Devices_Lista();
+            }
+
+
+            #endregion INGRESO_DE_DATOS
+            object objProducto = new object();
+            return objProducto;
+        }
+
+        [WebMethod]
+        [ScriptMethod(UseHttpGet = false, ResponseFormat = ResponseFormat.Json)]
+        public static object temperatura(string configuracion)
         {
             DataTable dt = new DataTable();
 
@@ -328,7 +394,7 @@ namespace desafio2019.WEB.Device
             objEn.hummax = objJson["HumidityAlertMAX"];
             objEn.hummin = objJson["HumidityAlertMin"];
 
-            msg = objLo.Devices_configuracion(objEn);
+            //msg = objLo.Devices_configuracion(objEn);
             if (msg.ToUpper() == "EXITO")
             {
                 //Devices_Lista();
@@ -339,6 +405,58 @@ namespace desafio2019.WEB.Device
             object objProducto = new object();
             return objProducto;
         }
+
+
+
+        protected void btnTemperatura_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                string msg = string.Empty;
+                LoDevices objLo = new LoDevices();
+                EnDevices objEn = new EnDevices();
+
+                int temp = 1;
+                int hum = 1;
+                if (string.IsNullOrEmpty(txtTempMaxima.Text))
+                {
+                    temp = 0;
+                }
+                if (string.IsNullOrEmpty(txtTempMin.Text))
+                {
+                    temp = 0;
+                }
+                if (string.IsNullOrEmpty(txtTempMaxima.Text))
+                {
+                    hum = 0;
+                }
+                if (string.IsNullOrEmpty(txtTempMin.Text))
+                {
+                    hum = 0;
+                }
+
+                if (temp == 0 && hum == 0)
+                {
+                    ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alerta", "alert('alerta : debe ingresar una temperatura y humedad.');", true);
+                    return;
+                }
+
+                string cadena = string.Empty;
+                cadena = "{  \"simulatedData\": false,  \"interval\": 2000,  \"deviceId\": \"Raspberry Pi Node\",  \"LEDPin\": 5,  \"messageMax\": 256,  \"credentialPath\": \"~/.iot-hub\",  \"temperatureAlertMAX\": " + txtTempMaxima.Text + ", \"temperatureAlertMIN\": " + txtTempMin.Text + ", \"HumidityAlertMAX\": " + txtHumMax.Text + ", \"HumidityAlertMin\": " + txtHumMin.Text + ",  \"i2cOption\": { \"pin\": 9,    \"i2cBusNo\": 1,    \"i2cAddress\": 119  } }";
+
+                msg = objLo.Devices_configuracion(Convert.ToInt32(hd_ID.Value), cadena);
+                if (msg.ToUpper() == "EXITO")
+                {
+                    Devices_Lista();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+
 
     }
 }
