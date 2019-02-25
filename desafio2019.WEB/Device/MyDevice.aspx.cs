@@ -1,10 +1,7 @@
-﻿using AjaxControlToolkit.Bundling;
-using desafio2019.Entity.MySql;
+﻿using desafio2019.Entity.MySql;
 using desafio2019.Logic.MySql;
 using desafio2019.WEB.Enumerador;
-using Renci.SshNet;
 using System;
-using System.Collections;
 using System.Data;
 using System.IO;
 using System.Net;
@@ -14,13 +11,6 @@ using System.Web.Script.Services;
 using System.Web.Services;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-
-using System.Linq;
-using System.Text;
-using Tamir.SharpSsh;
-using System.Collections;
-using System.IO;
-using Tamir.SharpSsh.jsch;
 
 namespace desafio2019.WEB.Device
 {
@@ -57,8 +47,6 @@ namespace desafio2019.WEB.Device
         }
 
 
-
-        //protected void btnEditar_Click(object sender, EventArgs e)
         protected void btnEditar_Command(object sender, CommandEventArgs e)
         {
             try
@@ -80,9 +68,7 @@ namespace desafio2019.WEB.Device
                 ddlTypeSensor.SelectedValue = dt.Rows[0]["SensorID"].ToString();
                 ddlOperativeSystem.SelectedValue = dt.Rows[0]["OperSysID"].ToString();
                 txtUsuario.Text = dt.Rows[0]["usuario"].ToString();
-                //txtclave.Text = Seguridad.DesEncriptar(dt.Rows[0]["clave"].ToString());
                 txtclave.Text = dt.Rows[0]["clave"].ToString();
-                //txtIp.Text = dt.Rows[0]["NameDevice"].ToString();
                 txtNameDevice.Text = dt.Rows[0]["NameDevice"].ToString();
 
                 ScriptManager.RegisterStartupScript(this, typeof(Page), "jsKeys", "javascript:BuscarItem();", true);
@@ -154,38 +140,12 @@ namespace desafio2019.WEB.Device
                 File.WriteAllText(HttpContext.Current.Server.MapPath(ruta), dt.Rows[0]["DJson"].ToString());
 
                 string source = "/files/config.json";
-                //string destination = "/opt/prueba/";
-
-                //string host = "sftp://104.248.211.185";
-                //string destination = "sftp://"+ lblDip.Text + "/opt/prueba/";
+   
                 string destination = "/opt/prueba/config.json";
                 string host = lblDip.Text.Trim();
                 string username = grvListado.DataKeys[index].Values["usuario"].ToString();
                 string password = Seguridad.DesEncriptar(grvListado.DataKeys[index].Values["clave"].ToString());
 
-
-                //Sftp _sftp = new Sftp("sftp://104.248.211.185:22/opt/prueba/config.json", username, password);
-                //Sftp _sftp = new Sftp("sftp://104.248.211.185", username, password);
-                //Sftp _sftp = new Sftp("sftp://104.248.211.185:22", username, password);
-                //Sftp _sftp = new Sftp("104.248.211.185", username, password);
-                //Sftp _sftp = new Sftp("104.248.211.185:22", username, password);
-                //Sftp _sftp = new Sftp("sftp://104.248.211.185:22/opt/prueba/", username, password);
-                //Sftp _sftp = new Sftp("sftp://104.248.211.185/opt/prueba/", username, password);
-                //Sftp _sftp = new Sftp("sftp://104.248.211.185:22/opt/prueba/config.json", username, password);
-
-                //_sftp.Connect(22);
-
-                //var lista = _sftp.GetFileList(source);
-
-                //foreach (string dir in lista)
-                //{
-                //    if (dir.Length > 4)
-                //    {
-                //        _sftp.Get(source + dir, destination + dir);
-
-                //    }
-                //}
-                //_sftp.Close();
 
 
 
@@ -197,201 +157,16 @@ namespace desafio2019.WEB.Device
 
 
 
-                #region conexiones2
-
-                //string source = @"/files/config.json";
-                //string destination = @"/opt/prueba/";
-                //string host = "sftp://" + lblDip.Text;
-                //string username = grvListado.DataKeys[index].Values["usuario"].ToString();
-                //string password = Seguridad.DesEncriptar(grvListado.DataKeys[index].Values["clave"].ToString());
-                //int port = 22;
-
-                //Sftp.UploadSFTPFile(host, username, password, source, destination, port);
-
-                #endregion conexiones2
-
-                #region conexiones3
-                //const string host = "sftp://104.248.211.185:22/";
-                //const string username = "root";
-                //const string password = "iota2019123";
-                //const string workingdirectory = "/opt/prueba/";
-                //const string uploadfile = "/files/config.json";
-
-                //string RutaClavePrivada = "C:Rutaid_rsa_nombre";
-                //string FrasePaso = "xxxxxxxxxxxxxxxx";
-                //Renci.SshNet.PrivateKeyFile ClavePrivada = new Renci.SshNet.PrivateKeyFile(RutaClavePrivada, FrasePaso);
-                //object conexion = new PrivateKeyConnectionInfo("xxx.xxx.xxx.xxx", "xxxxxxxxx", ProxyTypes.Socks5, "socks.xxxx.es", 1080, "", "", ClavePrivada);
-                //Renci.SshNet.SftpClient Ftp = new Renci.SshNet.SftpClient(conexion);
-                //Ftp.Connect();
-                //System.IO.Stream fsd = new System.IO.FileStream("c:archivo.txt", System.IO.FileMode.Create);
-                //Ftp.DownloadFile("/.ssh/authorized_keys2", fsd);
-                //fsd.Close();
-                //System.IO.Stream fs = System.IO.File.OpenRead("c:archivo.txt");
-                //Ftp.UploadFile(fs, "/files/config.json", true);
-                //fs.Close();
-                ////  Renombrar un fichero.
-                //Ftp.RenameFile("/files/config.json", " / path/archivo_renombrado.txt");
-                ////  Eliminar un fichero.
-                //Ftp.DeleteFile("/path/archivo_renombrado.txt");
-                //Ftp.Disconnect();
-                //Ftp.Dispose();
-
-
-
-
-
-
-
-                //const string host = "sftp://104.248.211.185:22/";
-                //const string username = "root";
-                //const string password = "iota2019123";
-                //const string workingdirectory = "/opt/prueba/";
-                //const string uploadfile = "/files/config.json";
-
-                //Console.WriteLine("Creating client and connecting");
-                //using (var client = new SftpClient(host, 22, username, password))
-                //{
-                //    client.Connect();
-                //   // Console.WriteLine("Connected to {0}", host);
-
-                //    client.ChangeDirectory(workingdirectory);
-                //   // Console.WriteLine("Changed directory to {0}", workingdirectory);
-
-                //    var listDirectory = client.ListDirectory(workingdirectory);
-                ////    Console.WriteLine("Listing directory:");
-                //    //foreach (var fi in listDirectory)
-                //    //{
-                //    //    Console.WriteLine(" - " + fi.Name);
-                //    //}
-
-                //    using (var fileStream = new FileStream(uploadfile, FileMode.Open))
-                //    {
-                //       // Console.WriteLine("Uploading {0} ({1:N0} bytes)", uploadfile, fileStream.Length);
-                //        client.BufferSize = 4 * 1024; // bypass Payload error large files
-                //        client.UploadFile(fileStream, Path.GetFileName(uploadfile));
-                //    }
-                //}
-
-
-
-                //var host = "sftp://104.248.211.185:22/opt/prueba/";
-                //var port = 22;
-                //var username = "root";
-                //var password = "iota2019123";
-
-                //// path for file you want to upload
-                //var uploadFile = @"c:yourfilegoeshere.txt";
-
-                //using (var client = new SftpClient(host, port, username, password))
-                //{
-                //    client.Connect();
-                //    if (client.IsConnected)
-                //    {
-                //        //Debug.WriteLine("I'm connected to the client");
-
-                //        using (var fileStream = new FileStream(uploadFile, FileMode.Open))
-                //        {
-
-                //            client.BufferSize = 4 * 1024; // bypass Payload error large files
-                //            client.UploadFile(fileStream, Path.GetFileName(uploadFile));
-                //        }
-                //    }
-                //    else
-                //    {
-                //        Debug.WriteLine("I couldn't connect");
-                //    }
-                //}
-
-
-
-
-
-                //string host = "sftp://104.248.211.185:22/opt/prueba/config.json";
-                //string user = "root";
-                //string pass = "iota2019123";
-                //string cadenaJson = dt.Rows[0]["DJson"].ToString();
-                //string resultado = string.Empty;
-
-                //using (SshClient ssh = new SshClient(host, user, pass))
-                //{
-                //    ssh.Connect();
-                //    var result = ssh.RunCommand("df -h");
-                //    ssh.Disconnect();
-                //}
-
-                // sftp://104.248.211.185
-
-                //using (WebClient client = new WebClient())
-                //{
-                //    client.Credentials = new NetworkCredential(user, pass);
-                //    client.UploadFile("sftp://104.248.211.185:22/opt/prueba/config.json", WebRequestMethods.Ftp.UploadFile, localFilePath);
-                //}
-
-                #endregion conexiones3
-
+               
             }
             catch (Exception ex)
             {
                 throw ex;
             }
         }
-        //private class Sftp
-        //{
-        //    public static void UploadSFTPFile(string host, string username, string password, string sourcefile, string destinationpath, int port)
-        //    {
-        //        using (SftpClient client = new SftpClient(host, port, username, password))
-        //        {
-        //            client.Connect();
-        //            client.ChangeDirectory(destinationpath);
-        //            using (FileStream fs = new FileStream(sourcefile, FileMode.Open))
-        //            {
-        //                client.BufferSize = 4 * 1024;
-        //                client.UploadFile(fs, Path.GetFileName(sourcefile));
-        //            }
-        //        }
-        //    }
-        //}
+     
 
-        public class UInfo : UserInfo
-        {
-
-            string _passwd = string.Empty;
-            public UInfo() { _passwd = string.Empty; }
-            public UInfo(string pwd) { _passwd = pwd; }
-            public String getPassword() { return _passwd; }
-
-            public string Password
-            {
-
-                set { _passwd = value; }
-
-                get { return _passwd; }
-
-            }
-
-            #region Dummy Implementations
-
-            public bool promptYesNo(String str) { return true; }
-            public String getPassphrase() { return null; }
-            public bool promptPassphrase(String message) { return true; }
-            public bool promptPassword(String message) { return true; }
-            public void showMessage(String message) { }
-
-            #endregion Dummy Implementations
-
-        }
-
-        public interface UserInfo
-        {
-            string getPassphrase();
-            string getPassword();
-            bool promptPassphrase(string message);
-            bool promptPassword(string message);
-            bool promptYesNo(string message);
-            void showMessage(string message);
-        }
-
-
+ 
 
         protected void chkValidarIp_CheckedChanged(object sender, EventArgs e)
         {
