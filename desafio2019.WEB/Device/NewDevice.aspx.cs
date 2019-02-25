@@ -1,9 +1,12 @@
 ﻿using desafio2019.Entity.MySql;
 using desafio2019.Logic.MySql;
+using desafio2019.WEB.Enumerador;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
+using System.Security.Cryptography;
+using System.Text;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
@@ -174,6 +177,9 @@ namespace desafio2019.WEB.Device
                 objEn.DeviceID = Convert.ToInt32(ddlTypeDevice.SelectedValue);
                 objEn.SensorID = Convert.ToInt32(ddlTypeSensor.SelectedValue);
                 objEn.OperSysID = Convert.ToInt32(ddlTypeConnection.SelectedValue);
+                objEn.usuario = txtUsuario.Text.Trim();
+                objEn.clave = Seguridad.Encriptar(txtclave.Text);
+                objEn.Dip = txtIp.Text;
 
                 msg = objLo.Devices_Insertar(objEn);
                 if (msg.ToUpper() == "EXITO")
@@ -186,9 +192,6 @@ namespace desafio2019.WEB.Device
             {
                 throw ex;
             }
-
-
-
 
 
         }

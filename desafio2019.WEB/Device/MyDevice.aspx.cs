@@ -1,13 +1,17 @@
 ﻿using desafio2019.Entity.MySql;
 using desafio2019.Logic.MySql;
+using desafio2019.WEB.Enumerador;
 using OfficeOpenXml;
 using Renci.SshNet;
 using System;
 using System.Collections;
 using System.Data;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Net;
+using System.Security.Cryptography;
+using System.Text;
 using System.Web;
 using System.Web.Script.Serialization;
 using System.Web.Script.Services;
@@ -25,6 +29,10 @@ namespace desafio2019.WEB.Device
             if (!Page.IsPostBack)
             {
                 Devices_Lista();
+                CargaConnection();
+                CargaDevice();
+                CargaSensor();
+                CargaOperativeSystem();
             }
         }
 
@@ -53,13 +61,10 @@ namespace desafio2019.WEB.Device
         {
             try
             {
-                ScriptManager.RegisterStartupScript(this, typeof(Page), "jsKeys", "javascript:BuscarItem();", true);
 
 
-                CargaConnection();
-                CargaDevice();
-                CargaSensor();
-                CargaOperativeSystem();
+
+
 
                 LoDevices objLo = new LoDevices();
                 EnDevices objEn = new EnDevices();
@@ -76,9 +81,13 @@ namespace desafio2019.WEB.Device
                 ddlTypeDevice.SelectedValue = dt.Rows[0]["DeviceID"].ToString();
                 ddlTypeSensor.SelectedValue = dt.Rows[0]["SensorID"].ToString();
                 ddlOperativeSystem.SelectedValue = dt.Rows[0]["OperSysID"].ToString();
+                txtUsuario.Text = dt.Rows[0]["usuario"].ToString();
+                //txtclave.Text = Seguridad.DesEncriptar(dt.Rows[0]["clave"].ToString());
+                txtclave.Text = dt.Rows[0]["clave"].ToString();
                 //txtIp.Text = dt.Rows[0]["NameDevice"].ToString();
                 txtNameDevice.Text = dt.Rows[0]["NameDevice"].ToString();
 
+                ScriptManager.RegisterStartupScript(this, typeof(Page), "jsKeys", "javascript:BuscarItem();", true);
 
             }
             catch (Exception ex)
@@ -130,6 +139,7 @@ namespace desafio2019.WEB.Device
             try
             {
 
+
                 LoDevices objLo = new LoDevices();
                 EnDevices objEn = new EnDevices();
 
@@ -140,24 +150,124 @@ namespace desafio2019.WEB.Device
 
                 dt = objLo.DevicesJson_Selecionar(Convert.ToInt32(rowid.Text));
 
-
-
-
-                string ruta = "/files/configuracion.json";
-
-              
+                string ruta = "/files/config.json";
 
                 FileInfo Archivo = new FileInfo(HttpContext.Current.Server.MapPath(ruta));
                 File.WriteAllText(HttpContext.Current.Server.MapPath(ruta), dt.Rows[0]["DJson"].ToString());
 
+                string username = grvListado.DataKeys[index].Values["usuario"].ToString();
+                string password = Seguridad.DesEncriptar(grvListado.DataKeys[index].Values["clave"].ToString());
+
+
+                //const string host = "sftp://104.248.211.185:22/";
+                //const string username = "root";
+                //const string password = "iota2019123";
+                //const string workingdirectory = "/opt/prueba/";
+                //const string uploadfile = "/files/config.json";
+
+                string source = @"/files/config.json";
+                string destination = @"/opt/prueba/";
+                string host = "sftp://104.248.211.185:22";
+                int port = 22;  //Port 22 is defaulted for SFTP upload
+
+                sftp.UploadSFTPFile(host, username, password, source, destination, port);
 
 
 
-                string host = "";
-                string user = "";
-                string pass = "";
-                string cadenaJson = dt.Rows[0]["DJson"].ToString();
-                string resultado = string.Empty;
+                //string RutaClavePrivada = "C:Rutaid_rsa_nombre";
+                //string FrasePaso = "xxxxxxxxxxxxxxxx";
+                //Renci.SshNet.PrivateKeyFile ClavePrivada = new Renci.SshNet.PrivateKeyFile(RutaClavePrivada, FrasePaso);
+                //object conexion = new PrivateKeyConnectionInfo("xxx.xxx.xxx.xxx", "xxxxxxxxx", ProxyTypes.Socks5, "socks.xxxx.es", 1080, "", "", ClavePrivada);
+                //Renci.SshNet.SftpClient Ftp = new Renci.SshNet.SftpClient(conexion);
+                //Ftp.Connect();
+                //System.IO.Stream fsd = new System.IO.FileStream("c:archivo.txt", System.IO.FileMode.Create);
+                //Ftp.DownloadFile("/.ssh/authorized_keys2", fsd);
+                //fsd.Close();
+                //System.IO.Stream fs = System.IO.File.OpenRead("c:archivo.txt");
+                //Ftp.UploadFile(fs, "/files/config.json", true);
+                //fs.Close();
+                ////  Renombrar un fichero.
+                //Ftp.RenameFile("/files/config.json", " / path/archivo_renombrado.txt");
+                ////  Eliminar un fichero.
+                //Ftp.DeleteFile("/path/archivo_renombrado.txt");
+                //Ftp.Disconnect();
+                //Ftp.Dispose();
+
+
+
+
+
+
+
+                //const string host = "sftp://104.248.211.185:22/";
+                //const string username = "root";
+                //const string password = "iota2019123";
+                //const string workingdirectory = "/opt/prueba/";
+                //const string uploadfile = "/files/config.json";
+
+                //Console.WriteLine("Creating client and connecting");
+                //using (var client = new SftpClient(host, 22, username, password))
+                //{
+                //    client.Connect();
+                //   // Console.WriteLine("Connected to {0}", host);
+
+                //    client.ChangeDirectory(workingdirectory);
+                //   // Console.WriteLine("Changed directory to {0}", workingdirectory);
+
+                //    var listDirectory = client.ListDirectory(workingdirectory);
+                ////    Console.WriteLine("Listing directory:");
+                //    //foreach (var fi in listDirectory)
+                //    //{
+                //    //    Console.WriteLine(" - " + fi.Name);
+                //    //}
+
+                //    using (var fileStream = new FileStream(uploadfile, FileMode.Open))
+                //    {
+                //       // Console.WriteLine("Uploading {0} ({1:N0} bytes)", uploadfile, fileStream.Length);
+                //        client.BufferSize = 4 * 1024; // bypass Payload error large files
+                //        client.UploadFile(fileStream, Path.GetFileName(uploadfile));
+                //    }
+                //}
+
+
+
+                //var host = "sftp://104.248.211.185:22/opt/prueba/";
+                //var port = 22;
+                //var username = "root";
+                //var password = "iota2019123";
+
+                //// path for file you want to upload
+                //var uploadFile = @"c:yourfilegoeshere.txt";
+
+                //using (var client = new SftpClient(host, port, username, password))
+                //{
+                //    client.Connect();
+                //    if (client.IsConnected)
+                //    {
+                //        //Debug.WriteLine("I'm connected to the client");
+
+                //        using (var fileStream = new FileStream(uploadFile, FileMode.Open))
+                //        {
+
+                //            client.BufferSize = 4 * 1024; // bypass Payload error large files
+                //            client.UploadFile(fileStream, Path.GetFileName(uploadFile));
+                //        }
+                //    }
+                //    else
+                //    {
+                //        Debug.WriteLine("I couldn't connect");
+                //    }
+                //}
+
+
+
+
+
+                //string host = "sftp://104.248.211.185:22/opt/prueba/config.json";
+                //string user = "root";
+                //string pass = "iota2019123";
+                //string cadenaJson = dt.Rows[0]["DJson"].ToString();
+                //string resultado = string.Empty;
 
                 //using (SshClient ssh = new SshClient(host, user, pass))
                 //{
@@ -168,11 +278,11 @@ namespace desafio2019.WEB.Device
 
                 // sftp://104.248.211.185
 
-                using (WebClient client = new WebClient())
-                {
-                    client.Credentials = new NetworkCredential(user, pass);
-                    client.UploadFile("sftp://104.248.211.185:22/opt/prueba/config.json", WebRequestMethods.Ftp.UploadFile, localFilePath);
-                }
+                //using (WebClient client = new WebClient())
+                //{
+                //    client.Credentials = new NetworkCredential(user, pass);
+                //    client.UploadFile("sftp://104.248.211.185:22/opt/prueba/config.json", WebRequestMethods.Ftp.UploadFile, localFilePath);
+                //}
 
             }
             catch (Exception ex)
@@ -180,6 +290,24 @@ namespace desafio2019.WEB.Device
                 throw ex;
             }
         }
+        private class sftp
+        {
+            public static void UploadSFTPFile(string host, string username,
+            string password, string sourcefile, string destinationpath, int port)
+            {
+                using (SftpClient client = new SftpClient(host, port, username, password))
+                {
+                    client.Connect();
+                    client.ChangeDirectory(destinationpath);
+                    using (FileStream fs = new FileStream(sourcefile, FileMode.Open))
+                    {
+                        client.BufferSize = 4 * 1024;
+                        client.UploadFile(fs, Path.GetFileName(sourcefile));
+                    }
+                }
+            }
+        }
+
 
         protected void chkValidarIp_CheckedChanged(object sender, EventArgs e)
         {
@@ -319,9 +447,14 @@ namespace desafio2019.WEB.Device
                 objEn.rowid = Convert.ToInt32(hd_ID.Value);
                 objEn.ConnectionID = Convert.ToInt32(ddlTypeConnection.SelectedValue);
                 objEn.NameDevice = txtNameDevice.Text.Trim();
+                objEn.Dip = txtIp2.Text.Trim();
                 objEn.DeviceID = Convert.ToInt32(ddlTypeDevice.SelectedValue);
                 objEn.SensorID = Convert.ToInt32(ddlTypeSensor.SelectedValue);
                 objEn.OperSysID = Convert.ToInt32(ddlOperativeSystem.SelectedValue);
+                objEn.usuario = txtUsuario.Text.Trim();
+                objEn.clave = Seguridad.Encriptar(txtclave.Text);
+
+
 
                 msg = objLo.Devices_Editar(objEn);
                 if (msg.ToUpper() == "EXITO")
@@ -416,23 +549,23 @@ namespace desafio2019.WEB.Device
                 LoDevices objLo = new LoDevices();
                 EnDevices objEn = new EnDevices();
 
-                int temp = 1;
-                int hum = 1;
-                if (string.IsNullOrEmpty(txtTempMaxima.Text))
+                int temp = 0;
+                int hum = 0;
+                if (!string.IsNullOrEmpty(txtTempMaxima.Text))
                 {
-                    temp = 0;
+                    temp = 1;
                 }
-                if (string.IsNullOrEmpty(txtTempMin.Text))
+                if (!string.IsNullOrEmpty(txtTempMin.Text))
                 {
-                    temp = 0;
+                    temp = 1;
                 }
-                if (string.IsNullOrEmpty(txtTempMaxima.Text))
+                if (!string.IsNullOrEmpty(txtHumMax.Text))
                 {
-                    hum = 0;
+                    hum = 1;
                 }
-                if (string.IsNullOrEmpty(txtTempMin.Text))
+                if (!string.IsNullOrEmpty(txtHumMin.Text))
                 {
-                    hum = 0;
+                    hum = 1;
                 }
 
                 if (temp == 0 && hum == 0)

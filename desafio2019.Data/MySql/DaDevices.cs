@@ -34,16 +34,15 @@ namespace desafio2019.Data.MySql
                 cadena += "     d.ConnectionID,  ";
                 cadena += "     c.description as Connection,  ";
                 cadena += "     NameDevice,  ";
+                cadena += "     d.Dip,  ";
                 cadena += "     d.DeviceID,  ";
                 cadena += "     dt.description as Device,  ";
                 cadena += "     d.SensorID,  ";
                 cadena += "     s.description as Sensor,  ";
                 cadena += "     d.OperSysID,  ";
-                cadena += "     o.description as OperSystem , ";
-                cadena += "     d.temmax , ";
-                cadena += "     d.temmin , ";
-                cadena += "     d.hummax , ";
-                cadena += "     d.hummin  ";
+                cadena += "     o.description as OperSystem, ";
+                cadena += "     d.usuario, ";
+                cadena += "     d.clave ";
                 cadena += " FROM   ";
                 cadena += "     Device  d    ";
                 cadena += "     inner join Conecction_Type c   on      ";
@@ -81,17 +80,23 @@ namespace desafio2019.Data.MySql
                 cadena += " (    ";
                 cadena += "     ConnectionID,    ";
                 cadena += "     NameDevice,    ";
+                cadena += "     Dip,    ";
                 cadena += "     DeviceID,    ";
                 cadena += "     SensorID,    ";
-                cadena += "     OperSysID    ";
+                cadena += "     OperSysID ,   ";
+                cadena += "     usuario ,   ";
+                cadena += "     clave    ";
                 cadena += " )    ";
                 cadena += "     VALUES    ";
                 cadena += " (    ";
                 cadena += "     " + objEn.ConnectionID + ",    ";
                 cadena += "     '" + objEn.NameDevice + "',    ";
+                cadena += "     '" + objEn.Dip + "',    ";
                 cadena += "     " + objEn.DeviceID + ",    ";
                 cadena += "     " + objEn.SensorID + ",    ";
-                cadena += "     " + objEn.OperSysID + "    ";
+                cadena += "     " + objEn.OperSysID + " ,   ";
+                cadena += "     '" + objEn.usuario + "',    ";
+                cadena += "     '" + objEn.clave + "'    ";
                 cadena += " )  ";
 
                 using (MySqlCommand cmd = new MySqlCommand(cadena, tran.Connection))
@@ -120,9 +125,12 @@ namespace desafio2019.Data.MySql
                 cadena = " UPDATE    Device   SET ";
                 cadena += "     ConnectionID = " + objEn.ConnectionID + ",    ";
                 cadena += "     NameDevice = '" + objEn.NameDevice + "',    ";
+                cadena += "     Dip = '" + objEn.Dip + "',    ";
                 cadena += "     DeviceID = " + objEn.DeviceID + ",    ";
                 cadena += "     SensorID = " + objEn.SensorID + ",    ";
-                cadena += "     OperSysID = " + objEn.OperSysID + "    ";
+                cadena += "     OperSysID = " + objEn.OperSysID + " ,   ";
+                cadena += "     usuario = '" + objEn.usuario + "',    ";
+                cadena += "     clave = '" + objEn.clave + "'    ";
                 cadena += " WHERE   ";
                 cadena += "     rowid = " + objEn.rowid + "   ";
 
@@ -162,7 +170,9 @@ namespace desafio2019.Data.MySql
                 cadena += "     d.SensorID,  ";
                 cadena += "     s.description as Sensor,  ";
                 cadena += "     d.OperSysID,  ";
-                cadena += "     o.description as OperSystem  ";
+                cadena += "     o.description as OperSystem,  ";
+                cadena += "     d.usuario,  ";
+                cadena += "     d.clave  ";
                 cadena += " FROM   ";
                 cadena += "     Device  d    ";
                 cadena += "     inner join Conecction_Type c   on      ";

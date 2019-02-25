@@ -79,6 +79,8 @@ C:\Users\Wilder\Documents\GitHub\pruebacarga\desafio2019\desafio2019.WEB\obj\Deb
 C:\Users\Wilder\Documents\GitHub\pruebacarga\desafio2019\desafio2019.WEB\obj\Debug\desafio2019.WEB.csproj.CopyComplete
 C:\Users\Wilder\Documents\GitHub\pruebacarga\desafio2019\desafio2019.WEB\obj\Debug\desafio2019.WEB.dll
 C:\Users\Wilder\Documents\GitHub\pruebacarga\desafio2019\desafio2019.WEB\obj\Debug\desafio2019.WEB.pdb
+C:\Users\Wilder\Documents\GitHub\Desafio\desafio2019.WEB\obj\Debug\desafio2019.WEB.csprojAssemblyReference.cache
+C:\Users\Wilder\Documents\GitHub\Desafio\desafio2019.WEB\obj\Debug\desafio2019.WEB.csproj.CoreCompileInputs.cache
 C:\Users\Wilder\Documents\GitHub\Desafio\desafio2019.WEB\bin\desafio2019.WEB.dll.config
 C:\Users\Wilder\Documents\GitHub\Desafio\desafio2019.WEB\bin\desafio2019.WEB.dll
 C:\Users\Wilder\Documents\GitHub\Desafio\desafio2019.WEB\bin\desafio2019.WEB.pdb
@@ -143,6 +145,11 @@ C:\Users\Wilder\Documents\GitHub\Desafio\desafio2019.WEB\bin\Microsoft.ScriptMan
 C:\Users\Wilder\Documents\GitHub\Desafio\desafio2019.WEB\bin\Microsoft.ScriptManager.WebForms.dll
 C:\Users\Wilder\Documents\GitHub\Desafio\desafio2019.WEB\bin\Microsoft.Web.Infrastructure.dll
 C:\Users\Wilder\Documents\GitHub\Desafio\desafio2019.WEB\bin\Newtonsoft.Json.dll
+C:\Users\Wilder\Documents\GitHub\Desafio\desafio2019.WEB\bin\Rebex.Common.dll
+C:\Users\Wilder\Documents\GitHub\Desafio\desafio2019.WEB\bin\Rebex.Networking.dll
+C:\Users\Wilder\Documents\GitHub\Desafio\desafio2019.WEB\bin\Rebex.Sftp.dll
+C:\Users\Wilder\Documents\GitHub\Desafio\desafio2019.WEB\bin\Renci.SshNet.dll
+C:\Users\Wilder\Documents\GitHub\Desafio\desafio2019.WEB\bin\SSH.Client.dll
 C:\Users\Wilder\Documents\GitHub\Desafio\desafio2019.WEB\bin\System.Diagnostics.DiagnosticSource.dll
 C:\Users\Wilder\Documents\GitHub\Desafio\desafio2019.WEB\bin\System.Web.Optimization.dll
 C:\Users\Wilder\Documents\GitHub\Desafio\desafio2019.WEB\bin\WebGrease.dll
@@ -153,6 +160,10 @@ C:\Users\Wilder\Documents\GitHub\Desafio\desafio2019.WEB\bin\Google.Protobuf.dll
 C:\Users\Wilder\Documents\GitHub\Desafio\desafio2019.WEB\bin\desafio2019.Entity.pdb
 C:\Users\Wilder\Documents\GitHub\Desafio\desafio2019.WEB\bin\desafio2019.Logic.pdb
 C:\Users\Wilder\Documents\GitHub\Desafio\desafio2019.WEB\bin\EPPlus.xml
+C:\Users\Wilder\Documents\GitHub\Desafio\desafio2019.WEB\bin\Rebex.Common.xml
+C:\Users\Wilder\Documents\GitHub\Desafio\desafio2019.WEB\bin\Rebex.Networking.xml
+C:\Users\Wilder\Documents\GitHub\Desafio\desafio2019.WEB\bin\Rebex.Sftp.xml
+C:\Users\Wilder\Documents\GitHub\Desafio\desafio2019.WEB\bin\Renci.SshNet.xml
 C:\Users\Wilder\Documents\GitHub\Desafio\desafio2019.WEB\bin\System.Web.Optimization.xml
 C:\Users\Wilder\Documents\GitHub\Desafio\desafio2019.WEB\bin\Newtonsoft.Json.xml
 C:\Users\Wilder\Documents\GitHub\Desafio\desafio2019.WEB\bin\Antlr3.Runtime.pdb
@@ -166,10 +177,6 @@ C:\Users\Wilder\Documents\GitHub\Desafio\desafio2019.WEB\bin\Dapper.xml
 C:\Users\Wilder\Documents\GitHub\Desafio\desafio2019.WEB\bin\Google.Protobuf.xml
 C:\Users\Wilder\Documents\GitHub\Desafio\desafio2019.WEB\bin\es\System.Web.Optimization.resources.dll
 C:\Users\Wilder\Documents\GitHub\Desafio\desafio2019.WEB\bin\es\Microsoft.AspNet.FriendlyUrls.resources.dll
-C:\Users\Wilder\Documents\GitHub\Desafio\desafio2019.WEB\obj\Debug\desafio2019.WEB.csprojAssemblyReference.cache
-C:\Users\Wilder\Documents\GitHub\Desafio\desafio2019.WEB\obj\Debug\desafio2019.WEB.csproj.CoreCompileInputs.cache
 C:\Users\Wilder\Documents\GitHub\Desafio\desafio2019.WEB\obj\Debug\desafio2019.WEB.csproj.CopyComplete
 C:\Users\Wilder\Documents\GitHub\Desafio\desafio2019.WEB\obj\Debug\desafio2019.WEB.dll
 C:\Users\Wilder\Documents\GitHub\Desafio\desafio2019.WEB\obj\Debug\desafio2019.WEB.pdb
-C:\Users\Wilder\Documents\GitHub\Desafio\desafio2019.WEB\bin\Renci.SshNet.dll
-C:\Users\Wilder\Documents\GitHub\Desafio\desafio2019.WEB\bin\Renci.SshNet.xml

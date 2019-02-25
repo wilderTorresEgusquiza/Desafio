@@ -14,6 +14,9 @@ namespace desafio2019.Entity.MySql
         public int DeviceID { get; set; }
         public int SensorID { get; set; }
         public int OperSysID { get; set; }
+        public string Dip { get; set; }
+        public string usuario { get; set; }
+        public string clave { get; set; }
         public string temmax { get; set; }
         public string temmin { get; set; }
         public string hummax { get; set; }
@@ -25,7 +28,10 @@ namespace desafio2019.Entity.MySql
             public int ConnectionID { get; set; }
             public string Connection { get; set; }
             public string NameDevice { get; set; }
+            public string usuario { get; set; }
+            public string clave { get; set; }
             public int DeviceID { get; set; }
+            public string Dip { get; set; }
             public string Device { get; set; }
             public int SensorID { get; set; }
             public string Sensor { get; set; }
