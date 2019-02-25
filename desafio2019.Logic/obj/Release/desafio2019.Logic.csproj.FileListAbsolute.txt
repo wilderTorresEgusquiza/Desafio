@@ -1,0 +1,17 @@
+C:\Users\Wilder\Documents\GitHub\Desafio\desafio2019.Logic\bin\Release\desafio2019.Logic.dll
+C:\Users\Wilder\Documents\GitHub\Desafio\desafio2019.Logic\bin\Release\desafio2019.Logic.pdb
+C:\Users\Wilder\Documents\GitHub\Desafio\desafio2019.Logic\bin\Release\Dapper.dll
+C:\Users\Wilder\Documents\GitHub\Desafio\desafio2019.Logic\bin\Release\desafio2019.Data.dll
+C:\Users\Wilder\Documents\GitHub\Desafio\desafio2019.Logic\bin\Release\desafio2019.Entity.dll
+C:\Users\Wilder\Documents\GitHub\Desafio\desafio2019.Logic\bin\Release\Google.Protobuf.dll
+C:\Users\Wilder\Documents\GitHub\Desafio\desafio2019.Logic\bin\Release\MySql.Data.dll
+C:\Users\Wilder\Documents\GitHub\Desafio\desafio2019.Logic\bin\Release\desafio2019.Data.pdb
+C:\Users\Wilder\Documents\GitHub\Desafio\desafio2019.Logic\bin\Release\desafio2019.Entity.pdb
+C:\Users\Wilder\Documents\GitHub\Desafio\desafio2019.Logic\bin\Release\Dapper.xml
+C:\Users\Wilder\Documents\GitHub\Desafio\desafio2019.Logic\bin\Release\Google.Protobuf.xml
+C:\Users\Wilder\Documents\GitHub\Desafio\desafio2019.Logic\bin\Release\MySql.Data.xml
+C:\Users\Wilder\Documents\GitHub\Desafio\desafio2019.Logic\obj\Release\desafio2019.Logic.csprojAssemblyReference.cache
+C:\Users\Wilder\Documents\GitHub\Desafio\desafio2019.Logic\obj\Release\desafio2019.Logic.csproj.CoreCompileInputs.cache
+C:\Users\Wilder\Documents\GitHub\Desafio\desafio2019.Logic\obj\Release\desafio2019.Logic.csproj.CopyComplete
+C:\Users\Wilder\Documents\GitHub\Desafio\desafio2019.Logic\obj\Release\desafio2019.Logic.dll
+C:\Users\Wilder\Documents\GitHub\Desafio\desafio2019.Logic\obj\Release\desafio2019.Logic.pdb

@@ -1,0 +1,6 @@
+C:\Users\Wilder\Documents\GitHub\Desafio\desafio2019.Entity\bin\Release\desafio2019.Entity.dll
+C:\Users\Wilder\Documents\GitHub\Desafio\desafio2019.Entity\bin\Release\desafio2019.Entity.pdb
+C:\Users\Wilder\Documents\GitHub\Desafio\desafio2019.Entity\obj\Release\desafio2019.Entity.csprojAssemblyReference.cache
+C:\Users\Wilder\Documents\GitHub\Desafio\desafio2019.Entity\obj\Release\desafio2019.Entity.csproj.CoreCompileInputs.cache
+C:\Users\Wilder\Documents\GitHub\Desafio\desafio2019.Entity\obj\Release\desafio2019.Entity.dll
+C:\Users\Wilder\Documents\GitHub\Desafio\desafio2019.Entity\obj\Release\desafio2019.Entity.pdb
