@@ -205,7 +205,8 @@
                     if (ddlcontrolError(document.getElementById("<%=ddlOperativeSystem.ClientID %>")) == false) bolValida = false;
                     if (txtcontrolError(document.getElementById("<%=txtIp.ClientID %>")) == false) bolValida = false;
                     if (txtcontrolError(document.getElementById("<%=txtNameDevice.ClientID %>")) == false) bolValida = false;
-
+                    if (txtcontrolError(document.getElementById("<%=txtUsuario.ClientID %>")) == false) bolValida = false;
+                    if (txtcontrolError(document.getElementById("<%=txtclave.ClientID %>")) == false) bolValida = false;
 
                     return bolValida;
 

@@ -5,6 +5,7 @@ C:\Users\Wilder\Documents\GitHub\pruebacarga\desafio2019\desafio2019.Entity\obj\
 C:\Users\Wilder\Documents\GitHub\pruebacarga\desafio2019\desafio2019.Entity\obj\Debug\desafio2019.Entity.pdb
 C:\Users\Wilder\Documents\GitHub\Desafio\desafio2019.Entity\bin\Debug\desafio2019.Entity.dll
 C:\Users\Wilder\Documents\GitHub\Desafio\desafio2019.Entity\bin\Debug\desafio2019.Entity.pdb
+C:\Users\Wilder\Documents\GitHub\Desafio\desafio2019.Entity\obj\Debug\desafio2019.Entity.csprojAssemblyReference.cache
 C:\Users\Wilder\Documents\GitHub\Desafio\desafio2019.Entity\obj\Debug\desafio2019.Entity.csproj.CoreCompileInputs.cache
 C:\Users\Wilder\Documents\GitHub\Desafio\desafio2019.Entity\obj\Debug\desafio2019.Entity.dll
 C:\Users\Wilder\Documents\GitHub\Desafio\desafio2019.Entity\obj\Debug\desafio2019.Entity.pdb

@@ -79,8 +79,6 @@ C:\Users\Wilder\Documents\GitHub\pruebacarga\desafio2019\desafio2019.WEB\obj\Deb
 C:\Users\Wilder\Documents\GitHub\pruebacarga\desafio2019\desafio2019.WEB\obj\Debug\desafio2019.WEB.csproj.CopyComplete
 C:\Users\Wilder\Documents\GitHub\pruebacarga\desafio2019\desafio2019.WEB\obj\Debug\desafio2019.WEB.dll
 C:\Users\Wilder\Documents\GitHub\pruebacarga\desafio2019\desafio2019.WEB\obj\Debug\desafio2019.WEB.pdb
-C:\Users\Wilder\Documents\GitHub\Desafio\desafio2019.WEB\obj\Debug\desafio2019.WEB.csprojAssemblyReference.cache
-C:\Users\Wilder\Documents\GitHub\Desafio\desafio2019.WEB\obj\Debug\desafio2019.WEB.csproj.CoreCompileInputs.cache
 C:\Users\Wilder\Documents\GitHub\Desafio\desafio2019.WEB\bin\desafio2019.WEB.dll.config
 C:\Users\Wilder\Documents\GitHub\Desafio\desafio2019.WEB\bin\desafio2019.WEB.dll
 C:\Users\Wilder\Documents\GitHub\Desafio\desafio2019.WEB\bin\desafio2019.WEB.pdb
@@ -177,6 +175,8 @@ C:\Users\Wilder\Documents\GitHub\Desafio\desafio2019.WEB\bin\Dapper.xml
 C:\Users\Wilder\Documents\GitHub\Desafio\desafio2019.WEB\bin\Google.Protobuf.xml
 C:\Users\Wilder\Documents\GitHub\Desafio\desafio2019.WEB\bin\es\System.Web.Optimization.resources.dll
 C:\Users\Wilder\Documents\GitHub\Desafio\desafio2019.WEB\bin\es\Microsoft.AspNet.FriendlyUrls.resources.dll
+C:\Users\Wilder\Documents\GitHub\Desafio\desafio2019.WEB\obj\Debug\desafio2019.WEB.csprojAssemblyReference.cache
+C:\Users\Wilder\Documents\GitHub\Desafio\desafio2019.WEB\obj\Debug\desafio2019.WEB.csproj.CoreCompileInputs.cache
 C:\Users\Wilder\Documents\GitHub\Desafio\desafio2019.WEB\obj\Debug\desafio2019.WEB.csproj.CopyComplete
 C:\Users\Wilder\Documents\GitHub\Desafio\desafio2019.WEB\obj\Debug\desafio2019.WEB.dll
 C:\Users\Wilder\Documents\GitHub\Desafio\desafio2019.WEB\obj\Debug\desafio2019.WEB.pdb

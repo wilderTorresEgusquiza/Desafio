@@ -4,7 +4,7 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
     <link href="/font-awesome/css/font-awesome.css" rel="stylesheet" />
-
+    <script src="/Scripts/jValidacionGeneral.js"></script>
 
     <div id="page-wrapper">
         <div class="container-fluid">
@@ -218,7 +218,7 @@
 
 
                         <div class="row">
-                            <div class="col-lg-12 col-md-12" style="text-align: right;padding-right:15px">
+                            <div class="col-lg-12 col-md-12" style="text-align: right; padding-right: 15px">
                                 <asp:Button ID="btnSalvar2" runat="server" Text="Salvar" CssClass="btn btn-primary" OnClientClick="return Grabar();" OnClick="btnSalvar2_Click" />
                             </div>
                         </div>
@@ -227,196 +227,199 @@
             </div>
 
 
-        </div>
 
 
-        <div class="modal fade  bd-example-modal-lg" id="ItemID" tabindex="-1" role="dialog" aria-labelledby="ItemIDModal" aria-hidden="true">
-            <div class="modal-dialog  modal-md" role="document">
-                <div class="modal-content">
-                    <div class="modal-header" style="background-color: #e7eaec">
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                        <h5 class="modal-title" id="AnularModal">configuración del Dispositivo</h5>
-                    </div>
-                    <div class="modal-body">
-
-                        <div class="row">
-                            <div class="col-lg-12 col-md-12">
-
-                                <table style="align-content: center;">
-                                    <tr>
-                                        <td style="width: 110px;"></td>
-                                        <td>Maxima</td>
-                                        <td>Minima</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Temperatura</td>
-                                        <td>
-                                            <asp:TextBox ID="txtTempMaxima" runat="server" CssClass="form-control"></asp:TextBox></td>
-                                        <td>
-                                            <asp:TextBox ID="txtTempMin" runat="server" CssClass="form-control"></asp:TextBox></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Humedad</td>
-                                        <td>
-                                            <asp:TextBox ID="txtHumMax" runat="server" CssClass="form-control"></asp:TextBox></td>
-                                        <td>
-                                            <asp:TextBox ID="txtHumMin" runat="server" CssClass="form-control"></asp:TextBox></td>
-                                    </tr>
-                                </table>
-
-                            </div>
+            <div class="modal fade  bd-example-modal-lg" id="ItemID" tabindex="-1" role="dialog" aria-labelledby="ItemIDModal" aria-hidden="true">
+                <div class="modal-dialog  modal-md" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header" style="background-color: #e7eaec">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                            <h5 class="modal-title" id="AnularModal">configuración del Dispositivo</h5>
                         </div>
+                        <div class="modal-body">
 
-                    </div>
-                    <div class="modal-footer">
-                        <asp:Button ID="btnTemperatura" runat="server" Text="Generar" CssClass="btn btn-primary" OnClick="btnTemperatura_Click" OnClientClick="return validarconfig();" />
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">cancelar</button>
+                            <div class="row">
+                                <div class="col-lg-12 col-md-12">
+
+                                    <table style="align-content: center;">
+                                        <tr>
+                                            <td style="width: 110px;"></td>
+                                            <td>Maxima</td>
+                                            <td>Minima</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Temperatura</td>
+                                            <td>
+                                                <asp:TextBox ID="txtTempMaxima" runat="server" CssClass="form-control" onkeypress="return isDecimalKey(this,event)"></asp:TextBox></td>
+                                            <td>
+                                                <asp:TextBox ID="txtTempMin" runat="server" CssClass="form-control" onkeypress="return isDecimalKey(this,event)"></asp:TextBox></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Humedad</td>
+                                            <td>
+                                                <asp:TextBox ID="txtHumMax" runat="server" CssClass="form-control" onkeypress="return isDecimalKey(this,event)"></asp:TextBox></td>
+                                            <td>
+                                                <asp:TextBox ID="txtHumMin" runat="server" CssClass="form-control" onkeypress="return isDecimalKey(this,event)"></asp:TextBox></td>
+                                        </tr>
+                                    </table>
+
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="modal-footer">
+                            <asp:Button ID="btnTemperatura" runat="server" Text="Generar" CssClass="btn btn-primary" OnClick="btnTemperatura_Click" OnClientClick="return validarconfig();" />
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">cancelar</button>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
 
 
 
-        <script type="text/javascript">
+            <script type="text/javascript">
 
-            function BuscarItem() {
+                function BuscarItem() {
 
-                //$("#IdPopupBuscaItem").click();
-                document.getElementById("<%=IdPopupBuscaItem.ClientID %>").click();
+                    //$("#IdPopupBuscaItem").click();
+                    document.getElementById("<%=IdPopupBuscaItem.ClientID %>").click();
 
-            }
-
-            function validarconfig() {
-
-                var bolValida = true;
-                var temp = false;
-                var hum = false;
-
-                if (txtcontrolError(document.getElementById("<%=txtTempMaxima.ClientID %>")) == false) bolValida = false;
-                if (txtcontrolError(document.getElementById("<%=txtTempMin.ClientID %>")) == false) bolValida = false;
-                if (txtcontrolError(document.getElementById("<%=txtHumMax.ClientID %>")) == false) bolValida = false;
-                if (txtcontrolError(document.getElementById("<%=txtHumMin.ClientID %>")) == false) bolValida = false;
-
-
-                if (txtcontrolError(document.getElementById("<%=txtTempMaxima.ClientID %>"))) {
-                    temp = true;
-                }
-                if (txtcontrolError(document.getElementById("<%=txtTempMin.ClientID %>"))) {
-                    temp = true;
                 }
 
-                if (txtcontrolError(document.getElementById("<%=txtHumMax.ClientID %>"))) {
-                    hum = true;
-                }
-                if (txtcontrolError(document.getElementById("<%=txtHumMin.ClientID %>"))) {
-                    hum = true;
-                }
+                function validarconfig() {
 
-                if (!temp && !hum) {
-                    window.alert("debe ingresar una temperatura y humedad");
-                    bolValida = false;
-                }
+                    var bolValida = true;
+                    var temp = false;
+                    var hum = false;
 
-                return bolValida;
-            };
+                    if (txtcontrolError(document.getElementById("<%=txtTempMaxima.ClientID %>")) == false) bolValida = false;
+                    if (txtcontrolError(document.getElementById("<%=txtTempMin.ClientID %>")) == false) bolValida = false;
+                    if (txtcontrolError(document.getElementById("<%=txtHumMax.ClientID %>")) == false) bolValida = false;
+                    if (txtcontrolError(document.getElementById("<%=txtHumMin.ClientID %>")) == false) bolValida = false;
 
 
-            function GetItem(id) {
-                document.getElementById("<%=hd_ID.ClientID %>").value = id;
-            }
-
-            function configuracion2() {
-
-                var url = 'MyDevice.aspx/temperatura';
-                var prm = {};
-                prm.rowid = document.getElementById("<%=hd_ID.ClientID %>").value;
-                prm.temmax = document.getElementById("<%=txtTempMaxima.ClientID %>").value;
-                prm.temmin = document.getElementById("<%=txtTempMin.ClientID %>").value;
-                prm.hummax = document.getElementById("<%=txtHumMax.ClientID %>").value;
-                prm.humimin = document.getElementById("<%=txtHumMin.ClientID %>").value;
-
-                var prmJson = {};
-                prmJson.configuracion = JSON.stringify(prm);
-
-                var rsptaJson = {};
-                rsptaJson = execute(url, prmJson);
-
-                if (rsptaJson.ErrorJson == 0) {
-                    var Estado = $.parseJSON(rsptaJson.response.d);
-                    //bindGrid(rsptaJson.response.d);
-                }
-                else {
-                    var Estado = rsptaJson.response;
-                    alert(Estado);
-                }
-
-                return true;
-
-            }
-
-
-            function execute(urlmetodo, parametros) {
-                var rsp = {};
-                $.ajax({
-                    url: urlmetodo,
-                    type: "POST",
-                    data: JSON.stringify(parametros),
-                    dataType: "json",
-                    contentType: "application/json; charset=utf-8",
-                    async: false,
-                    cancel: false,
-                    success: function (response) {
-                        rsp.response = response;
-                        rsp.ErrorJson = 0;
-                    },
-                    failure: function (msg) {
-                        alert(msg);
-                        rsp = msg;
-                    },
-                    error: function (xhr, status, error) {
-                        var err = eval("(" + xhr.responseText + ")");
-                        rsp.response = err.Message;
-                        rsp.ErrorJson = 1;
+                    if (txtcontrolError(document.getElementById("<%=txtTempMaxima.ClientID %>"))) {
+                        temp = true;
                     }
-                });
+                    if (txtcontrolError(document.getElementById("<%=txtTempMin.ClientID %>"))) {
+                        temp = true;
+                    }
 
-                return rsp;
-            }
+                    if (txtcontrolError(document.getElementById("<%=txtHumMax.ClientID %>"))) {
+                        hum = true;
+                    }
+                    if (txtcontrolError(document.getElementById("<%=txtHumMin.ClientID %>"))) {
+                        hum = true;
+                    }
 
+                    if (!temp && !hum) {
+                        window.alert("debe ingresar una temperatura y humedad");
+                        bolValida = false;
+                    }
+                    if (temp && hum) {
+                        bolValida = true;
+                    }
 
-
-            function Validar() {
-
-                var bolValida = true;
-                if (txtcontrolError(document.getElementById("<%=txtIp2.ClientID %>")) == false) bolValida = false;
-
-                return bolValida;
-
-            }
-
-            function Grabar() {
-
-                var bolValida = true;
-
-                if (ddlcontrolError(document.getElementById("<%=ddlTypeConnection.ClientID %>")) == false) bolValida = false;
-                if (ddlcontrolError(document.getElementById("<%=ddlTypeDevice.ClientID %>")) == false) bolValida = false;
-                if (ddlcontrolError(document.getElementById("<%=ddlTypeSensor.ClientID %>")) == false) bolValida = false;
-                if (ddlcontrolError(document.getElementById("<%=ddlOperativeSystem.ClientID %>")) == false) bolValida = false;
-                if (txtcontrolError(document.getElementById("<%=txtIp2.ClientID %>")) == false) bolValida = false;
-                if (txtcontrolError(document.getElementById("<%=txtNameDevice.ClientID %>")) == false) bolValida = false;
+                    return bolValida;
+                };
 
 
-                return bolValida;
+                function GetItem(id) {
+                    document.getElementById("<%=hd_ID.ClientID %>").value = id;
+                }
 
-            }
+                function configuracion2() {
 
-        </script>
+                    var url = 'MyDevice.aspx/temperatura';
+                    var prm = {};
+                    prm.rowid = document.getElementById("<%=hd_ID.ClientID %>").value;
+                    prm.temmax = document.getElementById("<%=txtTempMaxima.ClientID %>").value;
+                    prm.temmin = document.getElementById("<%=txtTempMin.ClientID %>").value;
+                    prm.hummax = document.getElementById("<%=txtHumMax.ClientID %>").value;
+                    prm.humimin = document.getElementById("<%=txtHumMin.ClientID %>").value;
+
+                    var prmJson = {};
+                    prmJson.configuracion = JSON.stringify(prm);
+
+                    var rsptaJson = {};
+                    rsptaJson = execute(url, prmJson);
+
+                    if (rsptaJson.ErrorJson == 0) {
+                        var Estado = $.parseJSON(rsptaJson.response.d);
+                        //bindGrid(rsptaJson.response.d);
+                    }
+                    else {
+                        var Estado = rsptaJson.response;
+                        alert(Estado);
+                    }
+
+                    return true;
+
+                }
 
 
-    </div>
+                function execute(urlmetodo, parametros) {
+                    var rsp = {};
+                    $.ajax({
+                        url: urlmetodo,
+                        type: "POST",
+                        data: JSON.stringify(parametros),
+                        dataType: "json",
+                        contentType: "application/json; charset=utf-8",
+                        async: false,
+                        cancel: false,
+                        success: function (response) {
+                            rsp.response = response;
+                            rsp.ErrorJson = 0;
+                        },
+                        failure: function (msg) {
+                            alert(msg);
+                            rsp = msg;
+                        },
+                        error: function (xhr, status, error) {
+                            var err = eval("(" + xhr.responseText + ")");
+                            rsp.response = err.Message;
+                            rsp.ErrorJson = 1;
+                        }
+                    });
+
+                    return rsp;
+                }
+
+
+
+                function Validar() {
+
+                    var bolValida = true;
+                    if (txtcontrolError(document.getElementById("<%=txtIp2.ClientID %>")) == false) bolValida = false;
+
+                    return bolValida;
+
+                }
+
+                function Grabar() {
+
+                    var bolValida = true;
+
+                    if (ddlcontrolError(document.getElementById("<%=ddlTypeConnection.ClientID %>")) == false) bolValida = false;
+                    if (ddlcontrolError(document.getElementById("<%=ddlTypeDevice.ClientID %>")) == false) bolValida = false;
+                    if (ddlcontrolError(document.getElementById("<%=ddlTypeSensor.ClientID %>")) == false) bolValida = false;
+                    if (ddlcontrolError(document.getElementById("<%=ddlOperativeSystem.ClientID %>")) == false) bolValida = false;
+                    if (txtcontrolError(document.getElementById("<%=txtIp2.ClientID %>")) == false) bolValida = false;
+                    if (txtcontrolError(document.getElementById("<%=txtNameDevice.ClientID %>")) == false) bolValida = false;
+                    if (txtcontrolError(document.getElementById("<%=txtUsuario.ClientID %>")) == false) bolValida = false;
+                    if (txtcontrolError(document.getElementById("<%=txtclave.ClientID %>")) == false) bolValida = false;
+
+                    return bolValida;
+
+                }
+
+            </script>
+
+
+        </div>
     </div>
 
 </asp:Content>
