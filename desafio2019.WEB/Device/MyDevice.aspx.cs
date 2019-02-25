@@ -139,7 +139,6 @@ namespace desafio2019.WEB.Device
             try
             {
 
-
                 LoDevices objLo = new LoDevices();
                 EnDevices objEn = new EnDevices();
 
@@ -147,6 +146,7 @@ namespace desafio2019.WEB.Device
 
                 int index = Convert.ToInt32(e.CommandArgument);
                 Label rowid = (Label)grvListado.Rows[index].FindControl("lblrowid");
+                Label lblDip = (Label)grvListado.Rows[index].FindControl("lblDip");
 
                 dt = objLo.DevicesJson_Selecionar(Convert.ToInt32(rowid.Text));
 
@@ -155,24 +155,24 @@ namespace desafio2019.WEB.Device
                 FileInfo Archivo = new FileInfo(HttpContext.Current.Server.MapPath(ruta));
                 File.WriteAllText(HttpContext.Current.Server.MapPath(ruta), dt.Rows[0]["DJson"].ToString());
 
+
+                string source = @"/files/config.json";
+                string destination = @"/opt/prueba/";
+                string host = "sftp://" + lblDip.Text;
                 string username = grvListado.DataKeys[index].Values["usuario"].ToString();
                 string password = Seguridad.DesEncriptar(grvListado.DataKeys[index].Values["clave"].ToString());
+                int port = 22;
+
+                Sftp.UploadSFTPFile(host, username, password, source, destination, port);
 
 
+
+                #region conexiones
                 //const string host = "sftp://104.248.211.185:22/";
                 //const string username = "root";
                 //const string password = "iota2019123";
                 //const string workingdirectory = "/opt/prueba/";
                 //const string uploadfile = "/files/config.json";
-
-                string source = @"/files/config.json";
-                string destination = @"/opt/prueba/";
-                string host = "sftp://104.248.211.185:22";
-                int port = 22;  //Port 22 is defaulted for SFTP upload
-
-                sftp.UploadSFTPFile(host, username, password, source, destination, port);
-
-
 
                 //string RutaClavePrivada = "C:Rutaid_rsa_nombre";
                 //string FrasePaso = "xxxxxxxxxxxxxxxx";
@@ -284,16 +284,17 @@ namespace desafio2019.WEB.Device
                 //    client.UploadFile("sftp://104.248.211.185:22/opt/prueba/config.json", WebRequestMethods.Ftp.UploadFile, localFilePath);
                 //}
 
+                #endregion conexiones
+
             }
             catch (Exception ex)
             {
                 throw ex;
             }
         }
-        private class sftp
+        private class Sftp
         {
-            public static void UploadSFTPFile(string host, string username,
-            string password, string sourcefile, string destinationpath, int port)
+            public static void UploadSFTPFile(string host, string username, string password, string sourcefile, string destinationpath, int port)
             {
                 using (SftpClient client = new SftpClient(host, port, username, password))
                 {
