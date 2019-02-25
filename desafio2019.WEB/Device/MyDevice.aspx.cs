@@ -1,17 +1,13 @@
-﻿using desafio2019.Entity.MySql;
+﻿using AjaxControlToolkit.Bundling;
+using desafio2019.Entity.MySql;
 using desafio2019.Logic.MySql;
 using desafio2019.WEB.Enumerador;
-using OfficeOpenXml;
 using Renci.SshNet;
 using System;
 using System.Collections;
 using System.Data;
-using System.Diagnostics;
 using System.IO;
-using System.Linq;
 using System.Net;
-using System.Security.Cryptography;
-using System.Text;
 using System.Web;
 using System.Web.Script.Serialization;
 using System.Web.Script.Services;
@@ -19,6 +15,12 @@ using System.Web.Services;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
+using System.Linq;
+using System.Text;
+using Tamir.SharpSsh;
+using System.Collections;
+using System.IO;
+using Tamir.SharpSsh.jsch;
 
 namespace desafio2019.WEB.Device
 {
@@ -61,10 +63,6 @@ namespace desafio2019.WEB.Device
         {
             try
             {
-
-
-
-
 
                 LoDevices objLo = new LoDevices();
                 EnDevices objEn = new EnDevices();
@@ -155,19 +153,64 @@ namespace desafio2019.WEB.Device
                 FileInfo Archivo = new FileInfo(HttpContext.Current.Server.MapPath(ruta));
                 File.WriteAllText(HttpContext.Current.Server.MapPath(ruta), dt.Rows[0]["DJson"].ToString());
 
+                string source = "/files/config.json";
+                //string destination = "/opt/prueba/";
 
-                string source = @"/files/config.json";
-                string destination = @"/opt/prueba/";
-                string host = "sftp://" + lblDip.Text;
+                //string host = "sftp://104.248.211.185";
+                //string destination = "sftp://"+ lblDip.Text + "/opt/prueba/";
+                string destination = "/opt/prueba/config.json";
+                string host = lblDip.Text.Trim();
                 string username = grvListado.DataKeys[index].Values["usuario"].ToString();
                 string password = Seguridad.DesEncriptar(grvListado.DataKeys[index].Values["clave"].ToString());
-                int port = 22;
-
-                Sftp.UploadSFTPFile(host, username, password, source, destination, port);
 
 
+                //Sftp _sftp = new Sftp("sftp://104.248.211.185:22/opt/prueba/config.json", username, password);
+                //Sftp _sftp = new Sftp("sftp://104.248.211.185", username, password);
+                //Sftp _sftp = new Sftp("sftp://104.248.211.185:22", username, password);
+                //Sftp _sftp = new Sftp("104.248.211.185", username, password);
+                //Sftp _sftp = new Sftp("104.248.211.185:22", username, password);
+                //Sftp _sftp = new Sftp("sftp://104.248.211.185:22/opt/prueba/", username, password);
+                //Sftp _sftp = new Sftp("sftp://104.248.211.185/opt/prueba/", username, password);
+                //Sftp _sftp = new Sftp("sftp://104.248.211.185:22/opt/prueba/config.json", username, password);
 
-                #region conexiones
+                //_sftp.Connect(22);
+
+                //var lista = _sftp.GetFileList(source);
+
+                //foreach (string dir in lista)
+                //{
+                //    if (dir.Length > 4)
+                //    {
+                //        _sftp.Get(source + dir, destination + dir);
+
+                //    }
+                //}
+                //_sftp.Close();
+
+
+
+
+                SFTPHelper sftp = new SFTPHelper(host, username, password);
+                sftp.Connect();
+                sftp.Get(source, destination);
+                sftp.Disconnect();
+
+
+
+                #region conexiones2
+
+                //string source = @"/files/config.json";
+                //string destination = @"/opt/prueba/";
+                //string host = "sftp://" + lblDip.Text;
+                //string username = grvListado.DataKeys[index].Values["usuario"].ToString();
+                //string password = Seguridad.DesEncriptar(grvListado.DataKeys[index].Values["clave"].ToString());
+                //int port = 22;
+
+                //Sftp.UploadSFTPFile(host, username, password, source, destination, port);
+
+                #endregion conexiones2
+
+                #region conexiones3
                 //const string host = "sftp://104.248.211.185:22/";
                 //const string username = "root";
                 //const string password = "iota2019123";
@@ -284,7 +327,7 @@ namespace desafio2019.WEB.Device
                 //    client.UploadFile("sftp://104.248.211.185:22/opt/prueba/config.json", WebRequestMethods.Ftp.UploadFile, localFilePath);
                 //}
 
-                #endregion conexiones
+                #endregion conexiones3
 
             }
             catch (Exception ex)
@@ -292,22 +335,62 @@ namespace desafio2019.WEB.Device
                 throw ex;
             }
         }
-        private class Sftp
+        //private class Sftp
+        //{
+        //    public static void UploadSFTPFile(string host, string username, string password, string sourcefile, string destinationpath, int port)
+        //    {
+        //        using (SftpClient client = new SftpClient(host, port, username, password))
+        //        {
+        //            client.Connect();
+        //            client.ChangeDirectory(destinationpath);
+        //            using (FileStream fs = new FileStream(sourcefile, FileMode.Open))
+        //            {
+        //                client.BufferSize = 4 * 1024;
+        //                client.UploadFile(fs, Path.GetFileName(sourcefile));
+        //            }
+        //        }
+        //    }
+        //}
+
+        public class UInfo : UserInfo
         {
-            public static void UploadSFTPFile(string host, string username, string password, string sourcefile, string destinationpath, int port)
+
+            string _passwd = string.Empty;
+            public UInfo() { _passwd = string.Empty; }
+            public UInfo(string pwd) { _passwd = pwd; }
+            public String getPassword() { return _passwd; }
+
+            public string Password
             {
-                using (SftpClient client = new SftpClient(host, port, username, password))
-                {
-                    client.Connect();
-                    client.ChangeDirectory(destinationpath);
-                    using (FileStream fs = new FileStream(sourcefile, FileMode.Open))
-                    {
-                        client.BufferSize = 4 * 1024;
-                        client.UploadFile(fs, Path.GetFileName(sourcefile));
-                    }
-                }
+
+                set { _passwd = value; }
+
+                get { return _passwd; }
+
             }
+
+            #region Dummy Implementations
+
+            public bool promptYesNo(String str) { return true; }
+            public String getPassphrase() { return null; }
+            public bool promptPassphrase(String message) { return true; }
+            public bool promptPassword(String message) { return true; }
+            public void showMessage(String message) { }
+
+            #endregion Dummy Implementations
+
         }
+
+        public interface UserInfo
+        {
+            string getPassphrase();
+            string getPassword();
+            bool promptPassphrase(string message);
+            bool promptPassword(string message);
+            bool promptYesNo(string message);
+            void showMessage(string message);
+        }
+
 
 
         protected void chkValidarIp_CheckedChanged(object sender, EventArgs e)
@@ -470,8 +553,6 @@ namespace desafio2019.WEB.Device
             }
 
         }
-
-
 
 
         [WebMethod]
