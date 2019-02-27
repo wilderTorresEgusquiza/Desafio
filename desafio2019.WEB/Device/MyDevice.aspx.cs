@@ -1,6 +1,7 @@
 ﻿using desafio2019.Entity.MySql;
 using desafio2019.Logic.MySql;
 using desafio2019.WEB.Enumerador;
+using Renci.SshNet;
 using System;
 using System.Data;
 using System.IO;
@@ -11,6 +12,7 @@ using System.Web.Script.Services;
 using System.Web.Services;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+
 
 namespace desafio2019.WEB.Device
 {
@@ -132,16 +134,101 @@ namespace desafio2019.WEB.Device
                 Label rowid = (Label)grvListado.Rows[index].FindControl("lblrowid");
                 Label lblDip = (Label)grvListado.Rows[index].FindControl("lblDip");
 
+
+
                 dt = objLo.DevicesJson_Selecionar(Convert.ToInt32(rowid.Text));
 
+
                 string ruta = "/files/config.json";
+
+
+
+                // Setup Credentials and Server Information
+                ConnectionInfo ConnNfo = new ConnectionInfo("104.248.211.185", 22, "root", new AuthenticationMethod[]{
+
+                // Pasword based Authentication
+                new PasswordAuthenticationMethod("root","iota2019123"),
+
+                // Key Based Authentication (using keys in OpenSSH Format)
+                new PrivateKeyAuthenticationMethod("root",new PrivateKeyFile[]{
+                    new PrivateKeyFile(@"..\openssh.key","passphrase")
+                }),
+                    }
+                );
+
+                // Execute a (SHELL) Command - prepare upload directory
+                using (var sshclient = new SshClient(ConnNfo))
+                {
+                    sshclient.Connect();
+                    using (var cmd = sshclient.CreateCommand("mkdir -p /tmp/uploadtest && chmod +rw /tmp/uploadtest"))
+                    {
+                        cmd.Execute();
+                        Console.WriteLine("Command>" + cmd.CommandText);
+                        Console.WriteLine("Return Value = {0}", cmd.ExitStatus);
+                    }
+                    sshclient.Disconnect();
+                }
+
+                // Upload A File
+                using (var sftp1 = new SftpClient(ConnNfo))
+                {
+                    string uploadfn = "Renci.SshNet.dll";
+
+                    sftp1.Connect();
+                    sftp1.ChangeDirectory("/opt/prueba/");
+                    using (var uplfileStream = System.IO.File.OpenRead(uploadfn))
+                    {
+                        sftp1.UploadFile(uplfileStream, uploadfn, true);
+                    }
+                    sftp1.Disconnect();
+                }
+
+                // Execute (SHELL) Commands
+                using (var sshclient = new SshClient(ConnNfo))
+                {
+                    sshclient.Connect();
+
+                    // quick way to use ist, but not best practice - SshCommand is not Disposed, ExitStatus not checked...
+                    Console.WriteLine(sshclient.CreateCommand("cd /tmp && ls -lah").Execute());
+                    Console.WriteLine(sshclient.CreateCommand("pwd").Execute());
+                    Console.WriteLine(sshclient.CreateCommand("cd /tmp/uploadtest && ls -lah").Execute());
+                    sshclient.Disconnect();
+                }
+                Console.ReadKey();
+
+
+
+
+
+
+                //using (var client = new SshClient("104.248.211.185", "root", "iota2019123"))
+                //{
+                //    client.Connect();
+                //    //client.RunCommand("etc/init.d/networking restart");
+
+                //   client.RunCommand ChangeDirectory("/opt/prueba/");
+                //    using (var uplfileStream = System.IO.File.OpenRead(ruta))
+                //    {
+                //        client.UploadFile(uplfileStream, ruta, true);
+                //    }
+                //    client.Disconnect();
+
+                //    client.Disconnect();
+                //}
+
+
+
+                //  SendFileToServer.Send(ruta);
+
+                return;
+
+
+                /*
 
                 FileInfo Archivo = new FileInfo(HttpContext.Current.Server.MapPath(ruta));
                 File.WriteAllText(HttpContext.Current.Server.MapPath(ruta), dt.Rows[0]["DJson"].ToString());
 
-                string source = "/files/config.json";
-   
-                string destination = "/opt/prueba/config.json";
+                string destino = "/opt/prueba/";
                 string host = lblDip.Text.Trim();
                 string username = grvListado.DataKeys[index].Values["usuario"].ToString();
                 string password = Seguridad.DesEncriptar(grvListado.DataKeys[index].Values["clave"].ToString());
@@ -152,21 +239,21 @@ namespace desafio2019.WEB.Device
 
                 SFTPHelper sftp = new SFTPHelper(host, username, password);
                 sftp.Connect();
-                sftp.Get(source, destination);
+                sftp.Get(ruta, destino);
                 sftp.Disconnect();
 
+    */
 
 
-               
             }
             catch (Exception ex)
             {
                 throw ex;
             }
         }
-     
 
- 
+
+
 
         protected void chkValidarIp_CheckedChanged(object sender, EventArgs e)
         {
@@ -432,7 +519,7 @@ namespace desafio2019.WEB.Device
                 }
 
                 string cadena = string.Empty;
-                cadena = "{  \"simulatedData\": false,  \"interval\": 2000,  \"deviceId\": \"Raspberry Pi Node\",  \"LEDPin\": 5,  \"messageMax\": 256,  \"credentialPath\": \"~/.iot-hub\",  \"temperatureAlertMAX\": " + txtTempMaxima.Text + ", \"temperatureAlertMIN\": " + txtTempMin.Text + ", \"HumidityAlertMAX\": " + txtHumMax.Text + ", \"HumidityAlertMin\": " + txtHumMin.Text + ",  \"i2cOption\": { \"pin\": 9,    \"i2cBusNo\": 1,    \"i2cAddress\": 119  } }";
+                cadena = "{  \"simulatedData\": false,  \"interval\": 2000,  \"deviceId\": \"" + hd_dispositivo.Value + "\",  \"LEDPin\": 5,  \"messageMax\": 256,  \"credentialPath\": \"~/.iot-hub\",  \"temperatureAlertMAX\": " + txtTempMaxima.Text + ", \"temperatureAlertMIN\": " + txtTempMin.Text + ", \"HumidityAlertMAX\": " + txtHumMax.Text + ", \"HumidityAlertMin\": " + txtHumMin.Text + ",  \"i2cOption\": { \"pin\": 9,    \"i2cBusNo\": 1,    \"i2cAddress\": 119  } }";
 
                 msg = objLo.Devices_configuracion(Convert.ToInt32(hd_ID.Value), cadena);
                 if (msg.ToUpper() == "EXITO")

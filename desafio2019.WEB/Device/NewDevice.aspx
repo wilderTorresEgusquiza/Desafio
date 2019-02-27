@@ -15,7 +15,7 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-lg-2 col-md-2">
+                <div class="col-lg-3 col-md-3">
                     <div class="form-group">
                         <label for="lblTypeConnection">Type Connection</label>
                         <asp:DropDownList ID="ddlTypeConnection" runat="server" CssClass="form-control"></asp:DropDownList>
@@ -23,7 +23,7 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-lg-2 col-md-2">
+                <div class="col-lg-3 col-md-3">
                     <div class="form-group">
                         <label for="lblTypeDevice">Type Device</label>
                         <asp:DropDownList ID="ddlTypeDevice" runat="server" CssClass="form-control"></asp:DropDownList>
@@ -31,7 +31,7 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-lg-2 col-md-2">
+                <div class="col-lg-3 col-md-3">
                     <div class="form-group">
                         <label for="lblTypeSensor">Type Sensor</label>
                         <asp:DropDownList ID="ddlTypeSensor" runat="server" CssClass="form-control"></asp:DropDownList>
@@ -39,7 +39,7 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-lg-2 col-md-2">
+                <div class="col-lg-3 col-md-3">
                     <div class="form-group">
                         <label for="lblOperativeSystem">Operative System</label>
                         <asp:DropDownList ID="ddlOperativeSystem" runat="server" CssClass="form-control"></asp:DropDownList>
@@ -47,7 +47,7 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-lg-2 col-md-2">
+                <div class="col-lg-3 col-md-3">
                     <div class="form-group">
                         <label for="lblNameDevice">Name device</label>
                         <asp:TextBox ID="txtNameDevice" runat="server" CssClass="form-control"></asp:TextBox>
@@ -55,13 +55,13 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-lg-2 col-md-2">
+                <div class="col-lg-3 col-md-3">
                     <div class="form-group">
                         <label for="lblIp">Ip Publica</label>
                         <asp:TextBox ID="txtIp" runat="server" CssClass="form-control" placeholder="xxx.xxx.xxx.xxx" onkeyUp="return IpMascara(this,event);"></asp:TextBox>
                     </div>
                 </div>
-                <div class="col-lg-2 col-md-2">
+                <div class="col-lg-3 col-md-3">
                     <div class="form-group">
                         <div class="pull-left" style="padding-top: 35px">
                             <asp:CheckBox ID="chkValidarIp" runat="server" Text="Validar" OnCheckedChanged="chkValidarIp_CheckedChanged" AutoPostBack="true" />
@@ -70,21 +70,21 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-lg-2 col-md-2">
+                <div class="col-lg-3 col-md-3">
                     <div class="form-group">
                         <asp:Label ID="lblMensaje" runat="server" Text="" ForeColor="Red"></asp:Label>
                     </div>
                 </div>
             </div>
             <div class="row">
-                <div class="col-lg-2 col-md-2">
+                <div class="col-lg-3 col-md-3">
                     <div class="form-group">
                         <label for="lblUser">Usuario</label>
                         <asp:TextBox ID="txtUsuario" runat="server" CssClass="form-control"></asp:TextBox>
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-lg-2 col-md-2">
+                    <div class="col-lg-3 col-md-3">
                         <div class="form-group">
                             <label for="lblclave">Contraseña</label>
                             <asp:TextBox ID="txtclave" runat="server" CssClass="form-control"></asp:TextBox>
@@ -93,7 +93,7 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-lg-2 col-md-2">
+                <div class="col-lg-3 col-md-3">
                     <div class="form-group">
                         <div class="pull-right">
                             <asp:Button ID="btnSalvar" runat="server" Text="Salvar" CssClass="btn btn-primary" OnClientClick="return Grabar();" OnClick="btnSalvar_Click" />
@@ -208,7 +208,22 @@
                     if (txtcontrolError(document.getElementById("<%=txtUsuario.ClientID %>")) == false) bolValida = false;
                     if (txtcontrolError(document.getElementById("<%=txtclave.ClientID %>")) == false) bolValida = false;
 
+                    var usuario = document.getElementById("<%=txtUsuario.ClientID %>");
+
+                    if (usuario.value.trim() == "root" || usuario.value.trim() == "admin") {
+
+                        usuario.style.border = "1px solid #ccc";
+
+                    }
+                    else {
+                        bolValida = false;
+                        usuario.style.border = "1px solid Red";
+                        window.alert("Usuario incorrecto: admin | root");
+
+                    }
+
                     return bolValida;
+
 
                 }
 
