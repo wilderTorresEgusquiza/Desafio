@@ -65,17 +65,29 @@ namespace desafio2019.WEB
                     throw new InvalidOperationException("Error de validación del token Anti-XSRF.");
                 }
             }
+
         }
 
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            if (Session["UsuarioImg"]!=null)
+            {
+                UsuarioLogin(Session["UsuarioImg"].ToString());
+            }
+           
         }
 
         protected void Unnamed_LoggingOut(object sender, LoginCancelEventArgs e)
         {
             Context.GetOwinContext().Authentication.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
         }
+
+
+        public void UsuarioLogin(string url)
+        {
+            MasterProfileImage.ImageUrl = url;
+        }
+
     }
 
 }

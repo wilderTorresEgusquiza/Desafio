@@ -1,8 +1,13 @@
 ﻿using System;
+using System.Data;
+using System.Drawing;
+using System.Security.Policy;
 using System.Threading.Tasks;
 using System.Web.Script.Serialization;
 using System.Web.UI;
 using ASPSnippets.FaceBookAPI;
+using desafio2019.Entity.MySql;
+using desafio2019.Logic.MySql;
 using Google.Apis.Discovery.v1;
 using Google.Apis.Discovery.v1.Data;
 using Google.Apis.Services;
@@ -31,11 +36,41 @@ namespace desafio2019.WEB.Account
                     FaceBookUser faceBookUser = new JavaScriptSerializer().Deserialize<FaceBookUser>(data);
                     faceBookUser.PictureUrl = string.Format("https://graph.facebook.com/{0}/picture", faceBookUser.Id);
                     pnlFaceBookUser.Visible = true;
-                    lblId.Text = faceBookUser.Id;
-                    lblUserName.Text = faceBookUser.UserName;
-                    lblName.Text = faceBookUser.Name;
-                    lblEmail.Text = faceBookUser.Email;
-                    ProfileImage.ImageUrl = faceBookUser.PictureUrl;
+
+                    txtUsuario.Text = faceBookUser.Email;
+                    // txtPassword.Text = faceBookUser.
+
+                    LoUsuario objLo = new LoUsuario();
+                    EnUsuario objEn = new EnUsuario();
+
+                    objEn.Clave = faceBookUser.Id;
+                    objEn.Name = faceBookUser.UserName;
+                    objEn.Correo = faceBookUser.Email;
+
+                    Session["UsuarioImg"] = faceBookUser.PictureUrl;
+
+                    var miMaster = (SiteMaster)Master;
+
+                    SiteMaster master = (SiteMaster)this.Master;
+                    master.UsuarioLogin(faceBookUser.PictureUrl);
+
+                    DataTable dt = new DataTable();
+                    dt = objLo.Usuarios_Listar(objEn);
+
+                    if (dt.Rows.Count < 1)
+                    {
+
+                        string msg = string.Empty;
+                        msg = objLo.Usuarios_Insertar(objEn);
+                    }
+
+                    Response.Redirect("/Device/NewDevice.aspx");
+
+                    //lblId.Text = faceBookUser.Id;
+                    //lblUserName.Text = faceBookUser.UserName;
+                    //lblName.Text = faceBookUser.Name;
+                    //lblEmail.Text = faceBookUser.Email;
+                    //ProfileImage.ImageUrl = faceBookUser.PictureUrl;
 
                 }
             }
@@ -103,7 +138,7 @@ namespace desafio2019.WEB.Account
         protected void Button1_Click(object sender, EventArgs e)
         {
             //Run().Wait();
-        
+
 
 
 

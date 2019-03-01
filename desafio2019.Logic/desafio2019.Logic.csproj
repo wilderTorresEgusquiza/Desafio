@@ -65,6 +65,7 @@
     <Compile Include="MySql\LoDevices.cs" />
     <Compile Include="MySql\LoOperativeSystem.cs" />
     <Compile Include="MySql\LoSensor.cs" />
+    <Compile Include="MySql\LoUsuario.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

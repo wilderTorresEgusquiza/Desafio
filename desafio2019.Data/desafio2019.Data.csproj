@@ -65,6 +65,7 @@
     <Compile Include="MySql\DaDevices.cs" />
     <Compile Include="MySql\DaOperativeSystem.cs" />
     <Compile Include="MySql\DaSensor.cs" />
+    <Compile Include="MySql\DaUsuario.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

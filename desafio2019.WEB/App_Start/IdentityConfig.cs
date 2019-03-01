@@ -1,12 +1,16 @@
-﻿using System;
-using System.Security.Claims;
-using System.Threading.Tasks;
+﻿using desafio2019.WEB.Models;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
 using Microsoft.Owin.Security;
-using desafio2019.WEB.Models;
+using System;
+using System.Configuration;
+using System.Diagnostics;
+using System.Security.Claims;
+using System.Threading.Tasks;
+using Twilio.Clients;
+ 
 
 namespace desafio2019.WEB
 {
@@ -14,8 +18,30 @@ namespace desafio2019.WEB
     {
         public Task SendAsync(IdentityMessage message)
         {
-            // Conecte su servicio de correo electrónico aquí para enviar un correo electrónico.
+
+
+            var Twilio = new TwilioRestClient(ConfigurationManager.AppSettings["SMSSID"],ConfigurationManager.AppSettings["SMSAuthToken"]);
+            var result = SendMessage(ConfigurationManager.AppSettings["SMSPhoneNumber"],message.Destination, message.Body);
+
+            // Status is one of Queued, Sending, Sent, Failed or null if the number is not valid
+            Trace.TraceInformation(result.ToString());
+
+            // Twilio doesn't currently have an async API, so return success.
             return Task.FromResult(0);
+
+
+
+
+
+
+
+            // Conecte su servicio de correo electrónico aquí para enviar un correo electrónico.
+            //return Task.FromResult(0);
+        }
+
+        private object SendMessage(string v, string destination, string body)
+        {
+            throw new NotImplementedException();
         }
     }
 
@@ -87,7 +113,8 @@ namespace desafio2019.WEB
     public class ApplicationSignInManager : SignInManager<ApplicationUser, string>
     {
         public ApplicationSignInManager(ApplicationUserManager userManager, IAuthenticationManager authenticationManager) :
-            base(userManager, authenticationManager) { }
+            base(userManager, authenticationManager)
+        { }
 
         public override Task<ClaimsIdentity> CreateUserIdentityAsync(ApplicationUser user)
         {

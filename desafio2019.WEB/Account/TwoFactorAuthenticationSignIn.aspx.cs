@@ -24,21 +24,24 @@ namespace desafio2019.WEB.Account
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            var userId = signinManager.GetVerifiedUserId<ApplicationUser, string>();
-            if (userId == null)
+            if (!IsPostBack)
             {
-                Response.Redirect("/Account/Error", true);
+                var userId = signinManager.GetVerifiedUserId<ApplicationUser, string>();
+                if (userId == null)
+                {
+                    Response.Redirect("/Account/Error", true);
+                }
+                var userFactors = manager.GetValidTwoFactorProviders(userId);
+                Providers.DataSource = userFactors.Select(x => x).ToList();
+                Providers.DataBind();
             }
-            var userFactors = manager.GetValidTwoFactorProviders(userId);
-            Providers.DataSource = userFactors.Select(x => x).ToList();
-            Providers.DataBind();            
         }
 
         protected void CodeSubmit_Click(object sender, EventArgs e)
         {
             bool rememberMe = false;
             bool.TryParse(Request.QueryString["RememberMe"], out rememberMe);
-            
+
             var result = signinManager.TwoFactorSignIn<ApplicationUser, string>(SelectedProvider.Value, Code.Text, isPersistent: rememberMe, rememberBrowser: RememberBrowser.Checked);
             switch (result)
             {

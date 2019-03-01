@@ -13,6 +13,15 @@ namespace desafio2019.WEB {
     public partial class SiteMaster {
         
         /// <summary>
+        /// Control MasterProfileImage.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Image MasterProfileImage;
+        
+        /// <summary>
         /// Control MainContent.
         /// </summary>
         /// <remarks>

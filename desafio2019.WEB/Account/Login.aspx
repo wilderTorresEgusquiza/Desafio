@@ -26,7 +26,7 @@
                     <div class="form-group">
                         <asp:Label runat="server" CssClass="col-md-2 control-label">Contraseña</asp:Label>
                         <div class="col-md-5">
-                            <asp:TextBox runat="server" ID="Password" TextMode="Password" CssClass="form-control" />
+                            <asp:TextBox runat="server" ID="txtPassword" TextMode="Password" CssClass="form-control" />
 
                         </div>
                     </div>
@@ -40,9 +40,7 @@
                     </div>
                     <div class="form-group">
                         <div class="col-md-offset-2 col-md-5">
-                            <asp:Button runat="server" OnClick="LogIn" Text="Iniciar sesión" CssClass="btn btn-default" />
-                            <input id="btnGoogleLogin" type="button" value="Login with Google" class="btn btn-success" />
-                            <asp:Button ID="Button1" runat="server" Text="Login with Facebook" OnClick="Button1_Click" CssClass="btn btn-primary" />
+                            &nbsp;<asp:Button ID="Button1" runat="server" Text="Login with Facebook" OnClick="Button1_Click" CssClass="btn btn-primary" />
                         </div>
                     </div>
                 </div>
