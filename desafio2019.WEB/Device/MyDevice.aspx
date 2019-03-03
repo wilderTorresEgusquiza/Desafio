@@ -2,14 +2,29 @@
 
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="cc1" %>
 
-<asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
+<asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <link href="/font-awesome/css/font-awesome.css" rel="stylesheet" />
     <script src="/Scripts/jValidacionGeneral.js"></script>
 
-    <div id="page-wrapper">
+    <div class="page-content">
         <div class="container-fluid">
+
             <p></p>
             <br />
+
+            <div class="row">
+                <div class="col-lg-2">
+                    <div class="btn-upload btn-upload--fountain-blue">
+                        <input type="file" class="btn-upload__input-file">
+                        <div class="btn-upload__top-side">
+                            <span class="ua-icon-btn-upload btn-upload__icon"></span>
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
             <div class="row">
                 <div class="col-lg-6 col-md-6">
                     <h2 class="page-header">My Device
@@ -326,10 +341,10 @@
                 };
 
 
-                function GetItem(id,dispositivo) {
+                function GetItem(id, dispositivo) {
                     document.getElementById("<%=hd_ID.ClientID %>").value = id;
                     document.getElementById("<%=hd_dispositivo.ClientID %>").value = dispositivo;
-                    
+
                 }
 
                 function configuracion2() {
@@ -424,4 +439,21 @@
         </div>
     </div>
 
+    <script src="/admin/vendor/jquery/jquery.min.js"></script>
+    <script src="/admin/vendor/popper/popper.min.js"></script>
+    <script src="/admin/vendor/bootstrap/js/bootstrap.min.js"></script>
+    <script src="/admin/vendor/select2/js/select2.full.min.js"></script>
+    <script src="/admin/vendor/simplebar/simplebar.js"></script>
+    <script src="/admin/vendor/text-avatar/jquery.textavatar.js"></script>
+    <script src="/admin/vendor/tippyjs/tippy.all.min.js"></script>
+    <script src="/admin/vendor/flatpickr/flatpickr.min.js"></script>
+    <script src="/admin/vendor/wnumb/wNumb.js"></script>
+    <script src="/admin/js/main.js"></script>
+
+
+    <script src="/admin/vendor/fileapi/FileAPI.html5.min.js"></script>
+    <script src="/admin/js/preview/file-upload.min.js"></script>
+
+    <script src="/admin/js/preview/settings-panel.min.js"></script>
+    <script src="/admin/js/preview/slide-nav.min.js"></script>
 </asp:Content>

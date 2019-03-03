@@ -85,7 +85,7 @@ namespace desafio2019.WEB
 
         public void UsuarioLogin(string url)
         {
-            MasterProfileImage.ImageUrl = url;
+            //MasterProfileImage.ImageUrl = url;
         }
 
     }

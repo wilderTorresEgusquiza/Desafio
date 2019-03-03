@@ -1,9 +1,9 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="NewDevice.aspx.cs" Inherits="desafio2019.WEB.Device.NewDevice" %>
 
-<asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
+<asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <script src="/Scripts/jValidacionGeneral.js" type="text/javascript"></script>
 
-    <div id="page-wrapper">
+    <div class="page-content">
         <div class="container-fluid">
             <p></p>
             <br />
@@ -236,5 +236,22 @@
         </div>
     </div>
 
+    <script src="/admin/vendor/jquery/jquery.min.js"></script>
+    <script src="/admin/vendor/popper/popper.min.js"></script>
+    <script src="/admin/vendor/bootstrap/js/bootstrap.min.js"></script>
+    <script src="/admin/vendor/select2/js/select2.full.min.js"></script>
+    <script src="/admin/vendor/simplebar/simplebar.js"></script>
+    <script src="/admin/vendor/text-avatar/jquery.textavatar.js"></script>
+    <script src="/admin/vendor/tippyjs/tippy.all.min.js"></script>
+    <script src="/admin/vendor/flatpickr/flatpickr.min.js"></script>
+    <script src="/admin/vendor/wnumb/wNumb.js"></script>
+    <script src="/admin/js/main.js"></script>
+
+
+    <script src="/admin/vendor/fileapi/FileAPI.html5.min.js"></script>
+    <script src="/admin/js/preview/file-upload.min.js"></script>
+
+    <script src="/admin/js/preview/settings-panel.min.js"></script>
+    <script src="/admin/js/preview/slide-nav.min.js"></script>
 
 </asp:Content>

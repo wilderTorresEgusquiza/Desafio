@@ -3,95 +3,1049 @@
 <!DOCTYPE html>
 
 <html lang="en">
+
+
+    
 <head runat="server">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title><%: Page.Title %> - Mi aplicación ASP.NET</title>
+    <title></title>
 
-    <asp:PlaceHolder runat="server">
-        <%: Scripts.Render("~/bundles/modernizr") %>
-        <%: Scripts.Render("~/bundles/bootstrap") %>
-        <%: Scripts.Render("~/Content/css") %>
-    </asp:PlaceHolder>
-    <webopt:BundleReference runat="server" Path="~/Content/css" />
-    <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+    <link rel="shortcut icon" href="/admin/img/favicon.png">
 
+    <link rel="stylesheet" href="/admin/fonts/open-sans/style.min.css">
+    <!-- common font  styles  -->
+    <link rel="stylesheet" href="/admin/fonts/universe-admin/style.css">
+    <!-- universeadmin icon font styles -->
+    <link rel="stylesheet" href="/admin/fonts/mdi/css/materialdesignicons.min.css">
+    <!-- meterialdesignicons -->
+    <link rel="stylesheet" href="/admin/fonts/iconfont/style.css">
+    <!-- DEPRECATED iconmonstr -->
+    <link rel="stylesheet" href="/admin/vendor/flatpickr/flatpickr.min.css">
+    <!-- original flatpickr plugin (datepicker) styles -->
+    <link rel="stylesheet" href="/admin/vendor/simplebar/simplebar.css">
+    <!-- original simplebar plugin (scrollbar) styles  -->
+    <link rel="stylesheet" href="/admin/vendor/tagify/tagify.css">
+    <!-- styles for tags -->
+    <link rel="stylesheet" href="/admin/vendor/tippyjs/tippy.css">
+    <!-- original tippy plugin (tooltip) styles -->
+    <link rel="stylesheet" href="/admin/vendor/select2/css/select2.min.css">
+    <!-- original select2 plugin styles -->
+    <link rel="stylesheet" href="/admin/vendor/bootstrap/css/bootstrap.min.css">
+    <!-- original bootstrap styles -->
+    <link rel="stylesheet" href="/admin/css/style.min.css" id="stylesheet">
+    <!-- universeadmin styles -->
+
+
+    <script src="/admin/js/ie.assign.fix.min.js"></script>
+
+
+
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
 </head>
-<body>
-    <form runat="server">
-        <asp:ScriptManager runat="server">
-            <Scripts>
-                <%--To learn more about bundling scripts in ScriptManager see https://go.microsoft.com/fwlink/?LinkID=301884 --%>
-                <%--Framework Scripts--%>
-                <asp:ScriptReference Name="MsAjaxBundle" />
-                <asp:ScriptReference Name="jquery" />
-                <asp:ScriptReference Name="bootstrap" />
-                <asp:ScriptReference Name="WebForms.js" Assembly="System.Web" Path="~/Scripts/WebForms/WebForms.js" />
-                <asp:ScriptReference Name="WebUIValidation.js" Assembly="System.Web" Path="~/Scripts/WebForms/WebUIValidation.js" />
-                <asp:ScriptReference Name="MenuStandards.js" Assembly="System.Web" Path="~/Scripts/WebForms/MenuStandards.js" />
-                <asp:ScriptReference Name="GridView.js" Assembly="System.Web" Path="~/Scripts/WebForms/GridView.js" />
-                <asp:ScriptReference Name="DetailsView.js" Assembly="System.Web" Path="~/Scripts/WebForms/DetailsView.js" />
-                <asp:ScriptReference Name="TreeView.js" Assembly="System.Web" Path="~/Scripts/WebForms/TreeView.js" />
-                <asp:ScriptReference Name="WebParts.js" Assembly="System.Web" Path="~/Scripts/WebForms/WebParts.js" />
-                <asp:ScriptReference Name="Focus.js" Assembly="System.Web" Path="~/Scripts/WebForms/Focus.js" />
-                <asp:ScriptReference Name="WebFormsBundle" />
-                <%--Site Scripts--%>
-            </Scripts>
-        </asp:ScriptManager>
+<body class="js-loading">
+    <form id="form1" runat="server">
 
-        <div class="navbar navbar-inverse navbar-fixed-top">
-            <div class="container-fluid">
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                    <a class="navbar-brand" runat="server" href="~/">Nombre de la aplicación</a>
+
+
+        <div class="page-preloader js-page-preloader">
+            <div class="page-preloader__logo">
+                <img src="/admin/img/logo-black-lg.png" alt="" class="page-preloader__logo-image">
+            </div>
+            <div class="page-preloader__desc">Pro Edition</div>
+            <div class="page-preloader__loader">
+                <div class="page-preloader__loader-heading">System Loading</div>
+                <div class="page-preloader__loader-desc">Widgets update</div>
+                <div class="progress progress-rounded page-preloader__loader-progress">
+                    <div id="page-loader-progress-bar" class="progress-bar bg-info" role="progressbar" style="width: 10%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
                 </div>
-                <div class="navbar-collapse collapse">
-                    <ul class="nav navbar-nav">
-                        <%--                       <li><a runat="server" href="~/">Inicio</a></li>--%>
-                        <li><a runat="server" href="~/Device/NewDevice">New Device</a></li>
-                        <li><a runat="server" href="~/Device/MyDevice">My Device</a></li>
-                    </ul>
-                    <asp:LoginView runat="server" ViewStateMode="Disabled">
-                        <AnonymousTemplate>
-                            <ul class="nav navbar-nav navbar-right">
-                              <%--  <li><a runat="server" href="~/Account/Register">Registrarse</a></li>--%>
-                                <li><a runat="server" href="~/Account/Login">Iniciar sesión</a></li>
-
-                            </ul>
-                        </AnonymousTemplate>
-                        <LoggedInTemplate>
+            </div>
+            <div class="page-preloader__copyright">ThemesAnytime, 2018</div>
+        </div>
 
 
-                            <ul class="nav navbar-nav navbar-right">
-                                <li><a runat="server" href="~/Account/Manage" title="Manage your account">Hello, <%: Context.User.Identity.GetUserName()  %> !</a></li>
-                                <li>
-                                    <asp:LoginStatus runat="server" LogoutAction="Redirect" LogoutText="Log off" LogoutPageUrl="~/" OnLoggingOut="Unnamed_LoggingOut" />
-                                </li>
 
-                            </ul>
-                        </LoggedInTemplate>
-                    </asp:LoginView>
-                    <ul class="nav navbar-nav navbar-right">
-                        <li>
-                            <asp:Image ID="MasterProfileImage" runat="server" Width="50" Height="50" />
+        <div class="navbar navbar-light navbar-expand-lg">
+            <button class="sidebar-toggler" type="button">
+                <span class="ua-icon-sidebar-open sidebar-toggler__open"></span>
+                <span class="ua-icon-alert-close sidebar-toggler__close"></span>
+            </button>
+
+            <span class="navbar-brand">
+                <a href="/">
+                    <img src="/admin/img/logo.png" alt="" class="navbar-brand__logo"></a>
+                <span class="ua-icon-menu slide-nav-toggle"></span>
+            </span>
+
+            <span class="navbar-brand-sm">
+                <a href="/">
+                    <img src="/admin/img/logo-sm.png" alt="" class="navbar-brand__logo"></a>
+                <span class="ua-icon-menu slide-nav-toggle"></span>
+            </span>
+
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-collapse">
+                <span class="ua-icon-navbar-open navbar-toggler__open"></span>
+                <span class="ua-icon-alert-close navbar-toggler__close"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbar-collapse">
+                <div class="navbar__menu">
+                    <ul class="navbar-nav">
+                        <li class="nav-item dropdown navbar__menu-item">
+                            <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown">Project</a>
+                            <div class="dropdown-menu navbar__menu-dropdown-menu" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="#"><span class="iconfont-users dropdown-item__icon"></span>Lead</a>
+                                <a class="dropdown-item" href="#"><span class="iconfont-user-circle dropdown-item__icon"></span>Contact: Person</a>
+                                <a class="dropdown-item" href="#"><span class="iconfont-building-b dropdown-item__icon"></span>Contact: Company</a>
+                                <a class="dropdown-item" href="#"><span class="iconfont-deal dropdown-item__icon"></span>Deal</a>
+                                <a class="dropdown-item" href="#"><span class="iconfont-arrow-right dropdown-item__icon"></span>Import</a>
+                            </div>
                         </li>
-
+                        <li class="nav-item dropdown navbar__menu-item">
+                            <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown">Desafio 2019</a>
+                            <div class="dropdown-menu navbar__menu-dropdown-menu" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="/device/newDevice.aspx"><span class="iconfont-users dropdown-item__icon"></span>New Device</a>
+                                <a class="dropdown-item" href="/device/myDevice.aspx"><span class="iconfont-user-circle dropdown-item__icon"></span>My Device</a>
+                            </div>
+                        </li>
+                        <li class="nav-item dropdown dropdown__columns navbar__menu-item">
+                            <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown">Features</a>
+                            <div class="dropdown-menu dropdown__columns-menu navbar__menu-dropdown-menu" aria-labelledby="navbarDropdown">
+                                <div class="dropdown__columns-container">
+                                    <div class="dropdown__columns-column">
+                                        <a class="dropdown-item dropdown__columns-item" href="#">Range Slider</a>
+                                        <a class="dropdown-item dropdown__columns-item" href="#">Confirm Alerts</a>
+                                        <a class="dropdown-item dropdown__columns-item" href="#">Tag Editor</a>
+                                        <a class="dropdown-item dropdown__columns-item" href="#">Date Picker</a>
+                                        <a class="dropdown-item dropdown__columns-item" href="#">Date Range Picker</a>
+                                        <a class="dropdown-item dropdown__columns-item" href="#">File Upload</a>
+                                        <a class="dropdown-item dropdown__columns-item" href="#">Growl Notifications</a>
+                                        <a class="dropdown-item dropdown__columns-item" href="#">Wysiwyg Editor</a>
+                                        <a class="dropdown-item dropdown__columns-item" href="#">Page Tour</a>
+                                    </div>
+                                    <div class="dropdown__columns-column">
+                                        <a class="dropdown-item dropdown__columns-item" href="#">Sweet Alert</a>
+                                        <a class="dropdown-item dropdown__columns-item" href="#">DataTables</a>
+                                        <a class="dropdown-item dropdown__columns-item" href="#">Spreadsheet</a>
+                                        <a class="dropdown-item dropdown__columns-item" href="#">Email Templates</a>
+                                        <a class="dropdown-item dropdown__columns-item" href="#">Messenger</a>
+                                        <a class="dropdown-item dropdown__columns-item" href="#">Mail</a>
+                                        <a class="dropdown-item dropdown__columns-item" href="#">File Storage</a>
+                                        <a class="dropdown-item dropdown__columns-item" href="#">Kanban Board</a>
+                                        <a class="dropdown-item dropdown__columns-item" href="#">Social Profile</a>
+                                    </div>
+                                    <div class="dropdown__columns-column">
+                                        <a class="dropdown-item dropdown__columns-item" href="#">Sign In</a>
+                                        <a class="dropdown-item dropdown__columns-item" href="#">Sign Up</a>
+                                        <a class="dropdown-item dropdown__columns-item" href="#">Invoices</a>
+                                        <a class="dropdown-item dropdown__columns-item" href="#">Pricing Table</a>
+                                        <a class="dropdown-item dropdown__columns-item" href="#">Help Center</a>
+                                        <a class="dropdown-item dropdown__columns-item" href="#">Settings</a>
+                                        <a class="dropdown-item dropdown__columns-item" href="#">Scheduler</a>
+                                        <a class="dropdown-item dropdown__columns-item" href="#">Social Feed</a>
+                                        <a class="dropdown-item dropdown__columns-item" href="#">Widgets</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="nav-item navbar__menu-item">
+                            <a class="nav-link" href="#">Settings</a>
+                        </li>
+                        <li class="nav-item navbar__menu-item">
+                            <a class="nav-link" href="#">Help</a>
+                        </li>
                     </ul>
-                </div>
+                    <div class="navbar__menu-side">
+                        <div class="navbar__actions">
+                            <a href="https://themeforest.net/item/universeadmin-powerful-responsive-bootstrap-4-admin-template/20926048?ref=themesanytime" class="btn btn-info icon-left subnav__header-side-item">Buy Now <span class="btn-icon mdi mdi-cart"></span>
+                            </a>
+                        </div>
+                        <div class="navbar-search navbar__menu-search">
+                            <div class="input-group input-group-icon iconfont icon-right">
+                                <input class="form-control navbar-search__input navbar__menu-search-input" type="text" placeholder="Search" /><span class="input-icon ua-icon-search"></span>
+                            </div>
+                        </div>
+                    </div>
 
+                </div>
+                <div class="dropdown navbar-dropdown no-arrow navbar-notify-dropdown">
+                    <a class="dropdown-toggle navbar-dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+                        <span class="navbar-notify navbar-notify--notifications">
+                            <span>
+                                <span class="navbar-notify__icon mdi mdi-bell"></span>
+                                <span class="navbar-notify__text">Notifications</span>
+                            </span>
+                        </span>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right navbar-dropdown-menu navbar-dropdown-notifications">
+                        <div class="navbar-dropdown-notifications__header">
+                            <span>NOTIFICATIONS</span>
+                            <a href="#" class="navbar-dropdown-notifications__mark-read">Mark all as read <span class="navbar-dropdown-notifications__mark-read-icon ua-icon-arrow-circle-down"></span>
+                            </a>
+                        </div>
+                        <div class="navbar-dropdown-notifications__body js-scrollable">
+                            <div class="navbar-dropdown-notification is-new">
+                                <div class="navbar-dropdown-notification__user">
+                                    <img class="navbar-dropdown-notification__avatar rounded-circle" src="/admin/img/users/user-4.png" alt="" width="40" height="40">
+                                    <div class="ua-icon-circle-check navbar-dropdown-notification__icon color-success"></div>
+                                </div>
+                                <div class="navbar-dropdown-notification__content">
+                                    <a href="#" class="navbar-dropdown-notification__action-name">Antonius in Project X </a>
+                                    <div class="navbar-dropdown-notification__action-desc">Added a <strong>Task</strong> to you in <strong>Designer Candidates</strong></div>
+                                </div>
+                                <span class="navbar-dropdown-notification__date">9:49 AM</span>
+                            </div>
+                            <div class="navbar-dropdown-notification">
+                                <div class="navbar-dropdown-notification__user">
+                                    <img class="navbar-dropdown-notification__avatar rounded-circle" src="/admin/img/users/user-5.png" alt="" width="40" height="40">
+                                    <div class="ua-icon-letter-alt navbar-dropdown-notification__icon color-danger navbar-dropdown-notification__icon--letter"></div>
+                                </div>
+                                <div class="navbar-dropdown-notification__content">
+                                    <a href="#" class="navbar-dropdown-notification__action-name">Antonius in Project X </a>
+                                    <div class="navbar-dropdown-notification__action-desc">Added a <strong>Task</strong> to you in <strong>Designer Candidates</strong></div>
+                                </div>
+                                <span class="navbar-dropdown-notification__date">9:49 AM</span>
+                            </div>
+                            <div class="navbar-dropdown-notification">
+                                <div class="navbar-dropdown-notification__user">
+                                    <img class="navbar-dropdown-notification__avatar rounded-circle" src="/admin/img/users/user-6.png" alt="" width="40" height="40">
+                                    <div class="ua-icon-warning navbar-dropdown-notification__icon color-warning navbar-dropdown-notification__icon--warning"></div>
+                                </div>
+                                <div class="navbar-dropdown-notification__content">
+                                    <a href="#" class="navbar-dropdown-notification__action-name">Antonius in Project X </a>
+                                    <div class="navbar-dropdown-notification__action-desc">Added a <strong>Task</strong> to you in <strong>Designer Candidates</strong></div>
+                                </div>
+                                <span class="navbar-dropdown-notification__date">9:49 AM</span>
+                            </div>
+                            <div class="navbar-dropdown-notification">
+                                <div class="navbar-dropdown-notification__user">
+                                    <img class="navbar-dropdown-notification__avatar rounded-circle" src="/admin/img/users/user-7.png" alt="" width="40" height="40">
+                                    <div class="ua-icon-circle-check navbar-dropdown-notification__icon color-success"></div>
+                                </div>
+                                <div class="navbar-dropdown-notification__content">
+                                    <a href="#" class="navbar-dropdown-notification__action-name">Antonius in Project X </a>
+                                    <div class="navbar-dropdown-notification__action-desc">Added a <strong>Task</strong> to you in <strong>Designer Candidates</strong></div>
+                                </div>
+                                <span class="navbar-dropdown-notification__date">9:49 AM</span>
+                            </div>
+                            <div class="navbar-dropdown-notification__date-separator">Yesterday</div>
+                            <div class="navbar-dropdown-notification">
+                                <div class="navbar-dropdown-notification__user">
+                                    <img class="navbar-dropdown-notification__avatar rounded-circle" src="/admin/img/users/user-8.png" alt="" width="40" height="40">
+                                    <div class="ua-icon-letter-alt navbar-dropdown-notification__icon color-danger navbar-dropdown-notification__icon--letter"></div>
+                                </div>
+                                <div class="navbar-dropdown-notification__content">
+                                    <a href="#" class="navbar-dropdown-notification__action-name">Antonius in Project X </a>
+                                    <div class="navbar-dropdown-notification__action-desc">Added a <strong>Task</strong> to you in <strong>Designer Candidates</strong></div>
+                                </div>
+                                <span class="navbar-dropdown-notification__date">9:49 AM</span>
+                            </div>
+                            <div class="navbar-dropdown-notification">
+                                <div class="navbar-dropdown-notification__user">
+                                    <img class="navbar-dropdown-notification__avatar rounded-circle" src="/admin/img/users/user-9.png" alt="" width="40" height="40">
+                                    <div class="ua-icon-warning navbar-dropdown-notification__icon color-warning navbar-dropdown-notification__icon--warning"></div>
+                                </div>
+                                <div class="navbar-dropdown-notification__content">
+                                    <a href="#" class="navbar-dropdown-notification__action-name">Antonius in Project X </a>
+                                    <div class="navbar-dropdown-notification__action-desc">Added a <strong>Task</strong> to you in <strong>Designer Candidates</strong></div>
+                                </div>
+                                <span class="navbar-dropdown-notification__date">9:49 AM</span>
+                            </div>
+                            <div class="navbar-dropdown-notification">
+                                <div class="navbar-dropdown-notification__user">
+                                    <img class="navbar-dropdown-notification__avatar rounded-circle" src="/admin/img/users/user-10.png" alt="" width="40" height="40">
+                                    <div class="ua-icon-circle-check navbar-dropdown-notification__icon color-success"></div>
+                                </div>
+                                <div class="navbar-dropdown-notification__content">
+                                    <a href="#" class="navbar-dropdown-notification__action-name">Antonius in Project X </a>
+                                    <div class="navbar-dropdown-notification__action-desc">Added a <strong>Task</strong> to you in <strong>Designer Candidates</strong></div>
+                                </div>
+                                <span class="navbar-dropdown-notification__date">9:49 AM</span>
+                            </div>
+                        </div>
+                        <a class="navbar-dropdown-notifications__view-all" href="#"><span class="icon ua-icon-view-all"></span><span>View all</span></a>
+                    </div>
+                </div>
+                <div class="dropdown navbar-dropdown no-arrow navbar-notify-dropdown navbar-notify-dropdown--messages">
+                    <a class="dropdown-toggle navbar-dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+                        <span class="navbar-notify">
+                            <span>
+                                <span class="navbar-notify__icon mdi mdi-email"></span>
+                                <span class="navbar-notify__text">Messages</span>
+                            </span>
+                            <span class="navbar-notify__indicator"></span>
+                        </span>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right navbar-dropdown-menu navbar-dropdown-notifications navbar-dropdown-messages">
+                        <div class="navbar-dropdown-notifications__header">
+                            <span>MESSAGES</span>
+                            <a href="#" class="navbar-dropdown-notifications__mark-read">Mark all as read <span class="navbar-dropdown-notifications__mark-read-icon ua-icon-arrow-circle-down"></span>
+                            </a>
+                        </div>
+                        <div class="navbar-dropdown-notifications__body navbar-dropdown-notifications__body-messages js-scrollable">
+                            <div class="navbar-dropdown-notifications__item is-unread">
+                                <img class="navbar-dropdown-notifications__item-avatar rounded-circle" src="/admin/img/users/user-4.png" alt="" width="40" height="40" />
+                                <div class="navbar-dropdown-notifications__item-notify">
+                                    <div>
+                                        <span class="icon ua-icon-reply-to"></span>
+                                        <strong>Gabriel Saunders</strong> replied to <strong>your comment</strong> to <strong>The secret weapon of lebound marketing...</strong>
+                                    </div>
+                                    <div class="navbar-dropdown-notifications__item-datetime">5 minute ago</div>
+                                </div>
+                                <div class="navbar-dropdown-notifications__item-actions">
+                                    <span class="icon ua-icon-circle-check navbar-dropdown-notifications__item-mark-as-read" data-toggle="tooltip" data-placement="top" title="Mark as read"></span>
+                                    <span class="icon ua-icon-circle-close navbar-dropdown-notifications__item-remove" data-toggle="tooltip" data-placement="top" title="Delete notification"></span>
+                                </div>
+                            </div>
+                            <div class="navbar-dropdown-notifications__item">
+                                <img class="navbar-dropdown-notifications__item-avatar rounded-circle" src="/admin/img/users/user-5.png" alt="" width="40" height="40" />
+                                <div class="navbar-dropdown-notifications__item-notify">
+                                    <div>
+                                        <span class="icon ua-icon-comments"></span>
+                                        <strong>Gabriel Saunders</strong> replied to <strong>your comment</strong> to <strong>The secret weapon of lebound marketing...</strong>
+                                    </div>
+                                    <div class="navbar-dropdown-notifications__item-datetime">5 minute ago</div>
+                                </div>
+                                <div class="navbar-dropdown-notifications__item-actions">
+                                    <span class="icon ua-icon-circle-check navbar-dropdown-notifications__item-mark-as-read" data-toggle="tooltip" data-placement="top" title="Mark as read"></span>
+                                    <span class="icon ua-icon-circle-close navbar-dropdown-notifications__item-remove" data-toggle="tooltip" data-placement="top" title="Delete notification"></span>
+                                </div>
+                            </div>
+                            <div class="navbar-dropdown-notifications__item is-unread">
+                                <img class="navbar-dropdown-notifications__item-avatar rounded-circle" src="/admin/img/users/user-6.png" alt="" width="40" height="40" />
+                                <div class="navbar-dropdown-notifications__item-notify">
+                                    <div>
+                                        <span class="icon ua-icon-star"></span>
+                                        <strong>Shawna Cohen</strong> replied to <strong>your comment</strong> to <strong>The secret weapon of lebound marketing...</strong>
+                                    </div>
+                                    <div class="navbar-dropdown-notifications__item-datetime">5 minute ago</div>
+                                </div>
+                                <div class="navbar-dropdown-notifications__item-actions">
+                                    <span class="icon ua-icon-circle-check navbar-dropdown-notifications__item-mark-as-read" data-toggle="tooltip" data-placement="top" title="Mark as read"></span>
+                                    <span class="icon ua-icon-circle-close navbar-dropdown-notifications__item-remove" data-toggle="tooltip" data-placement="top" title="Delete notification"></span>
+                                </div>
+                            </div>
+                            <div class="navbar-dropdown-notifications__item is-unread">
+                                <img class="navbar-dropdown-notifications__item-avatar rounded-circle" src="/admin/img/users/user-7.png" alt="" width="40" height="40" />
+                                <div class="navbar-dropdown-notifications__item-notify">
+                                    <div>
+                                        <span class="icon ua-icon-download"></span>
+                                        <strong>Jason Kendall</strong> replied to <strong>your comment</strong> to <strong>The secret weapon of lebound marketing...</strong>
+                                    </div>
+                                    <div class="navbar-dropdown-notifications__item-datetime">5 minute ago</div>
+                                </div>
+                                <div class="navbar-dropdown-notifications__item-actions">
+                                    <span class="icon ua-icon-circle-check navbar-dropdown-notifications__item-mark-as-read" data-toggle="tooltip" data-placement="top" title="Mark as read"></span>
+                                    <span class="icon ua-icon-circle-close navbar-dropdown-notifications__item-remove" data-toggle="tooltip" data-placement="top" title="Delete notification"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <a class="navbar-dropdown-notifications__view-all" href="#"><span class="icon ua-icon-view-all"></span><span>View all</span></a>
+                    </div>
+                </div>
+                <div class="dropdown navbar-dropdown no-arrow navbar-help-dropdown navbar-notify-dropdown--help">
+                    <a class="dropdown-toggle navbar-dropdown-toggle" data-toggle="dropdown" href="#">
+                        <span class="navbar-notify">
+                            <span>
+                                <span class="navbar-notify__icon mdi mdi-help-circle"></span>
+                                <span class="navbar-notify__text">Info</span>
+                            </span>
+                        </span>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-center navbar-dropdown-menu">
+                        <h6 class="navbar-help-dropdown__heading">Need Help?</h6>
+                        <p class="navbar-help-dropdown__desc">
+                            Give us a call 888-898-8302
+                            <br>
+                            send a email: <a href="#">info@example.com</a>
+                            <br>
+                            or
+       
+                        </p>
+                        <div>
+                            <a href="help-center-submit-ticket.html" class="btn btn-info navbar-help-dropdown__submit">Submit a Ticket</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="dropdown navbar-dropdown">
+                    <a class="dropdown-toggle navbar-dropdown-toggle navbar-dropdown-toggle__user" data-toggle="dropdown" href="#">
+                        <img src="/admin/img/users/user-3.png" alt="" class="navbar-dropdown-toggle__user-avatar">
+                        <span class="navbar-dropdown__user-name">John Smith</span>
+                    </a>
+                    <div class="dropdown-menu navbar-dropdown-menu navbar-dropdown-menu__user">
+                        <div class="navbar-dropdown-user-content">
+                            <div class="dropdown-user__avatar">
+                                <img src="/admin/img/users/user-3.png" alt="" />
+                            </div>
+                            <div class="dropdown-info">
+                                <div class="dropdown-info__name">John Smith</div>
+                                <div class="dropdown-info__job">Manager</div>
+                                <div class="dropdown-info-buttons"><a class="dropdown-info__viewprofile" href="#">View Profile</a><a class="dropdown-info__addaccount" href="#">Add account</a></div>
+                            </div>
+                        </div>
+                        <a class="dropdown-item navbar-dropdown__item" href="#">Upgrade to <span>PRO</span></a><a class="dropdown-item navbar-dropdown__item" href="#">Invite team member</a><a class="dropdown-item navbar-dropdown__item" href="#">Fedback</a><a class="dropdown-item navbar-dropdown__item" href="#">Help</a><a class="dropdown-item navbar-dropdown__item" href="#">Sign Out</a>
+                    </div>
+                </div>
             </div>
         </div>
-        <div class="container-fluid">
-            <asp:ContentPlaceHolder ID="MainContent" runat="server">
+
+
+
+
+        <div class="page-wrap">
+
+
+            <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
             </asp:ContentPlaceHolder>
 
 
+            <div class="sidebar-section">
+                <div class="sidebar-section__scroll">
+                    <!--<div class="sidebar-section__user has-background">
+      <img src="img/users/user-19.png" alt="" class="sidebar-section__user-avatar rounded-circle">
+
+      <div class="dropdown sidebar-section__user-dropdown">
+        <a class="dropdown-toggle sidebar-section__user-dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Joyce Walsh
+        </a>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+          <a class="dropdown-item" href="#">Settings</a>
+          <a class="dropdown-item" href="#">Help</a>
+          <a class="dropdown-item" href="#">Sign Out</a>
         </div>
+      </div>
+    </div>-->
+
+                    <div class="sidebar-user-a">
+                        <img src="/admin/img/users/user-19.png" alt="" class="sidebar-user-a__avatar rounded-circle">
+                        <div class="sidebar-user-a__name">Martha Howard</div>
+                        <div class="sidebar-user-a__desc">Product Manager</div>
+
+                        <a href="#" class="btn icon-left sidebar-user-a__link">Personal Account <span class="btn-icon ua-icon-user-solid"></span>
+                        </a>
+                    </div>
+
+                    <div>
+                        <div class="sidebar-section__separator">Main</div>
+                        <ul class="sidebar-section-nav">
+                            <li class="sidebar-section-nav__item">
+                                <a class="sidebar-section-nav__link sidebar-section-nav__link-dropdown" href="#">
+                                    <span class="sidebar-section-nav__item-icon ua-icon-home"></span>
+                                    <span class="sidebar-section-nav__item-text">Dashboard</span>
+                                    <span class="badge sidebar-section-nav__badge">2</span>
+                                </a>
+                                <ul class="sidebar-section-subnav">
+                                    <li class="sidebar-section-subnav__item"><a class="sidebar-section-subnav__link" href="/admin/index.html">Default Dashboard</a></li>
+                                    <li class="sidebar-section-subnav__item"><a class="sidebar-section-subnav__link" href="/admin/booking-dashboard.html">Booking Dashboard</a></li>
+                                    <li class="sidebar-section-subnav__item"><a class="sidebar-section-subnav__link" href="/admin/medical-dashboard.html">Medical Dashboard</a></li>
+                                    <li class="sidebar-section-subnav__item"><a class="sidebar-section-subnav__link" href="/admin/sales-dashboard.html">Sales Dashboard</a></li>
+                                    <li class="sidebar-section-subnav__item"><a class="sidebar-section-subnav__link" href="/admin/payment-dashboard.html">Payment Dashboard</a></li>
+                                </ul>
+                            </li>
+                            <li class="sidebar-section-nav__item">
+                                <a class="sidebar-section-nav__link" href="/admin/draggable-panels.html">
+                                    <span class="sidebar-section-nav__item-icon iconfont-control-panel"></span>
+                                    <span class="sidebar-section-nav__item-text">Draggable Panels</span>
+                                </a>
+                            </li>
+                            <li class="sidebar-section-nav__item">
+                                <a class="sidebar-section-nav__link sidebar-section-nav__link-dropdown" href="#">
+                                    <span class="sidebar-section-nav__item-icon iconfont-layout"></span>
+                                    <span class="sidebar-section-nav__item-text">Custom Layouts</span>
+                                </a>
+                                <ul class="sidebar-section-subnav">
+                                    <li class="sidebar-section-subnav__item"><a class="sidebar-section-subnav__link" href="/device/custom-layouts/simple/index.html" target="_blank">Simple</a></li>
+                                </ul>
+                            </li>
+                            <li class="sidebar-section-nav__item">
+                                <a class="sidebar-section-nav__link sidebar-section-nav__link-dropdown" href="#">
+                                    <span class="sidebar-section-nav__item-icon iconfont-layout"></span>
+                                    <span class="sidebar-section-nav__item-text">Page Layouts</span>
+                                </a>
+                                <ul class="sidebar-section-subnav">
+                                    <li class="sidebar-section-subnav__item"><a class="sidebar-section-subnav__link" href="/admin/sidebar-md.html">Medium Sidebar</a></li>
+                                    <li class="sidebar-section-subnav__item"><a class="sidebar-section-subnav__link" href="/admin/container-md.html">Medium Container</a></li>
+                                    <li class="sidebar-section-subnav__item"><a class="sidebar-section-subnav__link" href="/admin/boxed-layout.html">Boxed Layout</a></li>
+                                    <li class="sidebar-section-subnav__item"><a class="sidebar-section-subnav__link" href="/admin/full-height-content.html">Full Height Content</a></li>
+                                    <li class="sidebar-section-subnav__item"><a class="sidebar-section-subnav__link" href="/admin/menu-and-content.html">Menu and Content</a></li>
+                                    <li class="sidebar-section-subnav__item"><a class="sidebar-section-subnav__link" href="/admin/sidebar-a.html">Sidebar (a)</a></li>
+                                    <li class="sidebar-section-subnav__item"><a class="sidebar-section-subnav__link" href="/admin/sidebar-b.html">Sidebar (b)</a></li>
+                                    <li class="sidebar-section-subnav__item"><a class="sidebar-section-subnav__link" href="/admin/ecommerce-navbar.html">E-commerce Navbar</a></li>
+                                    <li class="sidebar-section-subnav__item"><a class="sidebar-section-subnav__link" href="/admin/simple-navbar.html">Simple Navbar</a></li>
+                                </ul>
+                            </li>
+                            <li class="sidebar-section-nav__item">
+                                <a class="sidebar-section-nav__link sidebar-section-nav__link-dropdown" href="#">
+                                    <span class="sidebar-section-nav__item-icon ua-icon-ui"></span>
+                                    <span class="sidebar-section-nav__item-text">UI Features</span>
+                                </a>
+                                <ul class="sidebar-section-subnav">
+                                    <li class="sidebar-section-subnav__item"><a class="sidebar-section-subnav__link" href="/admin/alerts.html">Alerts</a></li>
+                                    <li class="sidebar-section-subnav__item"><a class="sidebar-section-subnav__link" href="/admin/breadcrumbs.html">Breadcrumbs</a></li>
+                                    <li class="sidebar-section-subnav__item"><a class="sidebar-section-subnav__link" href="/admin/badges.html">Badges</a></li>
+                                    <li class="sidebar-section-subnav__item"><a class="sidebar-section-subnav__link" href="/admin/collapse.html">Collapse</a></li>
+                                    <li class="sidebar-section-subnav__item"><a class="sidebar-section-subnav__link" href="/admin/colors.html">Colors</a></li>
+                                    <li class="sidebar-section-subnav__item"><a class="sidebar-section-subnav__link" href="/admin/pagination.html">Pagination</a></li>
+                                    <li class="sidebar-section-subnav__item"><a class="sidebar-section-subnav__link" href="/admin/progress.html">Progress</a></li>
+                                    <li class="sidebar-section-subnav__item"><a class="sidebar-section-subnav__link" href="/admin/modal.html">Modal</a></li>
+                                    <li class="sidebar-section-subnav__item"><a class="sidebar-section-subnav__link" href="/admin/tables.html">Tables</a></li>
+                                    <li class="sidebar-section-subnav__item"><a class="sidebar-section-subnav__link" href="/admin/tabs.html">Tabs</a></li>
+                                    <li class="sidebar-section-subnav__item"><a class="sidebar-section-subnav__link" href="/admin/tooltips-and-popovers.html">Tooltips &amp; Popovers</a></li>
+                                    <li class="sidebar-section-subnav__item"><a class="sidebar-section-subnav__link" href="/admin/typography.html">Typography</a></li>
+                                </ul>
+                            </li>
+                            <li class="sidebar-section-nav__item">
+                                <a class="sidebar-section-nav__link sidebar-section-nav__link-dropdown" href="#">
+                                    <span class="sidebar-section-nav__item-icon ua-icon-grid"></span>
+                                    <span class="sidebar-section-nav__item-text">Widgets</span>
+                                </a>
+                                <ul class="sidebar-section-subnav">
+                                    <li class="sidebar-section-subnav__item"><a class="sidebar-section-subnav__link" href="/admin/widgets-cards.html">Card Widgets</a></li>
+                                    <li class="sidebar-section-subnav__item"><a class="sidebar-section-subnav__link" href="/admin/widgets-social.html">Social Widgets</a></li>
+                                    <li class="sidebar-section-subnav__item"><a class="sidebar-section-subnav__link" href="/admin/widgets-ecommerce.html">E-commerce Widgets</a></li>
+                                    <li class="sidebar-section-subnav__item"><a class="sidebar-section-subnav__link" href="/admin/widgets-statistic.html">Statistic Widgets</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+
+                        <div class="sidebar-section__separator">Apps</div>
+
+                        <ul class="sidebar-section-nav">
+                            <li class="sidebar-section-nav__item">
+                                <a class="sidebar-section-nav__link" href="../apps/prototype/index.html" target="_blank">
+                                    <span class="sidebar-section-nav__item-icon ua-icon-navbar-open"></span>
+                                    <span class="sidebar-section-nav__item-text">Prototype</span>
+                                </a>
+                            </li>
+                            <li class="sidebar-section-nav__item">
+                                <a class="sidebar-section-nav__link sidebar-section-nav__link-dropdown" href="#">
+                                    <span class="sidebar-section-nav__item-icon iconfont-cloud-storage"></span>
+                                    <span class="sidebar-section-nav__item-text">File Storage</span>
+                                </a>
+                                <ul class="sidebar-section-subnav">
+                                    <li class="sidebar-section-subnav__item"><a class="sidebar-section-subnav__link" href="/device/apps/file-storage/list.html" target="_blank">Files List</a></li>
+                                    <li class="sidebar-section-subnav__item"><a class="sidebar-section-subnav__link" href="/device/apps/file-storage/index.html" target="_blank">Empty Files List</a></li>
+                                    <li class="sidebar-section-subnav__item"><a class="sidebar-section-subnav__link" href="/device/apps/file-storage/list-selected.html" target="_blank">Selected File</a></li>
+                                    <li class="sidebar-section-subnav__item"><a class="sidebar-section-subnav__link" href="/device/apps/file-storage/trash-empty.html" target="_blank">Empty Trash</a></li>
+                                    <li class="sidebar-section-subnav__item"><a class="sidebar-section-subnav__link" href="/device/apps/file-storage/albums.html" target="_blank">Albums</a></li>
+                                    <li class="sidebar-section-subnav__item"><a class="sidebar-section-subnav__link" href="/device/apps/file-storage/album-empty.html" target="_blank">Empty Album</a></li>
+                                    <li class="sidebar-section-subnav__item"><a class="sidebar-section-subnav__link" href="/device/apps/file-storage/photos.html" target="_blank">Photos</a></li>
+                                    <li class="sidebar-section-subnav__item"><a class="sidebar-section-subnav__link" href="/device/apps/file-storage/photos-selected.html" target="_blank">Selected Photos</a></li>
+                                    <li class="sidebar-section-subnav__item"><a class="sidebar-section-subnav__link" href="/device/apps/file-storage/photos-empty.html" target="_blank">Empty Photos</a></li>
+                                    <li class="sidebar-section-subnav__item"><a class="sidebar-section-subnav__link" href="/device/apps/file-storage/file-upload.html" target="_blank">File Upload</a></li>
+                                    <li class="sidebar-section-subnav__item"><a class="sidebar-section-subnav__link" href="/device/apps/file-storage/share-file-modal.html" target="_blank">Share File Modal</a></li>
+                                </ul>
+                            </li>
+                            <li class="sidebar-section-nav__item">
+                                <a class="sidebar-section-nav__link sidebar-section-nav__link-dropdown" href="#">
+                                    <span class="mdi mdi-account-multiple sidebar-section-nav__item-icon"></span>
+                                    <span class="sidebar-section-nav__item-text">CRM</span>
+                                </a>
+                                <ul class="sidebar-section-subnav">
+                                    <li class="sidebar-section-subnav__item"><a class="sidebar-section-subnav__link" href="/device/apps/crm/index.html" target="_blank">Empty State</a></li>
+                                    <li class="sidebar-section-subnav__item"><a class="sidebar-section-subnav__link" href="/device/apps/crm/dataset.html" target="_blank">Dataset</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+
+                        <div class="sidebar-section__separator">Form</div>
+
+                        <ul class="sidebar-section-nav">
+                            <li class="sidebar-section-nav__item">
+                                <a class="sidebar-section-nav__link sidebar-section-nav__link-dropdown" href="#">
+                                    <span class="mdi mdi-radiobox-marked sidebar-section-nav__item-icon"></span>
+                                    <span class="sidebar-section-nav__item-text">Basic Elements</span>
+                                </a>
+                                <ul class="sidebar-section-subnav">
+                                    <li class="sidebar-section-subnav__item"><a class="sidebar-section-subnav__link" href="/admin/inputs.html">Inputs</a></li>
+                                    <li class="sidebar-section-subnav__item"><a class="sidebar-section-subnav__link" href="/admin/input-group.html">Input Group</a></li>
+                                    <li class="sidebar-section-subnav__item"><a class="sidebar-section-subnav__link" href="/admin/buttons.html">Buttons</a></li>
+                                    <li class="sidebar-section-subnav__item"><a class="sidebar-section-subnav__link" href="/admin/checkbox-radio.html">Checkbox &amp; Radio</a></li>
+                                    <li class="sidebar-section-subnav__item"><a class="sidebar-section-subnav__link" href="/admin/select.html">Select</a></li>
+                                    <li class="sidebar-section-subnav__item"><a class="sidebar-section-subnav__link" href="/admin/form-mask-input.html">Mask Input</a></li>
+                                    <li class="sidebar-section-subnav__item"><a class="sidebar-section-subnav__link" href="/admin/form-float-labels.html">Float Labels</a></li>
+                                </ul>
+                            </li>
+                            <li class="sidebar-section-nav__item">
+                                <a class="sidebar-section-nav__link" href="form-validation.html">
+                                    <span class="mdi mdi-format-pilcrow sidebar-section-nav__item-icon"></span>
+                                    <span class="sidebar-section-nav__item-text">Form Validation</span>
+                                </a>
+                            </li>
+                            <li class="sidebar-section-nav__item">
+                                <a class="sidebar-section-nav__link sidebar-section-nav__link-dropdown" href="#">
+                                    <span class="mdi mdi-step-forward sidebar-section-nav__item-icon"></span>
+                                    <span class="sidebar-section-nav__item-text">Form Wizard</span>
+                                </a>
+                                <ul class="sidebar-section-subnav">
+                                    <li class="sidebar-section-subnav__item"><a class="sidebar-section-subnav__link" href="/admin/form-wizard.html">Form Wizard</a></li>
+                                    <li class="sidebar-section-subnav__item"><a class="sidebar-section-subnav__link" href="/admin/form-wizard-a.html">Form Wizard (a)</a></li>
+                                    <li class="sidebar-section-subnav__item"><a class="sidebar-section-subnav__link" href="/admin/form-wizard-b.html">Form Wizard (b)</a></li>
+                                    <li class="sidebar-section-subnav__item"><a class="sidebar-section-subnav__link" href="/admin/form-wizard-c.html">Form Wizard (c)</a></li>
+                                    <li class="sidebar-section-subnav__item"><a class="sidebar-section-subnav__link" href="/admin/form-wizard-d.html">Form Wizard (d)</a></li>
+                                    <li class="sidebar-section-subnav__item"><a class="sidebar-section-subnav__link" href="/admin/form-wizard-e.html">Form Wizard (e)</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+
+                        <div class="sidebar-section__separator">Tables</div>
+
+                        <ul class="sidebar-section-nav">
+                            <li class="sidebar-section-nav__item">
+                                <a class="sidebar-section-nav__link sidebar-section-nav__link-dropdown" href="#">
+                                    <span class="mdi mdi-grid-large sidebar-section-nav__item-icon"></span>
+                                    <span class="sidebar-section-nav__item-text">Dataset</span>
+                                </a>
+                                <ul class="sidebar-section-subnav">
+                                    <li class="sidebar-section-subnav__item"><a class="sidebar-section-subnav__link" href="/admin/dataset-table.html">Table</a></li>
+                                    <li class="sidebar-section-subnav__item"><a class="sidebar-section-subnav__link" href="/admin/dataset-grid.html">Grid</a></li>
+                                </ul>
+                            </li>
+                            <li class="sidebar-section-nav__item">
+                                <a class="sidebar-section-nav__link" href="tables.html">
+                                    <span class="mdi mdi-view-grid sidebar-section-nav__item-icon"></span>
+                                    <span class="sidebar-section-nav__item-text">Static Tables</span>
+                                </a>
+                            </li>
+                            <li class="sidebar-section-nav__item">
+                                <a class="sidebar-section-nav__link" href="datatables.html">
+                                    <span class="mdi mdi-view-grid sidebar-section-nav__item-icon"></span>
+                                    <span class="sidebar-section-nav__item-text">DataTables</span>
+                                </a>
+                            </li>
+                            <li class="sidebar-section-nav__item">
+                                <a class="sidebar-section-nav__link" href="spreadsheet.html">
+                                    <span class="mdi mdi-view-grid sidebar-section-nav__item-icon"></span>
+                                    <span class="sidebar-section-nav__item-text">Spreadsheet</span>
+                                </a>
+                            </li>
+                        </ul>
+
+                        <div class="sidebar-section__separator">Features</div>
+
+                        <ul class="sidebar-section-nav">
+                            <li class="sidebar-section-nav__item">
+                                <a class="sidebar-section-nav__link sidebar-section-nav__link-dropdown" href="#">
+                                    <span class="sidebar-section-nav__item-icon ua-icon-component"></span>
+                                    <span class="sidebar-section-nav__item-text">Components</span>
+                                </a>
+                                <ul class="sidebar-section-subnav">
+                                    <li class="sidebar-section-subnav__item"><a class="sidebar-section-subnav__link" href="/admin/colorpicker.html">Color Picker</a></li>
+                                    <li class="sidebar-section-subnav__item"><a class="sidebar-section-subnav__link" href="/admin/growl-notifications.html">Growl Notifications</a></li>
+                                    <li class="sidebar-section-subnav__item"><a class="sidebar-section-subnav__link" href="/admin/range-slider.html">Range Slider</a></li>
+                                    <li class="sidebar-section-subnav__item"><a class="sidebar-section-subnav__link" href="/admin/confirm-alerts.html">Confirm Alerts</a></li>
+                                    <li class="sidebar-section-subnav__item"><a class="sidebar-section-subnav__link" href="/admin/tag-editor.html">Tag Editor</a></li>
+                                    <li class="sidebar-section-subnav__item"><a class="sidebar-section-subnav__link" href="/admin/datepicker.html">Date Picker</a></li>
+                                    <li class="sidebar-section-subnav__item"><a class="sidebar-section-subnav__link" href="/admin/date-range-picker.html">Date Range Picker</a></li>
+                                    <li class="sidebar-section-subnav__item"><a class="sidebar-section-subnav__link" href="/admin/file-upload.html">File Upload</a></li>
+                                    <li class="sidebar-section-subnav__item"><a class="sidebar-section-subnav__link" href="/admin/wysiwyg-jodit-editor.html">Wysiwyg Editor</a></li>
+                                    <li class="sidebar-section-subnav__item"><a class="sidebar-section-subnav__link" href="/admin/page-tour.html">Page Tour</a></li>
+                                    <li class="sidebar-section-subnav__item"><a class="sidebar-section-subnav__link" href="/admin/sweet-alert.html">Sweet Alert</a></li>
+                                </ul>
+                            </li>
+                            <li class="sidebar-section-nav__item">
+                                <a class="sidebar-section-nav__link sidebar-section-nav__link-dropdown" href="#">
+                                    <span class="sidebar-section-nav__item-icon ua-icon-charts"></span>
+                                    <span class="sidebar-section-nav__item-text">Charts</span>
+                                </a>
+                                <ul class="sidebar-section-subnav">
+                                    <li class="sidebar-section-subnav__item"><a class="sidebar-section-subnav__link" href="frappe-charts.html">Frappe Charts</a></li>
+                                    <li class="sidebar-section-subnav__item"><a class="sidebar-section-subnav__link" href="tui-charts.html">Tui Charts</a></li>
+                                </ul>
+                            </li>
+                            <li class="sidebar-section-nav__item">
+                                <a class="sidebar-section-nav__link sidebar-section-nav__link-dropdown" href="#">
+                                    <span class="sidebar-section-nav__item-icon ua-icon-pages"></span>
+                                    <span class="sidebar-section-nav__item-text">Pages</span>
+                                </a>
+                                <ul class="sidebar-section-subnav">
+                                    <li class="sidebar-section-subnav__item"><a class="sidebar-section-subnav__link" href="/admin/signin.html">Sign In</a></li>
+                                    <li class="sidebar-section-subnav__item"><a class="sidebar-section-subnav__link" href="/admin/signin-a.html">Sign In (a)</a></li>
+                                    <li class="sidebar-section-subnav__item"><a class="sidebar-section-subnav__link" href="/admin/signup.html">Sign Up</a></li>
+                                    <li class="sidebar-section-subnav__item"><a class="sidebar-section-subnav__link" href="/admin/signup-a.html">Sign Up (a)</a></li>
+                                    <li class="sidebar-section-subnav__item"><a class="sidebar-section-subnav__link" href="/admin/thanks.html">Thanks</a></li>
+                                    <li class="sidebar-section-subnav__item"><a class="sidebar-section-subnav__link" href="/admin/invoices.html">Invoices</a></li>
+                                    <li class="sidebar-section-subnav__item"><a class="sidebar-section-subnav__link" href="/admin/pricing.html">Pricing</a></li>
+                                    <li class="sidebar-section-subnav__item"><a class="sidebar-section-subnav__link" href="/admin/subscribe-plans.html">Subscribe Plans</a></li>
+                                    <li class="sidebar-section-subnav__item"><a class="sidebar-section-subnav__link" href="/admin/pricing-and-plans.html">Pricing and Plans</a></li>
+                                    <li class="sidebar-section-subnav__item"><a class="sidebar-section-subnav__link" href="/admin/documents.html">Documents</a></li>
+                                    <li class="sidebar-section-subnav__item"><a class="sidebar-section-subnav__link" href="/admin/trial-period-expired.html">Trial Expired</a></li>
+                                </ul>
+                            </li>
+                            <li class="sidebar-section-nav__item">
+                                <a class="sidebar-section-nav__link sidebar-section-nav__link-dropdown" href="#">
+                                    <span class="sidebar-section-nav__item-icon ua-icon-pages"></span>
+                                    <span class="sidebar-section-nav__item-text">Extra Pages</span>
+                                </a>
+                                <ul class="sidebar-section-subnav">
+                                    <li class="sidebar-section-subnav__item"><a class="sidebar-section-subnav__link" href="/admin/contact.html">Contact</a></li>
+                                    <li class="sidebar-section-subnav__item"><a class="sidebar-section-subnav__link" href="/admin/users-grid.html">Users Grid</a></li>
+                                    <li class="sidebar-section-subnav__item"><a class="sidebar-section-subnav__link" href="/admin/users-contacts.html">Users Contacts</a></li>
+                                    <li class="sidebar-section-subnav__item"><a class="sidebar-section-subnav__link" href="/admin/activity.html">Activity</a></li>
+                                    <li class="sidebar-section-subnav__item"><a class="sidebar-section-subnav__link" href="/admin/invoices-datagrid.html">Invoices (DataTable)</a></li>
+                                    <li class="sidebar-section-subnav__item"><a class="sidebar-section-subnav__link" href="/admin/invoice-overview.html">Invoice Overview</a></li>
+                                    <li class="sidebar-section-subnav__item"><a class="sidebar-section-subnav__link" href="/admin/tree-view.html">Tree View</a></li>
+                                    <li class="sidebar-section-subnav__item"><a class="sidebar-section-subnav__link" href="/admin/timeline.html">Timeline</a></li>
+                                    <li class="sidebar-section-subnav__item"><a class="sidebar-section-subnav__link" href="/admin/listings-travel.html">Travel Listing</a></li>
+                                </ul>
+                            </li>
+                            <li class="sidebar-section-nav__item">
+                                <a class="sidebar-section-nav__link sidebar-section-nav__link-dropdown" href="#">
+                                    <span class="sidebar-section-nav__item-icon ua-icon-pages"></span>
+                                    <span class="sidebar-section-nav__item-text">Error Pages</span>
+                                </a>
+                                <ul class="sidebar-section-subnav">
+                                    <li class="sidebar-section-subnav__item"><a class="sidebar-section-subnav__link" href="/admin/403.html">Page 403</a></li>
+                                    <li class="sidebar-section-subnav__item"><a class="sidebar-section-subnav__link" href="/admin/404.html">Page 404</a></li>
+                                    <li class="sidebar-section-subnav__item"><a class="sidebar-section-subnav__link" href="/admin/404-a.html">Page 404 (a)</a></li>
+                                    <li class="sidebar-section-subnav__item"><a class="sidebar-section-subnav__link" href="/admin/404-b.html">Page 404 (b)</a></li>
+                                    <li class="sidebar-section-subnav__item"><a class="sidebar-section-subnav__link" href="/admin/404-c.html">Page 404 (c)</a></li>
+                                    <li class="sidebar-section-subnav__item"><a class="sidebar-section-subnav__link" href="/admin/500.html">Page 500</a></li>
+                                    <li class="sidebar-section-subnav__item"><a class="sidebar-section-subnav__link" href="/admin/wrong.html">Wrong Page</a></li>
+                                </ul>
+                            </li>
+                            <li class="sidebar-section-nav__item">
+                                <a class="sidebar-section-nav__link sidebar-section-nav__link-dropdown" href="#">
+                                    <span class="sidebar-section-nav__item-icon ua-icon-help-circle"></span>
+                                    <span class="sidebar-section-nav__item-text">Help Center</span>
+                                </a>
+                                <ul class="sidebar-section-subnav">
+                                    <li class="sidebar-section-subnav__item"><a class="sidebar-section-subnav__link" href="/admin/help-center.html">Browse Help Desk</a></li>
+                                    <li class="sidebar-section-subnav__item"><a class="sidebar-section-subnav__link" href="/admin/help-center-submit-ticket.html">Submit Ticket</a></li>
+                                </ul>
+                            </li>
+                            <li class="sidebar-section-nav__item">
+                                <a class="sidebar-section-nav__link sidebar-section-nav__link-dropdown" href="#">
+                                    <span class="sidebar-section-nav__item-icon ua-icon-settings"></span>
+                                    <span class="sidebar-section-nav__item-text">Settings</span>
+                                </a>
+                                <ul class="sidebar-section-subnav">
+                                    <li class="sidebar-section-subnav__item"><a class="sidebar-section-subnav__link" href="/admin/app-settings.html">App Settings</a></li>
+                                    <li class="sidebar-section-subnav__item"><a class="sidebar-section-subnav__link" href="/admin/global-settings.html">Global Settings</a></li>
+                                    <li class="sidebar-section-subnav__item"><a class="sidebar-section-subnav__link" href="/admin/account-settings.html">Account Settings</a></li>
+                                </ul>
+                            </li>
+                            <li class="sidebar-section-nav__item">
+                                <a class="sidebar-section-nav__link" href="email-templates.html">
+                                    <span class="mdi mdi-email sidebar-section-nav__item-icon"></span>
+                                    <span class="sidebar-section-nav__item-text">Email Templates</span>
+                                </a>
+                            </li>
+                        </ul>
+
+                        <div class="sidebar-section__separator">Modules</div>
+
+                        <ul class="sidebar-section-nav">
+                            <li class="sidebar-section-nav__item">
+                                <a class="sidebar-section-nav__link sidebar-section-nav__link-dropdown" href="#">
+                                    <span class="mdi mdi-currency-usd sidebar-section-nav__item-icon"></span>
+                                    <span class="sidebar-section-nav__item-text">E-commerce</span>
+                                </a>
+                                <ul class="sidebar-section-subnav">
+                                    <li class="sidebar-section-subnav__item"><a class="sidebar-section-subnav__link" href="/admin/ecommerce-products.html">Products</a></li>
+                                </ul>
+                            </li>
+                            <li class="sidebar-section-nav__item">
+                                <a class="sidebar-section-nav__link" href="mail.html">
+                                    <span class="mdi mdi-at sidebar-section-nav__item-icon"></span>
+                                    <span class="sidebar-section-nav__item-text">Mail</span>
+                                </a>
+                            </li>
+                            <li class="sidebar-section-nav__item">
+                                <a class="sidebar-section-nav__link" href="messenger.html">
+                                    <span class="mdi mdi-message-processing sidebar-section-nav__item-icon"></span>
+                                    <span class="sidebar-section-nav__item-text">Messenger</span>
+                                </a>
+                            </li>
+                            <li class="sidebar-section-nav__item">
+                                <a class="sidebar-section-nav__link" href="file-manager.html">
+                                    <span class="mdi mdi-file sidebar-section-nav__item-icon"></span>
+                                    <span class="sidebar-section-nav__item-text">File Manager</span>
+                                </a>
+                            </li>
+                            <li class="sidebar-section-nav__item">
+                                <a class="sidebar-section-nav__link" href="scheduler.html">
+                                    <span class="mdi mdi-calendar-clock sidebar-section-nav__item-icon"></span>
+                                    <span class="sidebar-section-nav__item-text">Scheduler</span>
+                                </a>
+                            </li>
+                            <li class="sidebar-section-nav__item">
+                                <a class="sidebar-section-nav__link" href="kanban-board.html">
+                                    <span class="mdi mdi-clipboard-text sidebar-section-nav__item-icon"></span>
+                                    <span class="sidebar-section-nav__item-text">Kanban Board</span>
+                                </a>
+                            </li>
+                            <li class="sidebar-section-nav__item">
+                                <a class="sidebar-section-nav__link sidebar-section-nav__link-dropdown" href="#">
+                                    <span class="mdi mdi-clipboard-check sidebar-section-nav__item-icon"></span>
+                                    <span class="sidebar-section-nav__item-text">Tasks</span>
+                                </a>
+                                <ul class="sidebar-section-subnav">
+                                    <li class="sidebar-section-subnav__item"><a class="sidebar-section-subnav__link" href="/admin/tasks.html">Tasks List</a></li>
+                                    <li class="sidebar-section-subnav__item"><a class="sidebar-section-subnav__link" href="/admin/task-overview.html">Task Overview</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-section__separator">Social Toolkit</div>
+
+                    <ul class="sidebar-section-nav">
+                        <li class="sidebar-section-nav__item">
+                            <a class="sidebar-section-nav__link" href="/admin/social-feed.html">
+                                <span class="sidebar-section-nav__item-icon iconfont-activity"></span>
+                                <span class="sidebar-section-nav__item-text">Social Feed</span>
+                            </a>
+                        </li>
+                        <li class="sidebar-section-nav__item">
+                            <a class="sidebar-section-nav__link" href="/admin/social-profile.html">
+                                <span class="sidebar-section-nav__item-icon iconfont-user-circle"></span>
+                                <span class="sidebar-section-nav__item-text">Social Profile</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+
+                <!--<div class="sidebar-section-nav__footer">
+      <ul class="sidebar-section-nav">
+        <li class="sidebar-section-nav__item sidebar-section-nav__item-btn mb-4">
+          <a href="#" class="btn btn-info btn-block">Create project</a>
+        </li>
+      </ul>
+      <div class="sidebar__collapse">
+        <span class="icon ua-icon-collapse-left-arrows"></span>
+      </div>
+    </div>
+  </div>
+  -->
+            </div>
+
+
+
+
+        </div>
+
+
+
+
+        <%--        <script src="/admin/vendor/jquery/jquery.min.js"></script>
+        <script src="/admin/vendor/popper/popper.min.js"></script>
+        <script src="/admin/vendor/bootstrap/js/bootstrap.min.js"></script>
+        <script src="/admin/vendor/select2/js/select2.full.min.js"></script>
+        <script src="/admin/vendor/simplebar/simplebar.js"></script>
+        <script src="/admin/vendor/text-avatar/jquery.textavatar.js"></script>
+        <script src="/admin/vendor/tippyjs/tippy.all.min.js"></script>
+        <script src="/admin/vendor/flatpickr/flatpickr.min.js"></script>
+        <script src="/admin/vendor/wnumb/wNumb.js"></script>
+        <script src="/admin/js/main.js"></script>
+
+
+        <script src="/admin/vendor/fileapi/FileAPI.html5.min.js"></script>
+        <script src="/admin/js/preview/file-upload.min.js"></script>--%>
+
+
+        <div class="sidebar-mobile-overlay"></div>
+
+
+        <div class="settings-panel">
+            <div class="settings-panel__header">
+                <span class="settings-panel__close ua-icon-modal-close"></span>
+
+                <h5 class="settings-panel__heading">Theme Customizer</h5>
+                <div class="settings-panel__desc">Customize & Preview In Real Time</div>
+            </div>
+            <div class="settings-panel__body">
+                <div class="settings-panel__layout-options">
+                    <h6 class="settings-panel__block-heading">Layout Options</h6>
+                    <div class="settings-panel__layout-option">
+                        <label class="switch-inline">
+                            <span class="switch">
+                                <input type="checkbox" id="collapse-sidebar">
+                                <span class="switch-slider"></span>
+                            </span>
+                            <span class="switch-inline__text">Collapse Sidebar</span>
+                        </label>
+                    </div>
+                    <div class="settings-panel__layout-option">
+                        <label class="switch-inline">
+                            <span class="switch">
+                                <input type="checkbox" id="hide-sidebar">
+                                <span class="switch-slider"></span>
+                            </span>
+                            <span class="switch-inline__text">Hide Sidebar</span>
+                        </label>
+                    </div>
+                    <div class="settings-panel__layout-option">
+                        <label class="switch-inline">
+                            <span class="switch">
+                                <input type="checkbox" id="full-height-sidebar">
+                                <span class="switch-slider"></span>
+                            </span>
+                            <span class="switch-inline__text">Full Height Sidebar</span>
+                        </label>
+                    </div>
+                    <div class="settings-panel__layout-option">
+                        <label class="switch-inline">
+                            <span class="switch">
+                                <input type="checkbox" id="rounded-form-controls">
+                                <span class="switch-slider"></span>
+                            </span>
+                            <span class="switch-inline__text">Rounded Form Controls</span>
+                        </label>
+                    </div>
+                </div>
+                <div class="settings-panel__theme-colors">
+                    <h6 class="settings-panel__block-heading">Theme Colors</h6>
+
+                    <ul class="list-unstyled">
+                        <li>
+                            <label class="color-radio js-settings-color">
+                                <input type="radio" name="settings_color" data-style="style-b">
+                                <span class="color-radio__color color-radio__color--deep-cerulean"></span>
+                                <span class="color-radio__text">#2</span>
+                            </label>
+                        </li>
+                        <li>
+                            <label class="color-radio js-settings-color is-checked">
+                                <input type="radio" name="settings_color" data-style="style" checked>
+                                <span class="color-radio__color color-radio__color--river-bad"></span>
+                                <span class="color-radio__text">#3</span>
+                            </label>
+                        </li>
+                        <li>
+                            <label class="color-radio js-settings-color">
+                                <input type="radio" name="settings_color" data-style="style-d">
+                                <span class="color-radio__color color-radio__color--sun-juan"></span>
+                                <span class="color-radio__text">#4</span>
+                            </label>
+                        </li>
+                        <li>
+                            <label class="color-radio js-settings-color">
+                                <input type="radio" name="settings_color" data-style="style-e">
+                                <span class="color-radio__color color-radio__color--bermuda-gray"></span>
+                                <span class="color-radio__text">#5</span>
+                            </label>
+                        </li>
+                        <li>
+                            <label class="color-radio js-settings-color">
+                                <input type="radio" name="settings_color" data-style="style-f">
+                                <span class="color-radio__color color-radio__color--deep-sea"></span>
+                                <span class="color-radio__text">#6</span>
+                            </label>
+                        </li>
+                        <li>
+                            <label class="color-radio js-settings-color">
+                                <input type="radio" name="settings_color" data-style="style-i">
+                                <span class="color-radio__color color-radio__color--wine-berry"></span>
+                                <span class="color-radio__text">#7</span>
+                            </label>
+                        </li>
+                        <li>
+                            <label class="color-radio js-settings-color">
+                                <input type="radio" name="settings_color" data-style="style-g">
+                                <span class="color-radio__color  color-radio__color--big-stone"></span>
+                                <span class="color-radio__text">#8</span>
+                            </label>
+                        </li>
+                        <li>
+                            <label class="color-radio js-settings-color">
+                                <input type="radio" name="settings_color" data-style="style-j">
+                                <span class="color-radio__color color-radio__color--killarney"></span>
+                                <span class="color-radio__text">#9</span>
+                            </label>
+                        </li>
+                        <li>
+                            <label class="color-radio js-settings-color">
+                                <input type="radio" name="settings_color" data-style="style-h">
+                                <span class="color-radio__color color-radio__color--kabul"></span>
+                                <span class="color-radio__text">#10</span>
+                            </label>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <%--        <span class="settings-panel-control">
+            <span class="settings-panel-control__icon ua-icon-settings"></span>
+        </span>
+        <script src="/admin/js/preview/settings-panel.min.js"></script>
+        --%>
+
+
+
+        <div class="slide-nav">
+            <div class="slide-nav__header">
+                <a href="#" class="slide-nav__back ua-icon-step-arrow-left"></a>
+                <img src="/admin/img/logo.png" alt="" class="slide-nav__logo">
+            </div>
+            <div class="slide-nav__body">
+                <div class="slide-nav__scrollpane js-scrollable">
+                    <div class="slide-nav__items">
+                        <a href="#" class="slide-nav__item">
+                            <img src="/admin/img/slidenav/30.png" alt="" class="slide-nav__item-image">
+                            <span class="slide-nav__item-text">Storage</span>
+                        </a>
+                        <a href="#" class="slide-nav__item">
+                            <img src="/admin/img/slidenav/31.png" alt="" class="slide-nav__item-image">
+                            <span class="slide-nav__item-text">Search</span>
+                        </a>
+                        <a href="#" class="slide-nav__item">
+                            <img src="/admin/img/slidenav/32.png" alt="" class="slide-nav__item-image">
+                            <span class="slide-nav__item-text">Calendar</span>
+                        </a>
+                        <a href="#" class="slide-nav__item">
+                            <img src="/admin/img/slidenav/33.png" alt="" class="slide-nav__item-image">
+                            <span class="slide-nav__item-text">Mail</span>
+                        </a>
+                        <a href="#" class="slide-nav__item">
+                            <img src="/admin/img/slidenav/34.png" alt="" class="slide-nav__item-image">
+                            <span class="slide-nav__item-text">Images</span>
+                        </a>
+                        <a href="#" class="slide-nav__item">
+                            <img src="/admin/img/slidenav/35.png" alt="" class="slide-nav__item-image">
+                            <span class="slide-nav__item-text">News</span>
+                        </a>
+                        <a href="#" class="slide-nav__item">
+                            <img src="/admin/img/slidenav/36.png" alt="" class="slide-nav__item-image">
+                            <span class="slide-nav__item-text">Maps</span>
+                        </a>
+                        <a href="#" class="slide-nav__item">
+                            <img src="/admin/img/slidenav/37.png" alt="" class="slide-nav__item-image">
+                            <span class="slide-nav__item-text">Market</span>
+                        </a>
+                        <a href="#" class="slide-nav__item">
+                            <img src="/admin/img/slidenav/38.png" alt="" class="slide-nav__item-image">
+                            <span class="slide-nav__item-text">Weather</span>
+                        </a>
+                        <a href="#" class="slide-nav__item">
+                            <img src="/admin/img/slidenav/39.png" alt="" class="slide-nav__item-image">
+                            <span class="slide-nav__item-text">Music</span>
+                        </a>
+                        <a href="#" class="slide-nav__item">
+                            <img src="/admin/img/slidenav/40.png" alt="" class="slide-nav__item-image">
+                            <span class="slide-nav__item-text">Tickets</span>
+                        </a>
+                        <a href="#" class="slide-nav__item">
+                            <img src="/admin/img/slidenav/41.png" alt="" class="slide-nav__item-image">
+                            <span class="slide-nav__item-text">Stats</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+
+
+
+        <%--           <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+            </asp:ContentPlaceHolder>--%>
     </form>
 </body>
+
+
+
+
 </html>
